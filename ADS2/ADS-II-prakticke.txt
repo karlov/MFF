@@ -1,0 +1,214 @@
+ADS II prakticke
+#define Text
+1. Najděte pro daný řetězec co nejdelší podřetězec, který je současně prefixem i suffixem (vlastním).
+	viz 20. PrefixFunction()
+14. Náhrdelník je cyklický řetězec, který nemá určený ani začátek, ani směr čtení. Jak rozhodnout, zda jsou si dva náhrdelníky rovny?
+7. V daném řetězci nad abecedou {a,b} chceme nalézt nejdelší Fibonacciho podslovo. Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
+16. Je dán slovník a text. Navrhněte algoritmus, který pro každé slovo ze slovníku spočte, kolikrát se v textu vyskytuje jako podřetězec.
+20. printf(); Jak zjistit, jestli je zadaný řetězec periodický? Tedy zda pro daný řetězec α existuje řetězec β a číslo k>1 tak, že α = βk.
+	{
+		Tak druhý pokus. Pomoci KMP najdu nejdelší Sufix, který je zároveň Prefixem slova (budou mě zajímat všechny takové kromě triviálního případu, když prefix = sufix = celé slovo). Pak pokud takový existuje, jeho délka je K a N se dělí beze zbytku (N - K), tak slovo je periodické.
+
+	Pro výpočet délky takového sufixu/prefixu použijí následující funkce. Která spočítá tzv. prefixovou funkci KMP.
+
+	void PrefixFunction(string str)
+	{
+	    int longest_prefix[str.length];
+	    int length = 0; //Zatím nejdelší suffix
+	    int i;
+	 
+	    longest_prefix[0] = 0;
+	    i = 1;
+
+	    while (i < str.length)
+	    {
+	       if (str[i] == str[length])
+	       {
+	           ++length;
+	           longest_prefix[i] = length;
+	           ++i;
+	       }
+	       else
+	       {
+	          if (length != 0)
+	          {
+	             length = longest_prefix[length-1];
+	          }
+	          else // if (length == 0)
+	          {
+	             longest_prefix[i] = 0;
+	             ++i;
+	          }
+	       }
+	    }
+	}
+
+	Z toho pole vezmu poslední prvek(longest_prefix[longest_prefix.Length - 1]), což je délka hledaného sufixu/prefixu K.
+
+	Jelikož tento algoritmus je KMP a jedno porovnaní navíc, časová složitost je O(N);
+	}
+26. Je dán text a číslo K. Nalezněte podřetězec délky K, který se v textu vyskytuje nejčastěji.
+22. Je dán řetězec a číslo K. Který podřetězec délky K je nejčetnější?
+
+#define Toky
+3. Mějme děravou šachnovnici. Jak ji pokrýt kostkami 1×2 políčka?
+11. Je dán neorientovaný graf a číslo k. Zjistěte, zda graf je vrcholově k-souvislý.
+17. Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami. Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
+18. Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
+
+19. printf(); Je dán orientovaný graf a jeho vrcholy u, v. Chceme nalézt co nejvíce hranově disjunktních cest z u do v.
+	Za zdroj si vezmu U jako zdroj a V jako stok. Každé hraně přiřadím kapacitu 1, v případě vrcholově z disjunktních cest ještě vrcholům kapacitu 1.
+	Pustím na tento graf např F-F algoritmus. Uvážím ty hrany, kterým algoritmus přiřadí tok 1. Zbývá ještě řešit případ když cesta obsahuje cyklus.
+	Stačí projít graf a pokud nějaký vrchol potkám dvakrát, tak je tam cyklus, který musím smazat. Když smažu cyklus tak dostanu cestu od U do V.
+	Naleznutou cestu smažu, v hledaní cest budu pokračovat pokud Tok není nulový.
+
+	časová složitost: F-F O(m*n), jelikož cesty jsou disjunktní jejích hledaní po ukončení F-F je O(m). Takže O(m*n) dohromady.
+
+	//Vrcholove
+	Tak z vrcholu udělám hranu následujícím způsobem:
+	Pro původní vrchol a přidám 2 vrcholy a1, a2. Které spojím hranou (a1, a2). Pak ještě spojím všechny vrcholy, které předtím byly spojený hranou s a: (a, b), s a2. Neboli pro všechny b : (a, b) byla hrana v původním grafu, vytvořím hranu (a2, b).
+
+	Pak můžu použit algoritmus pro hranově disjunktní cesty na modifikovaný graf, protože vrcholově disjunktní cesta je hranové disjunktní.
+8. printf(); Pro daný neorientovaný graf chceme nalézt největší k takové, že graf je hranově k-souvislý.
+	{
+		Když budu spouštět algoritmus na hledaní max toku na všechny dvojice vrcholu, tak určitě všechny hranově disjunktní cesty potkám několikrát.
+	Takže stačí zafixovat nějaký vrchol(třeba k), označit ho za Zdroj. Za Stock budu postupně označovat vrcholy z V\{k}(Je možné taky neuvažovat sousedy k). Minimum z toku se bude rovnat hranové souvislosti grafu. Zastavím se, když počet iteraci(I) přesáhne zatím minimální tok(Protože hranová souvislost je omezená min stupněm vrcholu a 2|E|/|V|)
+
+	Důkaz korektností: Minimální tok ze všech iteraci označím za F.
+	Z Mengerové věty existuje Separator (množina hran, po odebraní kterých graf stane nesouvislý). Velikost separátoru se rovna souvislostí grafu(Označím za R) . Aspoň jeden z množiny vrcholu V1, V2, ... V(r+1), kde r+1 index, není v tom řezu-separátoru. Nechť to bude vrchol Vj. Existuje vrchol Vt z separátoru takový, že #hranově-disjunktních cest z Vt do Vj = R.
+
+	F >= R,
+	I > F
+	I >= R + 1
+
+	Z toho C = F.
+
+	Pro orientované grafy je nutno spočítat jak Tok z vybraného vrcholu do Vi (z množiny V\{k}) z k tak o obraceně, z Vi do k.
+
+	Takže pro neorientovaný graf |V| - 1 je max počet spuštění algoritmu na max tok, pro orientovaný 2(|V| - 1).
+	}
+5. scanf("Ivona") Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
+	{
+		Veta (Königova): V každom bipartitonom grafe je veľkosť maximálneho párovania rovná veľkosti minimálneho vrcholového pokrytia.
+
+		Teda problém minimálneho vrcholového pokrytia (v bipartitnom grafe) môžeme previesť na problém maximálneho párovania.
+
+		Veta: Najväčší tok odpovedá najväčšiemu párovaniu.
+
+		Teda následujúci príklad vyriešime tak, že zadaný bipartitný graf (V,E) pretvoríme na sieť (V',E',z,s,c) a 
+		spustíme Ford-Fulkersonov algoritmus.
+
+		Pretvorenie grafu (V,E) na (V',E',z,s,c):
+		- Nájdeme partity grafu: pravá a ľavá
+		- Všetky hrany zorientujeme zľava doprava
+		- Pridáme zdroj z a vedieme z neho hrany do všetkých vrcholov ľavej partity
+		- Pridáme spotrebič s a vedieme do neho hrany z všetkých vrcholov pravej partity
+		- Všetkým hranám nastavíme jednotkovú kapacitu
+
+		Teraz v tejto sieti nájdeme maximálny celočíselný tok. Keďže všetky hrany majú kapacitu 1, musí po všetkých hranách tiesť buď 0 alebo 1.
+
+		Do výsledného párovania vložíme práve tie hrany pôvodného grafu, po ktorých tečie 1.
+
+		Dôkaz správnosti (Najväčšie párovanie):
+		1. sporom (Párovanie):
+			Nedostali sme párovanie, teda nejaké 2 hrany majú spoločný vrchol. 
+			- Pokiaľ z pravej partity: pritiekli 2 jednotky toku, ale nemajú kam odtiecť.
+			- Pokiaľ z ľavej partity: musia odtiecť 2 jednotky toku, ale nemajú kam. (spor)
+		2. priamo (Najväčšie)
+			Z toku vytvoríme párovanie o toľko hranách, koľko je veľkosť toku a naopak, z každého párovania vieme vytvoriť celočíselný tok 
+			odpovedajúci veľkosti - našli sme bijekciu, ktorá zachováva veľkosť.
+
+		Časová zložitosť:
+
+		Veta: Najväčšie párovanie v bipartitnom grafe nájdeme v čase O(nm). // U tohto mám poznámku od Krála: Stačí O(n^2)... tok nebude väčší, než n.
+
+		Dôkaz: Prevedená konštrukcia: n'= n+2, m' = m+2n (vrcholy, hrany) spotrebuje čas O(n'+m'). Nájdenie max. celočíselného toku Ford-Fulkersnovým
+		algoritmom trvá O(n'm') - pri jednotlivých kapacitách - jedna iterácia beží v čase O(m), nenasýtenú cestu s BFS, zlepšenie toku v lineárnom čase,
+		každá iterácia zlepší tok aspoň o 1, počet iterací je obmedzená max. toku, teda najviac n. Nakoniec tok v lineárnom čase preložíme na párovanie.
+		O(n'm') = O(mn). // Copy-paste z Marešových skript.
+
+		Priestorová zložitosť:
+
+		Priestor potrebujeme na vrcholy, hrany + zdroj, stok a nové hrany: n+2+m+2n = 3n+m+2, teda O(3n+m+2) //konštanty,
+		teda O(n+m).
+
+		Dôkaz (König):
+		Pokiaľ U podmnožinou V je vrcholové pokrytie, musia hrany vedúce medzi vrcholami tejto množiny a zdrojom a stokom tvoriť rovnaký veľký rez, 
+		pretože každá s,t-cesta obsahuje aspoň 1 hranu bipartitného grafu a tá je pokrytá. Analogicky vezmeme ľubovolný st-rez, *bez zväčšenia upravíme
+		na st-rez používajúci iba hrany zo s do t, ktoré odpovedajú vrcholovému pokrytiu rovnakej veľkosti.* // Od 1.* po 2.* podčiarknuté a k tomu poznámka:
+		// Ano, dá se i říct, že kapacity původního párování budou velké, pak FF vybere rovnou ten řez, ktorý chceš.
+	}
+
+21. Jak nalézt průsečíky zadaných parabol (tvaru ax2+bx+c pro a>0)? (*) Bez omezení na a.
+
+#define Rovina
+2. Jsou dány množiny bodů v rovině: červené a zelené. Sestrojte přímku takovou, aby na jedné její straně ležely všechny červené body, zatímco na druhé všechny zelené.
+4. Je dána množina bodů v rovině. Oploťte ji dvěma uzavřenými ploty tak, aby celková spotřeba pletiva byla minimální.
+9. Jsou dány dva mnohoúhelníky. Protínají se (ne nutně hranicí)?
+12. Navrhněte datovou strukturu, která dostane množinu obdélníků v rovině (v osové poloze) a bude umět rychle odpovídat na dotazy typu "v kolika obdélnících z množiny se nachází tento bod?".
+
+#define Hradla
+10. Navrhněte hradlovou síť, která testuje, zda se v n-bitové posloupnosti vyskytuje nějaký pevný vzorek. Výstupem nechť je ano/ne.
+
+#define Ostatni
+6. Definujme permanent matice stejně jako determinant, ale bez znaménkového pravidla (všechny členy přispívají kladně). Chceme pro danou nula-jedničkovou matici zjistit, zda má nenulový permanent.
+13. Uvažujme problém "Je dána soustava lineárních rovnic v celých číslech. Existuje vektor složený z nul a jedniček, který ji řeší?" Dokažte, že tento problém je NP-úplný.
+15. Hledání největší nezávislé množiny v intervalovém grafu (to je graf, jehož vrcholy jsou intervaly a hrany spojují dvojice intervalů mající neprázdný průnik).
+27. Spočítejte diskrétní Fourierovu transformaci vektoru (i,-1,-i,1,i,-1,-i,1).
+24. Uvažujme problém nezávislé množiny v grafech s maximálním stupněm 4 resp. 2. Rozhodněte, zda tento problém patří do P nebo je NP-úplný.
+25. Jsou dány Fourierovy obrazy dvou vektorů. Jak podle nich rozhodnout, zda je jeden vektor rotací druhého?
+23. Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
+
+Teorie
+4. Aho-Corasicková pro vyhledávání v textu.
+2. Rabinův-Karpův algoritmus.
+
+10. Algoritmus Knuth-Morris-Pratt.
+3. Dinic
+1. printf(); Goldberg
+	tok Goldberg(){
+		//Init
+		h(z) = n;
+		foreach(vrchol v in V){
+			h(v) = 0;
+		}
+		//Starting first wave
+		foreach(hrana h in H){ //All to zero
+			if(h ma zdroj jako vrchol) f(h) = c(h);
+			else f(h) = 0;
+		}
+		while(Existuje vrchol u != Z OR S, že Pritok > 0){
+			if (Existuje hrana ua, r(ua)>0 AND h(u) > h(a))
+			{
+				převedeme přebytek po hraně uv
+			}
+			else
+			{
+				u: ++h(u); //zvedneme u:...
+			}
+		}
+		return max. tok f
+	}
+
+	Invarian:
+	1. f je vlna
+	2. h(v) nikdy neklesa
+	3. h(Z) = n AND h(S) = 0
+	4. prebytek S >= 0
+
+	Dukaz indukci
+	n = 0 -> plati
+	zmena prebytku -> nevytvari zaporne
+14. Ford-Fulkerson
+
+16. Convex hull
+6. Definujte Voroného diagram a popište algoritmus na jeho konstrukci.
+8. Průsečíky úseček.
+7. Rychlá Fourierova transformace.
+
+11. NP-úplnost: definice tříd, Cookova věta, důkaz NP-úplnosti vybraného problému.
+13. Problém batohu – pseudopolynomiální algoritmus a aproximační schéma.
+5. 2-aproximace problému obchodního cestujícího.
+
+15. binary addition
+12. Hradlová síť, která o dvojici binárních čísel zjistí, zda je první větší než druhé.
