@@ -60,8 +60,8 @@ ADS II prakticke
 18. scanf("Kyrylo") Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
 	{
 		Ty jednotkove kapacity zaridi, ze nemame nenasycena prevedeni. To by nam zbyvala slozitost O(N^3 + NM). Jde to ale i na O(NM), kdyz si trosku vylepsime odhad poctu zvednuti.
-		Diky implementaci nas jedno zvednuti stoji <= N. Kazda hrana ma dva vrcholy a kolikrat muzeme zvednout vrchol, uz vime, ze?
-		Takze pro kazdou hranu mame <= 4N zvednuti, tedy cas na zvedani taky O(NM).
+		Diky implementaci nas jedno zvednuti stoji ≤ N. Kazda hrana ma dva vrcholy a kolikrat muzeme zvednout vrchol, uz vime, ze?
+		Takze pro kazdou hranu mame ≤ 4N zvednuti, tedy cas na zvedani taky O(NM).
 		MJ mi rikal jeste jinou verzi dukazu O(NM) zvednuti, a to pres scitani vstupnich a vystupnich stupnu vrcholu - nicmene uvedeny postup je taky spravny.
 	}
 19. printf(); Je dán orientovaný graf a jeho vrcholy u, v. Chceme nalézt co nejvíce hranově disjunktních cest z u do v.
@@ -321,7 +321,7 @@ Teorie
 		zmena prebytku -> nevytvari zaporne
 
 		Lemma o korektností(v returnu je TOK a je max):
-			1) vlna splnuje pozadavek na f(v) <= c(v). Chceme Kirfchhoffuv zakon: Dukaz sporem, kdyby nebyl splnen v nejakem vrcholu v, tak alg se nezastavi.
+			1) vlna splnuje pozadavek na f(v) ≤ c(v). Chceme Kirfchhoffuv zakon: Dukaz sporem, kdyby nebyl splnen v nejakem vrcholu v, tak alg se nezastavi.
 			2) f je max: Sporem, necht tok neni max -> Existuje nenasycena cesta z Z do S.
 				Z ma vysku N, S - 0, takze cesta ma spad N.(ma ale jen (n-1) hran) -> najde se hrana se spadem aspoň 2 - je nenasycena, spor s Invariantem S.
 		Veta o casove složitosti(O(n^2*m)):
@@ -411,7 +411,24 @@ Teorie
 	}
 5. scanf("Kyrylo") 2-aproximace problému obchodního cestujícího
 	{
+		//Nejkratsi z Hamiltonovskych kruznic v grafu s ohodnocenim
+		if(Graf je uplny ^ plati v nem trojuhelnikova nerovnost) muzeme 2-aproximovat;
+		//To znamená najít v polynomiálním čase kružnici,
+		//která je přinejhorším dvakrát delší než ta optimální.
 
+		1. Najdeme Kostru
+		2. Zakoreneme naleznutou kostru
+		3. Pustime DFS a poznamename v jakem poradi jsme nalezli hrany
+		4. Kazdou hranu projdeme 2krat (dolu a nahoru). Upravime tento sled tak, ze kdykoliv se dostává do již navštíveného vrcholu,
+		přeskočí ho a přesune se až do nejbližšího dalšího nenavštíveného.
+		Tak ze sledu vytvoříme hamiltonovskou kružnici a jelikož v grafu platí trojúhelníková nerovnost, celková délka nevzrostla.
+
+		Věta: Nalezená kružnice není delší než dvojnásobek optima
+		T je delka min Kostry. A delka kruznice v 2-apr alg., O - optimalni hamiltonovska kruznice
+		A ≤ 2*T
+		T ≤ O //jelikož z každé hamiltonovské kružnice vznikne vynecháním hrany kostra a ta nemůže být kratší než minimální
+
+		A ≤ 2*T ≤ 2*O
 	}
 
 15. scanf("Kyrylo") binary addition
