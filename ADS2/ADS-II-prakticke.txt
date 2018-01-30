@@ -1,6 +1,6 @@
 ADS II prakticke
 #define Text
-1. Najděte pro daný řetězec co nejdelší podřetězec, který je současně prefixem i suffixem (vlastním).
+1. printf(); Najděte pro daný řetězec co nejdelší podřetězec, který je současně prefixem i suffixem (vlastním).
 	viz 20. PrefixFunction()
 14. Náhrdelník je cyklický řetězec, který nemá určený ani začátek, ani směr čtení. Jak rozhodnout, zda jsou si dva náhrdelníky rovny?
 7. V daném řetězci nad abecedou {a,b} chceme nalézt nejdelší Fibonacciho podslovo. Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
@@ -51,9 +51,10 @@ ADS II prakticke
 22. Je dán řetězec a číslo K. Který podřetězec délky K je nejčetnější?
 
 #define Toky
-3. Mějme děravou šachnovnici. Jak ji pokrýt kostkami 1×2 políčka?
-11. Je dán neorientovaný graf a číslo k. Zjistěte, zda graf je vrcholově k-souvislý.
-17. Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami. Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
+3. scanf("Ivona") Mějme děravou šachnovnici. Jak ji pokrýt kostkami 1×2 políčka?
+11. printf(); Je dán neorientovaný graf a číslo k. Zjistěte, zda graf je vrcholově k-souvislý.
+	viz 8. doplnění
+17. scanf("Ivona") Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami. Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
 18. Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
 
 19. printf(); Je dán orientovaný graf a jeho vrcholy u, v. Chceme nalézt co nejvíce hranově disjunktních cest z u do v.
@@ -87,7 +88,7 @@ ADS II prakticke
 
 	Takže pro neorientovaný graf |V| - 1 je max počet spuštění algoritmu na max tok, pro orientovaný 2(|V| - 1).
 	}
-5. scanf("Ivona") Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
+5. scanf("Kyrylo") Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
 	{
 		Veta (Königova): V každom bipartitonom grafe je veľkosť maximálneho párovania rovná veľkosti minimálneho vrcholového pokrytia.
 
@@ -139,13 +140,13 @@ ADS II prakticke
 		// Ano, dá se i říct, že kapacity původního párování budou velké, pak FF vybere rovnou ten řez, ktorý chceš.
 	}
 
-21. Jak nalézt průsečíky zadaných parabol (tvaru ax2+bx+c pro a>0)? (*) Bez omezení na a.
+21. scanf("Kyrylo") Jak nalézt průsečíky zadaných parabol (tvaru ax2+bx+c pro a>0)? (*) Bez omezení na a.
 
 #define Rovina
-2. Jsou dány množiny bodů v rovině: červené a zelené. Sestrojte přímku takovou, aby na jedné její straně ležely všechny červené body, zatímco na druhé všechny zelené.
-4. Je dána množina bodů v rovině. Oploťte ji dvěma uzavřenými ploty tak, aby celková spotřeba pletiva byla minimální.
-9. Jsou dány dva mnohoúhelníky. Protínají se (ne nutně hranicí)?
-12. Navrhněte datovou strukturu, která dostane množinu obdélníků v rovině (v osové poloze) a bude umět rychle odpovídat na dotazy typu "v kolika obdélnících z množiny se nachází tento bod?".
+2. scanf("Ivona") Jsou dány množiny bodů v rovině: červené a zelené. Sestrojte přímku takovou, aby na jedné její straně ležely všechny červené body, zatímco na druhé všechny zelené.
+4. scanf("Ivona") Je dána množina bodů v rovině. Oploťte ji dvěma uzavřenými ploty tak, aby celková spotřeba pletiva byla minimální.
+9. scanf("Kyrylo") Jsou dány dva mnohoúhelníky. Protínají se (ne nutně hranicí)?
+12. scanf("Kyrylo") Navrhněte datovou strukturu, která dostane množinu obdélníků v rovině (v osové poloze) a bude umět rychle odpovídat na dotazy typu "v kolika obdélnících z množiny se nachází tento bod?".
 
 #define Hradla
 10. Navrhněte hradlovou síť, která testuje, zda se v n-bitové posloupnosti vyskytuje nějaký pevný vzorek. Výstupem nechť je ano/ne.
