@@ -154,13 +154,19 @@ ADS II prakticke
 		// Ano, dá se i říct, že kapacity původního párování budou velké, pak FF vybere rovnou ten řez, ktorý chceš.
 	}
 
-21. scanf("Kyrylo") Jak nalézt průsečíky zadaných parabol (tvaru ax2+bx+c pro a>0)? (*) Bez omezení na a.
+21. scanf("Kyrylo") Jak nalézt průsečíky zadaných parabol (tvaru ax^2+bx+c pro a>0)? (*) Bez omezení na a.
 
 #define Rovina
 2. scanf("Ivona") Jsou dány množiny bodů v rovině: červené a zelené. Sestrojte přímku takovou, aby na jedné její straně ležely všechny červené body, zatímco na druhé všechny zelené.
 4. scanf("Ivona") Je dána množina bodů v rovině. Oploťte ji dvěma uzavřenými ploty tak, aby celková spotřeba pletiva byla minimální.
 9. scanf("Kyrylo") Jsou dány dva mnohoúhelníky. Protínají se (ne nutně hranicí)?
+	{
+		
+	}
 12. scanf("Kyrylo") Navrhněte datovou strukturu, která dostane množinu obdélníků v rovině (v osové poloze) a bude umět rychle odpovídat na dotazy typu "v kolika obdélnících z množiny se nachází tento bod?".
+	{
+		
+	}
 
 #define Hradla
 10. Navrhněte hradlovou síť, která testuje, zda se v n-bitové posloupnosti vyskytuje nějaký pevný vzorek. Výstupem nechť je ano/ne.
@@ -174,7 +180,13 @@ ADS II prakticke
 		Prevedeme na to 3,3-SAT (2 hrany ma kazdy vrchol v trojuhelniku a dale muze byt spojen s nejvyse 2 svymi negacemi, tj. nevytvorime vic nez 4 hrany).
 	}
 25. scanf("Kyrylo") Jsou dány Fourierovy obrazy dvou vektorů. Jak podle nich rozhodnout, zda je jeden vektor rotací druhého?
+	{
+		
+	}
 23. scanf("Kyrylo") Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
+	{
+		
+	}
 
 27. Spočítejte diskrétní Fourierovu transformaci vektoru (i,-1,-i,1,i,-1,-i,1).
 
@@ -346,7 +358,38 @@ Teorie
 	}
 7. scanf("Kyrylo") Rychlá Fourierova transformace
 	{
+		polynom_nasobeni(polynom Q, polynom P, deg N)
+		{
+			//Init
+			Doplnime Q a P na 2*N (pokud deg(P) = deg(Q) = N)
+			//Zvolme navzajem ruzna W0, W1 ... W2n-1
+			Zvolime primitivni odmocninu 1 = W;
+			F[] = FFT(2*N, P, W);
+			G[] = FFT(2*N, Q, m);
+			for(int i = 0; i < 2*N; ++i)
+				R[i] = F[i]*G[i];
 
+			FFT^(-1)(R[]); //TODO
+		}
+
+		vektor FFT(deg n, mocnina W, vektor P)
+		{
+			if(n == 1) Y0 = P0; return Y;
+
+			(S0, ... Sn) = FFT (n/2, W^2, P sude);
+			(L0, ... Ln) = FFT (n/2, W^2, P liche);
+
+			for(int j = 0; j < n; ++j){
+				Y[j] = S[j] + W[j] * L[j];
+				Y[j+n] = S[j] - W[j] * L[j];
+			}
+			return Y;
+		}
+
+		//Casova slozitost
+		Je-li N = 2^k, pak v O(n*log(n)) lze spocitat FFT a FFT^(-1) v C^n. Nasobeni polynomu v O(n*log(n))
+
+		funkce FFT trva (n*log(n)), nasobeni O(n).
 	}
 
 11. printf(); NP-úplnost: definice tříd, Cookova věta, důkaz NP-úplnosti vybraného problému
@@ -362,8 +405,20 @@ Teorie
 		case NP-úplnost: Problem je NP-úplny když je NP-tezky a zaroven lezi v NP.
 		case Cook theorem: SAT je NP-uplny problem.
 	}
-13. scanf("Kyrylo") Problém batohu – pseudopolynomiální algoritmus a aproximační schéma.
-5. scanf("Kyrylo") 2-aproximace problému obchodního cestujícího.
+13. scanf("Kyrylo") Problém batohu – pseudopolynomiální algoritmus a aproximační schéma
+	{
+		
+	}
+5. scanf("Kyrylo") 2-aproximace problému obchodního cestujícího
+	{
+
+	}
 
 15. scanf("Kyrylo") binary addition
+	{
+		
+	}
 12. scanf("Kyrylo") Hradlová síť, která o dvojici binárních čísel zjistí, zda je první větší než druhé.
+	{
+		
+	}
