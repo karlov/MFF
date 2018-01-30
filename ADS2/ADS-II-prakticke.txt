@@ -180,7 +180,7 @@ ADS II prakticke
 
 Teorie
 4. scanf("Ivona") Aho-Corasicková pro vyhledávání v textu.
-{
+	{
 	- Zobecnenie Knuthova-Morrisova-Prattova algoritmu pre viac reťazcov.
 		- Opäť zostavenie automatu, ktorý má dopredné a spätné hrany.
 		- Po novom zavedieme skratkové hrany:
@@ -227,48 +227,48 @@ Teorie
 
 		- Algoritmus beží v čase e Θ ((suma)Ji + S + V)
 			- J1,...,Jn sú dĺžky jednotlivých ihiel, S je dĺžka sena a V počet výskytov
-}
+	}
 
 2. scanf("Ivona") Rabinův-Karpův algoritmus.
 
 10. scanf("Ivona") Algoritmus Knuth-Morris-Pratt.
-{
-	- Inkrementálný algoritmus
-		- Opiera sa o vyhladávací automat
-		- Vrcholy sú spojené hranami dvoch druhov:
-			- Dopredné: popisujú rozšírenie prefixu pridaním jednoho písmena, 
-			- Spätné vedú podľa spätnej funkie (z každého stavu do jeho najdlhšieho vlastného suffixu, ktorý je opäť stavom)
-				- Najdlhší prefix ihly, ktorý je suffixom prehľadávaného sena.
+	{
+		- Inkrementálný algoritmus
+			- Opiera sa o vyhladávací automat
+			- Vrcholy sú spojené hranami dvoch druhov:
+				- Dopredné: popisujú rozšírenie prefixu pridaním jednoho písmena, 
+				- Spätné vedú podľa spätnej funkie (z každého stavu do jeho najdlhšieho vlastného suffixu, ktorý je opäť stavom)
+					- Najdlhší prefix ihly, ktorý je suffixom prehľadávaného sena.
 
-		- Algoritmus: //Zo skrípt
-			- KMP KROK
-				Procedura KmpKrok (jeden krok automatu)
-				Vstup: Jsme ve stavu s, přečetli jsme znak x
-				1. Dokud ι[s] 6= x ∧ s 6= 0 : s ← Z[s]. / zpětné hrany
-				2. Pokud ι[s] = x, pak s ← s + 1. / dopředná hrana
-				Výstup: Nový stav s
+			- Algoritmus: //Zo skrípt
+				- KMP KROK
+					Procedura KmpKrok (jeden krok automatu)
+					Vstup: Jsme ve stavu s, přečetli jsme znak x
+					1. Dokud ι[s] 6= x ∧ s 6= 0 : s ← Z[s]. / zpětné hrany
+					2. Pokud ι[s] = x, pak s ← s + 1. / dopředná hrana
+					Výstup: Nový stav s
 
-			- KMP HLEDEJ
-				Algoritmus KmpHledej (spuštění automatu na řetězec σ)
-					Vstup: Seno σ, zkonstruovaný automat
-					1. s ← 0
-					2. Pro znaky x ∈ σ postupně provádíme:
-					3. s ← KmpKrok(s, x)
-					4. Pokud s = J, ohlásíme výskyt.
+				- KMP HLEDEJ
+					Algoritmus KmpHledej (spuštění automatu na řetězec σ)
+						Vstup: Seno σ, zkonstruovaný automat
+						1. s ← 0
+						2. Pro znaky x ∈ σ postupně provádíme:
+						3. s ← KmpKrok(s, x)
+						4. Pokud s = J, ohlásíme výskyt.
 
-			- KMP KONSTRUKCE
-				Algoritmus KmpKonstrukce
-				Vstup: Jehla ι délky J
-				1. Z[0] ← nedefinováno, Z[1] ← 0
-				2. s ← 0
-				3. Pro i = 2, . . . , J:
-				4. s ← KmpKrok(s, ι[i − 1])
-				5. Z[i] ← s
-				Výstup: Pole zpětných hran Z
+				- KMP KONSTRUKCE
+					Algoritmus KmpKonstrukce
+					Vstup: Jehla ι délky J
+					1. Z[0] ← nedefinováno, Z[1] ← 0
+					2. s ← 0
+					3. Pro i = 2, . . . , J:
+					4. s ← KmpKrok(s, ι[i − 1])
+					5. Z[i] ← s
+					Výstup: Pole zpětných hran Z
 
-		- Algoritmus beží v čase O(J+S)
-			- Lineárny čas s dĺžkou ihly(J) potrebujeme na postavenie automatu, lineárny čas s dĺžkou sena potom samotné 				  vyhľadávanie
-}
+			- Algoritmus beží v čase O(J+S)
+				- Lineárny čas s dĺžkou ihly(J) potrebujeme na postavenie automatu, lineárny čas s dĺžkou sena potom samotné 				  vyhľadávanie
+	}
 
 3. scanf("Ivona") Dinic
 
@@ -322,11 +322,46 @@ Teorie
 14. scanf("Ivona") Ford-Fulkerson
 
 16. scanf("Ivona") Convex hull
-6. scanf("Ivona") Definujte Voroného diagram a popište algoritmus na jeho konstrukci.
-8. scanf("Kyrylo") Průsečíky úseček.
-7. scanf("Kyrylo") Rychlá Fourierova transformace.
+6. scanf("Ivona") Definujte Voroného diagram a popište algoritmus na jeho konstrukci
+8. printf(); Průsečíky úseček
+	{
+		//Princip Zametani Roviny
+		P = null; //Prurez
+		K[points] += zacatky a konce usecek. //Kalendar
+		while(k.empty() != true){
+			U = k.pop(); //vyndame posledni udalost
+			if(U == zacatek usecky) P += novou usecku;
+			if(U == konec usecky) P -= usecku;
+			if(U == prusecik){
+				printf("Prusecik!"); prohodime usecky v P; //TODO explain this step
+			}
+			Prepocitame naplanovane prusecikove udalosti v okoli zmeny(nejvýše dvě odebereme a dvě nové přidáme);
+		}
 
-11. scanf("Kyrylo") NP-úplnost: definice tříd, Cookova věta, důkaz NP-úplnosti vybraného problému.
+		//Analysis of Time complexity
+		Kalendar - halda nebo vyhled. strom, vždy ma 3n udalosti O(log(n))
+		Vložíme do vyhled stromu odkazy na usecky O(log(n))
+		Pro kazdou udalost O(1) operace s Datovymi struktury
+		Vsech n+p udalosti zpracujeme za O(log(n)*(n+p))
+	}
+7. scanf("Kyrylo") Rychlá Fourierova transformace
+	{
+
+	}
+
+11. printf(); NP-úplnost: definice tříd, Cookova věta, důkaz NP-úplnosti vybraného problému
+	{
+		case P: Trida P rozhodovacich problemu (jsou resitelne v polynomiálním čase).
+		L ∈ P <-> Existuje nejaky alg. A a polynom f, pro kazdy vstup X alg A dovehne v caaw nejvyse f(|X|) a vyda vysledek A(X) = L(X)
+
+		case NP: Trida NP, L ∈ NP <-> Existuje nejaky problem k ∈ P a polynom g,
+		pro vsechna X je L(X) = 1 prave tehdy, pokud pro nejaky retezec y delkz nejvyse g(|x|) plati k(x,y);
+		//Existuje polynomialni dlouha napoveda y. Je-li L(X) = 1, musi existovat aspon 1 napoveda, kterou alg k schvali.
+
+		case NP-tezky: problem L je NP-tezky <-> na nej je predvoditelny kazdy problem z NP.
+		case NP-úplnost: Problem je NP-úplny když je NP-tezky a zaroven lezi v NP.
+		case Cook theorem: SAT je NP-uplny problem.
+	}
 13. scanf("Kyrylo") Problém batohu – pseudopolynomiální algoritmus a aproximační schéma.
 5. scanf("Kyrylo") 2-aproximace problému obchodního cestujícího.
 
