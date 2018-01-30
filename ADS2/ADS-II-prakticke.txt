@@ -55,7 +55,7 @@ ADS II prakticke
 11. printf(); Je dán neorientovaný graf a číslo k. Zjistěte, zda graf je vrcholově k-souvislý.
 	viz 8. doplnění
 17. scanf("Ivona") Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami. Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
-18. Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
+18. scanf("Kyrylo") Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
 
 19. printf(); Je dán orientovaný graf a jeho vrcholy u, v. Chceme nalézt co nejvíce hranově disjunktních cest z u do v.
 	Za zdroj si vezmu U jako zdroj a V jako stok. Každé hraně přiřadím kapacitu 1, v případě vrcholově z disjunktních cest ještě vrcholům kapacitu 1.
@@ -88,7 +88,7 @@ ADS II prakticke
 
 	Takže pro neorientovaný graf |V| - 1 je max počet spuštění algoritmu na max tok, pro orientovaný 2(|V| - 1).
 	}
-5. scanf("Kyrylo") Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
+5. printf(); Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
 	{
 		Veta (Königova): V každom bipartitonom grafe je veľkosť maximálneho párovania rovná veľkosti minimálneho vrcholového pokrytia.
 
@@ -167,6 +167,7 @@ Teorie
 10. Algoritmus Knuth-Morris-Pratt.
 3. Dinic
 1. printf(); Goldberg
+{
 	tok Goldberg(){
 		//Init
 		h(z) = n;
@@ -197,9 +198,21 @@ Teorie
 	3. h(Z) = n AND h(S) = 0
 	4. prebytek S >= 0
 
-	Dukaz indukci
+	Dukaz indukci //TODO finish
 	n = 0 -> plati
 	zmena prebytku -> nevytvari zaporne
+
+	Lemma o korektností(v returnu je TOK a je max):
+		1) vlna splnuje pozadavek na f(v) <= c(v). Chceme Kirfchhoffuv zakon: Dukaz sporem, kdyby nebyl splnen v nejakem vrcholu v, tak alg se nezastavi.
+		2) f je max: Sporem, necht tok neni max -> Existuje nenasycena cesta z Z do S.
+			Z ma vysku N, S - 0, takze cesta ma spad N.(ma ale jen (n-1) hran) -> najde se hrana se spadem aspoň 2 - je nenasycena, spor s Invariantem S.
+	Veta o casove složitosti(O(n^2*m)):
+		1. Init trva O(m);
+		2. alg provede nejvys 2n^2 zvednuti(Lemma Z)
+		3. nejvyse n*m nasycenych prevedeni
+		4. nejvyse n^2*m nenasycenych prevedeni(Lemma N)
+		Dohromady O(n^3 + n*m + n^2*m) = O(n^2*m)
+}
 14. Ford-Fulkerson
 
 16. Convex hull
