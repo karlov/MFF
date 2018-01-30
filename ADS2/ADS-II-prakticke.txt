@@ -57,7 +57,12 @@ ADS II prakticke
 
 17. scanf("Ivona") Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami. Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
 18. scanf("Kyrylo") Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
-
+	{
+		Ty jednotkove kapacity zaridi, ze nemame nenasycena prevedeni. To by nam zbyvala slozitost O(N^3 + NM). Jde to ale i na O(NM), kdyz si trosku vylepsime odhad poctu zvednuti.
+		Diky implementaci nas jedno zvednuti stoji <= N. Kazda hrana ma dva vrcholy a kolikrat muzeme zvednout vrchol, uz vime, ze?
+		Takze pro kazdou hranu mame <= 4N zvednuti, tedy cas na zvedani taky O(NM).
+		MJ mi rikal jeste jinou verzi dukazu O(NM) zvednuti, a to pres scitani vstupnich a vystupnich stupnu vrcholu - nicmene uvedeny postup je taky spravny.
+	}
 19. printf(); Je dán orientovaný graf a jeho vrcholy u, v. Chceme nalézt co nejvíce hranově disjunktních cest z u do v.
 	Za zdroj si vezmu U jako zdroj a V jako stok. Každé hraně přiřadím kapacitu 1, v případě vrcholově z disjunktních cest ještě vrcholům kapacitu 1.
 	Pustím na tento graf např F-F algoritmus. Uvážím ty hrany, kterým algoritmus přiřadí tok 1. Zbývá ještě řešit případ když cesta obsahuje cyklus.
@@ -164,6 +169,9 @@ ADS II prakticke
 13. scanf("Ivona") Uvažujme problém "Je dána soustava lineárních rovnic v celých číslech. Existuje vektor složený z nul a jedniček, který ji řeší?" Dokažte, že tento problém je NP-úplný.
 15. scanf("Ivona") Hledání největší nezávislé množiny v intervalovém grafu (to je graf, jehož vrcholy jsou intervaly a hrany spojují dvojice intervalů mající neprázdný průnik).
 24. scanf("Kyrylo") Uvažujme problém nezávislé množiny v grafech s maximálním stupněm 4 resp. 2. Rozhodněte, zda tento problém patří do P nebo je NP-úplný.
+	{
+		Prevedeme na to 3,3-SAT (2 hrany ma kazdy vrchol v trojuhelniku a dale muze byt spojen s nejvyse 2 svymi negacemi, tj. nevytvorime vic nez 4 hrany).
+	}
 25. scanf("Kyrylo") Jsou dány Fourierovy obrazy dvou vektorů. Jak podle nich rozhodnout, zda je jeden vektor rotací druhého?
 23. scanf("Kyrylo") Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
 
