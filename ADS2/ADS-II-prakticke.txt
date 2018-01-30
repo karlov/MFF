@@ -5,6 +5,7 @@ ADS II prakticke
 		viz 20. PrefixFunction()
 	}
 14. scanf("Ivona") Náhrdelník je cyklický řetězec, který nemá určený ani začátek, ani směr čtení. Jak rozhodnout, zda jsou si dva náhrdelníky rovny?
+
 7. scanf("Ivona") V daném řetězci nad abecedou {a,b} chceme nalézt nejdelší Fibonacciho podslovo. Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
 16. scanf("Kyrylo") Je dán slovník a text. Navrhněte algoritmus, který pro každé slovo ze slovníku spočte, kolikrát se v textu vyskytuje jako podřetězec.
 20. printf(); Jak zjistit, jestli je zadaný řetězec periodický? Tedy zda pro daný řetězec α existuje řetězec β a číslo k>1 tak, že α = βk.
@@ -179,10 +180,98 @@ ADS II prakticke
 
 Teorie
 4. scanf("Ivona") Aho-Corasicková pro vyhledávání v textu.
+{
+	- Zobecnenie Knuthova-Morrisova-Prattova algoritmu pre viac reťazcov.
+		- Opäť zostavenie automatu, ktorý má dopredné a spätné hrany.
+		- Po novom zavedieme skratkové hrany:
+			- Skratková hrana zo stavu β vedie do najbližšieho koncového stavu h(β) dosažiteľného z β po spätných hranách (a 			   rôzneho od β)
+			- Inými slovami, skratka h(β) nám povie, aký je najdlhší vlastný suffix slova β, ktorý je ihlou.
+
+		- Algoritmus: //Zo skrípt
+			-AC KROK
+				Procedura AcKrok (jeden krok automatu)
+				Vstup: Jsme ve stavu s, přečetli jsme znak x
+				1. Dokud Dopředu(s, x) = ∅ ∧ s 6= kořen: s ← Zpět(s).
+				2. Pokud Dopředu(s, x) 6= ∅: s ← Dopředu(s, x).
+				Výstup: Nový stav s
+
+			-AC HLEDEJ
+				Algoritmus AcHledej (spuštění automatu na daný řetězec)
+				Vstup: Seno σ, zkonstruovaný automat
+				1. s ← kořen
+				2. Pro znaky x ∈ σ postupně provádíme:
+				3. s ← AcKrok(s, x)
+				4. j ← s
+				5. Dokud j 6= ∅:
+				6. Je-li Slovo(j) 6= ∅:
+				7. Ohlásíme Slovo(j).
+				8. j ← Zkratka(j)
+
+			-AC KONSTRUKCE
+				Algoritmus AcKonstrukce
+				Vstup: Slova ι1, . . . , ιn
+				1. Založíme strom, který obsahuje pouze kořen r.
+				2. Vložíme do stromu slova ι1. . . ιn, nastavíme Slovo ve všech stavech.
+				3. Zpět(r) ← ∅, Zkratka(r) ← ∅
+				4. Založíme frontu F a vložíme do ní syny kořene.
+				5. Pro všechny syny s kořene: Zpět(s) ← r, Zkratka(s) ← ∅.
+				6. Dokud F 6= ∅:
+				7. Vybereme i z fronty F.
+				8. Pro všechny syny s vrcholu i:
+				9. z ← AcKrok(Zpět(i), písmeno na hraně is)
+				10. Zpět(s) ← z
+				11. Pokud Slovo(z) 6= ∅: Zkratka(s) ← z.
+				12. Jinak Zkratka(s) ← Zkratka(z).
+				13. Vložíme s do fronty F.
+				Výstup: Strom, pole Slovo, Zpět a Zkratka
+
+		- Algoritmus beží v čase e Θ ((suma)Ji + S + V)
+			- J1,...,Jn sú dĺžky jednotlivých ihiel, S je dĺžka sena a V počet výskytov
+}
+
 2. scanf("Ivona") Rabinův-Karpův algoritmus.
 
 10. scanf("Ivona") Algoritmus Knuth-Morris-Pratt.
+{
+	- Inkrementálný algoritmus
+		- Opiera sa o vyhladávací automat
+		- Vrcholy sú spojené hranami dvoch druhov:
+			- Dopredné: popisujú rozšírenie prefixu pridaním jednoho písmena, 
+			- Spätné vedú podľa spätnej funkie (z každého stavu do jeho najdlhšieho vlastného suffixu, ktorý je opäť stavom)
+				- Najdlhší prefix ihly, ktorý je suffixom prehľadávaného sena.
+
+		- Algoritmus: //Zo skrípt
+			- KMP KROK
+				Procedura KmpKrok (jeden krok automatu)
+				Vstup: Jsme ve stavu s, přečetli jsme znak x
+				1. Dokud ι[s] 6= x ∧ s 6= 0 : s ← Z[s]. / zpětné hrany
+				2. Pokud ι[s] = x, pak s ← s + 1. / dopředná hrana
+				Výstup: Nový stav s
+
+			- KMP HLEDEJ
+				Algoritmus KmpHledej (spuštění automatu na řetězec σ)
+					Vstup: Seno σ, zkonstruovaný automat
+					1. s ← 0
+					2. Pro znaky x ∈ σ postupně provádíme:
+					3. s ← KmpKrok(s, x)
+					4. Pokud s = J, ohlásíme výskyt.
+
+			- KMP KONSTRUKCE
+				Algoritmus KmpKonstrukce
+				Vstup: Jehla ι délky J
+				1. Z[0] ← nedefinováno, Z[1] ← 0
+				2. s ← 0
+				3. Pro i = 2, . . . , J:
+				4. s ← KmpKrok(s, ι[i − 1])
+				5. Z[i] ← s
+				Výstup: Pole zpětných hran Z
+
+		- Algoritmus beží v čase O(J+S)
+			- Lineárny čas s dĺžkou ihly(J) potrebujeme na postavenie automatu, lineárny čas s dĺžkou sena potom samotné 				  vyhľadávanie
+}
+
 3. scanf("Ivona") Dinic
+
 1. printf(); Goldberg
 	{
 		tok Goldberg(){
