@@ -1,10 +1,12 @@
 ADS II prakticke
 #define Text
 1. printf(); Najděte pro daný řetězec co nejdelší podřetězec, který je současně prefixem i suffixem (vlastním).
-	viz 20. PrefixFunction()
-14. Náhrdelník je cyklický řetězec, který nemá určený ani začátek, ani směr čtení. Jak rozhodnout, zda jsou si dva náhrdelníky rovny?
-7. V daném řetězci nad abecedou {a,b} chceme nalézt nejdelší Fibonacciho podslovo. Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
-16. Je dán slovník a text. Navrhněte algoritmus, který pro každé slovo ze slovníku spočte, kolikrát se v textu vyskytuje jako podřetězec.
+	{
+		viz 20. PrefixFunction()
+	}
+14. scanf("Ivona") Náhrdelník je cyklický řetězec, který nemá určený ani začátek, ani směr čtení. Jak rozhodnout, zda jsou si dva náhrdelníky rovny?
+7. scanf("Ivona") V daném řetězci nad abecedou {a,b} chceme nalézt nejdelší Fibonacciho podslovo. Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
+16. scanf("Kyrylo") Je dán slovník a text. Navrhněte algoritmus, který pro každé slovo ze slovníku spočte, kolikrát se v textu vyskytuje jako podřetězec.
 20. printf(); Jak zjistit, jestli je zadaný řetězec periodický? Tedy zda pro daný řetězec α existuje řetězec β a číslo k>1 tak, že α = βk.
 	{
 		Tak druhý pokus. Pomoci KMP najdu nejdelší Sufix, který je zároveň Prefixem slova (budou mě zajímat všechny takové kromě triviálního případu, když prefix = sufix = celé slovo). Pak pokud takový existuje, jeho délka je K a N se dělí beze zbytku (N - K), tak slovo je periodické.
@@ -47,13 +49,12 @@ ADS II prakticke
 
 	Jelikož tento algoritmus je KMP a jedno porovnaní navíc, časová složitost je O(N);
 	}
-26. Je dán text a číslo K. Nalezněte podřetězec délky K, který se v textu vyskytuje nejčastěji.
-22. Je dán řetězec a číslo K. Který podřetězec délky K je nejčetnější?
+26. scanf("Kyrylo") Je dán text a číslo K. Nalezněte podřetězec délky K, který se v textu vyskytuje nejčastěji.
+22. scanf("Kyrylo") Je dán řetězec a číslo K. Který podřetězec délky K je nejčetnější?
 
 #define Toky
 3. scanf("Ivona") Mějme děravou šachnovnici. Jak ji pokrýt kostkami 1×2 políčka?
-11. printf(); Je dán neorientovaný graf a číslo k. Zjistěte, zda graf je vrcholově k-souvislý.
-	viz 8. doplnění
+
 17. scanf("Ivona") Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami. Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
 18. scanf("Kyrylo") Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
 
@@ -73,20 +74,27 @@ ADS II prakticke
 8. printf(); Pro daný neorientovaný graf chceme nalézt největší k takové, že graf je hranově k-souvislý.
 	{
 		Když budu spouštět algoritmus na hledaní max toku na všechny dvojice vrcholu, tak určitě všechny hranově disjunktní cesty potkám několikrát.
-	Takže stačí zafixovat nějaký vrchol(třeba k), označit ho za Zdroj. Za Stock budu postupně označovat vrcholy z V\{k}(Je možné taky neuvažovat sousedy k). Minimum z toku se bude rovnat hranové souvislosti grafu. Zastavím se, když počet iteraci(I) přesáhne zatím minimální tok(Protože hranová souvislost je omezená min stupněm vrcholu a 2|E|/|V|)
+		Takže stačí zafixovat nějaký vrchol(třeba k), označit ho za Zdroj. Za Stock budu postupně označovat vrcholy z V\{k}(Je možné taky neuvažovat sousedy k). Minimum z toku se bude rovnat hranové souvislosti grafu. Zastavím se, když počet iteraci(I) přesáhne zatím minimální tok(Protože hranová souvislost je omezená min stupněm vrcholu a 2|E|/|V|)
 
-	Důkaz korektností: Minimální tok ze všech iteraci označím za F.
-	Z Mengerové věty existuje Separator (množina hran, po odebraní kterých graf stane nesouvislý). Velikost separátoru se rovna souvislostí grafu(Označím za R) . Aspoň jeden z množiny vrcholu V1, V2, ... V(r+1), kde r+1 index, není v tom řezu-separátoru. Nechť to bude vrchol Vj. Existuje vrchol Vt z separátoru takový, že #hranově-disjunktních cest z Vt do Vj = R.
+		Důkaz korektností: Minimální tok ze všech iteraci označím za F.
+		Z Mengerové věty existuje Separator (množina hran, po odebraní kterých graf stane nesouvislý). Velikost separátoru se rovna souvislostí grafu(Označím za R) . Aspoň jeden z množiny vrcholu V1, V2, ... V(r+1), kde r+1 index, není v tom řezu-separátoru. Nechť to bude vrchol Vj. Existuje vrchol Vt z separátoru takový, že #hranově-disjunktních cest z Vt do Vj = R.
 
-	F >= R,
-	I > F
-	I >= R + 1
+		F >= R,
+		I > F
+		I >= R + 1
 
-	Z toho C = F.
+		Z toho C = F.
 
-	Pro orientované grafy je nutno spočítat jak Tok z vybraného vrcholu do Vi (z množiny V\{k}) z k tak o obraceně, z Vi do k.
+		Pro orientované grafy je nutno spočítat jak Tok z vybraného vrcholu do Vi (z množiny V\{k}) z k tak o obraceně, z Vi do k.
 
-	Takže pro neorientovaný graf |V| - 1 je max počet spuštění algoritmu na max tok, pro orientovaný 2(|V| - 1).
+		Takže pro neorientovaný graf |V| - 1 je max počet spuštění algoritmu na max tok, pro orientovaný 2(|V| - 1).
+	}
+11. printf(); Je dán neorientovaný graf a číslo k. Zjistěte, zda graf je vrcholově k-souvislý.
+	{
+		Tak z vrcholu udělám hranu následujícím způsobem:
+		Pro původní vrchol a přidám 2 vrcholy a1, a2. Které spojím hranou (a1, a2). Pak ještě spojím všechny vrcholy, které předtím byly spojený hranou s a: (a, b), s a2. Neboli pro všechny b : (a, b) byla hrana v původním grafu, vytvořím hranu (a2, b).
+
+		Pak můžu použit algoritmus pro hranově disjunktní cesty na modifikovaný graf, protože vrcholově disjunktní cesta je hranové disjunktní(viz 8).
 	}
 5. printf(); Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
 	{
@@ -152,77 +160,78 @@ ADS II prakticke
 10. Navrhněte hradlovou síť, která testuje, zda se v n-bitové posloupnosti vyskytuje nějaký pevný vzorek. Výstupem nechť je ano/ne.
 
 #define Ostatni
-6. Definujme permanent matice stejně jako determinant, ale bez znaménkového pravidla (všechny členy přispívají kladně). Chceme pro danou nula-jedničkovou matici zjistit, zda má nenulový permanent.
-13. Uvažujme problém "Je dána soustava lineárních rovnic v celých číslech. Existuje vektor složený z nul a jedniček, který ji řeší?" Dokažte, že tento problém je NP-úplný.
-15. Hledání největší nezávislé množiny v intervalovém grafu (to je graf, jehož vrcholy jsou intervaly a hrany spojují dvojice intervalů mající neprázdný průnik).
+6. scanf("Ivona") Definujme permanent matice stejně jako determinant, ale bez znaménkového pravidla (všechny členy přispívají kladně). Chceme pro danou nula-jedničkovou matici zjistit, zda má nenulový permanent.
+13. scanf("Ivona") Uvažujme problém "Je dána soustava lineárních rovnic v celých číslech. Existuje vektor složený z nul a jedniček, který ji řeší?" Dokažte, že tento problém je NP-úplný.
+15. scanf("Ivona") Hledání největší nezávislé množiny v intervalovém grafu (to je graf, jehož vrcholy jsou intervaly a hrany spojují dvojice intervalů mající neprázdný průnik).
+24. scanf("Kyrylo") Uvažujme problém nezávislé množiny v grafech s maximálním stupněm 4 resp. 2. Rozhodněte, zda tento problém patří do P nebo je NP-úplný.
+25. scanf("Kyrylo") Jsou dány Fourierovy obrazy dvou vektorů. Jak podle nich rozhodnout, zda je jeden vektor rotací druhého?
+23. scanf("Kyrylo") Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
+
 27. Spočítejte diskrétní Fourierovu transformaci vektoru (i,-1,-i,1,i,-1,-i,1).
-24. Uvažujme problém nezávislé množiny v grafech s maximálním stupněm 4 resp. 2. Rozhodněte, zda tento problém patří do P nebo je NP-úplný.
-25. Jsou dány Fourierovy obrazy dvou vektorů. Jak podle nich rozhodnout, zda je jeden vektor rotací druhého?
-23. Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
 
 Teorie
-4. Aho-Corasicková pro vyhledávání v textu.
-2. Rabinův-Karpův algoritmus.
+4. scanf("Ivona") Aho-Corasicková pro vyhledávání v textu.
+2. scanf("Ivona") Rabinův-Karpův algoritmus.
 
-10. Algoritmus Knuth-Morris-Pratt.
-3. Dinic
+10. scanf("Ivona") Algoritmus Knuth-Morris-Pratt.
+3. scanf("Ivona") Dinic
 1. printf(); Goldberg
-{
-	tok Goldberg(){
-		//Init
-		h(z) = n;
-		foreach(vrchol v in V){
-			h(v) = 0;
-		}
-		//Starting first wave
-		foreach(hrana h in H){ //All to zero
-			if(h ma zdroj jako vrchol) f(h) = c(h);
-			else f(h) = 0;
-		}
-		while(Existuje vrchol u != Z OR S, že Pritok > 0){
-			if (Existuje hrana ua, r(ua)>0 AND h(u) > h(a))
-			{
-				převedeme přebytek po hraně uv
+	{
+		tok Goldberg(){
+			//Init
+			h(z) = n;
+			foreach(vrchol v in V){
+				h(v) = 0;
 			}
-			else
-			{
-				u: ++h(u); //zvedneme u:...
+			//Starting first wave
+			foreach(hrana h in H){ //All to zero
+				if(h ma zdroj jako vrchol) f(h) = c(h);
+				else f(h) = 0;
 			}
+			while(Existuje vrchol u != Z OR S, že Pritok > 0){
+				if (Existuje hrana ua, r(ua)>0 AND h(u) > h(a))
+				{
+					převedeme přebytek po hraně uv
+				}
+				else
+				{
+					u: ++h(u); //zvedneme u:...
+				}
+			}
+			return max. tok f
 		}
-		return max. tok f
+
+		Invarian:
+		1. f je vlna
+		2. h(v) nikdy neklesa
+		3. h(Z) = n AND h(S) = 0
+		4. prebytek S >= 0
+
+		Dukaz indukci //TODO finish
+		n = 0 -> plati
+		zmena prebytku -> nevytvari zaporne
+
+		Lemma o korektností(v returnu je TOK a je max):
+			1) vlna splnuje pozadavek na f(v) <= c(v). Chceme Kirfchhoffuv zakon: Dukaz sporem, kdyby nebyl splnen v nejakem vrcholu v, tak alg se nezastavi.
+			2) f je max: Sporem, necht tok neni max -> Existuje nenasycena cesta z Z do S.
+				Z ma vysku N, S - 0, takze cesta ma spad N.(ma ale jen (n-1) hran) -> najde se hrana se spadem aspoň 2 - je nenasycena, spor s Invariantem S.
+		Veta o casove složitosti(O(n^2*m)):
+			1. Init trva O(m);
+			2. alg provede nejvys 2n^2 zvednuti(Lemma Z)
+			3. nejvyse n*m nasycenych prevedeni
+			4. nejvyse n^2*m nenasycenych prevedeni(Lemma N)
+			Dohromady O(n^3 + n*m + n^2*m) = O(n^2*m)
 	}
+14. scanf("Ivona") Ford-Fulkerson
 
-	Invarian:
-	1. f je vlna
-	2. h(v) nikdy neklesa
-	3. h(Z) = n AND h(S) = 0
-	4. prebytek S >= 0
+16. scanf("Ivona") Convex hull
+6. scanf("Ivona") Definujte Voroného diagram a popište algoritmus na jeho konstrukci.
+8. scanf("Kyrylo") Průsečíky úseček.
+7. scanf("Kyrylo") Rychlá Fourierova transformace.
 
-	Dukaz indukci //TODO finish
-	n = 0 -> plati
-	zmena prebytku -> nevytvari zaporne
+11. scanf("Kyrylo") NP-úplnost: definice tříd, Cookova věta, důkaz NP-úplnosti vybraného problému.
+13. scanf("Kyrylo") Problém batohu – pseudopolynomiální algoritmus a aproximační schéma.
+5. scanf("Kyrylo") 2-aproximace problému obchodního cestujícího.
 
-	Lemma o korektností(v returnu je TOK a je max):
-		1) vlna splnuje pozadavek na f(v) <= c(v). Chceme Kirfchhoffuv zakon: Dukaz sporem, kdyby nebyl splnen v nejakem vrcholu v, tak alg se nezastavi.
-		2) f je max: Sporem, necht tok neni max -> Existuje nenasycena cesta z Z do S.
-			Z ma vysku N, S - 0, takze cesta ma spad N.(ma ale jen (n-1) hran) -> najde se hrana se spadem aspoň 2 - je nenasycena, spor s Invariantem S.
-	Veta o casove složitosti(O(n^2*m)):
-		1. Init trva O(m);
-		2. alg provede nejvys 2n^2 zvednuti(Lemma Z)
-		3. nejvyse n*m nasycenych prevedeni
-		4. nejvyse n^2*m nenasycenych prevedeni(Lemma N)
-		Dohromady O(n^3 + n*m + n^2*m) = O(n^2*m)
-}
-14. Ford-Fulkerson
-
-16. Convex hull
-6. Definujte Voroného diagram a popište algoritmus na jeho konstrukci.
-8. Průsečíky úseček.
-7. Rychlá Fourierova transformace.
-
-11. NP-úplnost: definice tříd, Cookova věta, důkaz NP-úplnosti vybraného problému.
-13. Problém batohu – pseudopolynomiální algoritmus a aproximační schéma.
-5. 2-aproximace problému obchodního cestujícího.
-
-15. binary addition
-12. Hradlová síť, která o dvojici binárních čísel zjistí, zda je první větší než druhé.
+15. scanf("Kyrylo") binary addition
+12. scanf("Kyrylo") Hradlová síť, která o dvojici binárních čísel zjistí, zda je první větší než druhé.
