@@ -204,37 +204,37 @@ Teorie
 			-AC KROK
 				Procedura AcKrok (jeden krok automatu)
 				Vstup: Jsme ve stavu s, přečetli jsme znak x
-				1. Dokud Dopředu(s, x) = ∅ ∧ s 6= kořen: s ← Zpět(s).
-				2. Pokud Dopředu(s, x) 6= ∅: s ← Dopředu(s, x).
+				1. Dokud Dopředu(s, x) = ∅ ∧ s 6= kořen: s = Zpět(s).
+				2. Pokud Dopředu(s, x) 6= ∅: s = Dopředu(s, x).
 				Výstup: Nový stav s
 
 			-AC HLEDEJ
 				Algoritmus AcHledej (spuštění automatu na daný řetězec)
 				Vstup: Seno σ, zkonstruovaný automat
-				1. s ← kořen
+				1. s = kořen
 				2. Pro znaky x ∈ σ postupně provádíme:
-				3. s ← AcKrok(s, x)
-				4. j ← s
+				3. s = AcKrok(s, x)
+				4. j = s
 				5. Dokud j 6= ∅:
 				6. Je-li Slovo(j) 6= ∅:
 				7. Ohlásíme Slovo(j).
-				8. j ← Zkratka(j)
+				8. j = Zkratka(j)
 
 			-AC KONSTRUKCE
 				Algoritmus AcKonstrukce
 				Vstup: Slova ι1, . . . , ιn
 				1. Založíme strom, který obsahuje pouze kořen r.
 				2. Vložíme do stromu slova ι1. . . ιn, nastavíme Slovo ve všech stavech.
-				3. Zpět(r) ← ∅, Zkratka(r) ← ∅
+				3. Zpět(r) = ∅, Zkratka(r) = ∅
 				4. Založíme frontu F a vložíme do ní syny kořene.
-				5. Pro všechny syny s kořene: Zpět(s) ← r, Zkratka(s) ← ∅.
+				5. Pro všechny syny s kořene: Zpět(s) = r, Zkratka(s) = ∅.
 				6. Dokud F 6= ∅:
 				7. Vybereme i z fronty F.
 				8. Pro všechny syny s vrcholu i:
-				9. z ← AcKrok(Zpět(i), písmeno na hraně is)
-				10. Zpět(s) ← z
-				11. Pokud Slovo(z) 6= ∅: Zkratka(s) ← z.
-				12. Jinak Zkratka(s) ← Zkratka(z).
+				9. z = AcKrok(Zpět(i), písmeno na hraně is)
+				10. Zpět(s) = z
+				11. Pokud Slovo(z) 6= ∅: Zkratka(s) = z.
+				12. Jinak Zkratka(s) = Zkratka(z).
 				13. Vložíme s do fronty F.
 				Výstup: Strom, pole Slovo, Zpět a Zkratka
 
@@ -257,26 +257,26 @@ Teorie
 				- KMP KROK
 					Procedura KmpKrok (jeden krok automatu)
 					Vstup: Jsme ve stavu s, přečetli jsme znak x
-					1. Dokud ι[s] 6= x ∧ s 6= 0 : s ← Z[s]. / zpětné hrany
-					2. Pokud ι[s] = x, pak s ← s + 1. / dopředná hrana
+					1. Dokud ι[s] 6= x ∧ s 6= 0 : s = Z[s]. / zpětné hrany
+					2. Pokud ι[s] = x, pak s = s + 1. / dopředná hrana
 					Výstup: Nový stav s
 
 				- KMP HLEDEJ
 					Algoritmus KmpHledej (spuštění automatu na řetězec σ)
 						Vstup: Seno σ, zkonstruovaný automat
-						1. s ← 0
+						1. s = 0
 						2. Pro znaky x ∈ σ postupně provádíme:
-						3. s ← KmpKrok(s, x)
+						3. s = KmpKrok(s, x)
 						4. Pokud s = J, ohlásíme výskyt.
 
 				- KMP KONSTRUKCE
 					Algoritmus KmpKonstrukce
 					Vstup: Jehla ι délky J
-					1. Z[0] ← nedefinováno, Z[1] ← 0
-					2. s ← 0
+					1. Z[0] = nedefinováno, Z[1] = 0
+					2. s = 0
 					3. Pro i = 2, . . . , J:
-					4. s ← KmpKrok(s, ι[i − 1])
-					5. Z[i] ← s
+					4. s = KmpKrok(s, ι[i − 1])
+					5. Z[i] = s
 					Výstup: Pole zpětných hran Z
 
 			- Algoritmus beží v čase O(J+S)
