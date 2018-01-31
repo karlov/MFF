@@ -6,7 +6,8 @@ ADS II prakticke
 	}
 14. scanf("Ivona") Náhrdelník je cyklický řetězec, který nemá určený ani začátek, ani směr čtení. Jak rozhodnout, zda jsou si dva náhrdelníky rovny?
 
-7. scanf("Ivona") V daném řetězci nad abecedou {a,b} chceme nalézt nejdelší Fibonacciho podslovo. Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
+7. scanf("Ivona") V daném řetězci nad abecedou {a,b} chceme nalézt nejdelší Fibonacciho podslovo.
+Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
 16. scanf("Kyrylo") Je dán slovník a text. Navrhněte algoritmus, který pro každé slovo ze slovníku spočte, kolikrát se v textu vyskytuje jako podřetězec.
 20. printf(); Jak zjistit, jestli je zadaný řetězec periodický? Tedy zda pro daný řetězec α existuje řetězec β a číslo k>1 tak, že α = βk.
 	{
@@ -57,7 +58,8 @@ ADS II prakticke
 #define Toky
 3. scanf("Ivona") Mějme děravou šachnovnici. Jak ji pokrýt kostkami 1×2 políčka?
 
-17. scanf("Ivona") Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami. Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
+17. scanf("Ivona") Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami.
+Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
 18. printf(); Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
 	{
 		Ty jednotkove kapacity zaridi, ze nemame nenasycena prevedeni. To by nam zbyvala slozitost O(N^3 + NM). Jde to ale i na O(NM), kdyz si trosku vylepsime odhad poctu zvednuti.
@@ -158,13 +160,15 @@ ADS II prakticke
 21. scanf("Kyrylo") Jak nalézt průsečíky zadaných parabol (tvaru ax^2+bx+c pro a>0)? (*) Bez omezení na a.
 
 #define Rovina
-2. scanf("Ivona") Jsou dány množiny bodů v rovině: červené a zelené. Sestrojte přímku takovou, aby na jedné její straně ležely všechny červené body, zatímco na druhé všechny zelené.
+2. scanf("Ivona") Jsou dány množiny bodů v rovině: červené a zelené.
+Sestrojte přímku takovou, aby na jedné její straně ležely všechny červené body, zatímco na druhé všechny zelené.
 4. scanf("Ivona") Je dána množina bodů v rovině. Oploťte ji dvěma uzavřenými ploty tak, aby celková spotřeba pletiva byla minimální.
 9. scanf("Kyrylo") Jsou dány dva mnohoúhelníky. Protínají se (ne nutně hranicí)?
 	{
 		
 	}
-12. scanf("Kyrylo") Navrhněte datovou strukturu, která dostane množinu obdélníků v rovině (v osové poloze) a bude umět rychle odpovídat na dotazy typu "v kolika obdélnících z množiny se nachází tento bod?".
+12. scanf("Kyrylo") Navrhněte datovou strukturu, která dostane množinu obdélníků v rovině (v osové poloze)
+a bude umět rychle odpovídat na dotazy typu "v kolika obdélnících z množiny se nachází tento bod?".
 	{
 		
 	}
@@ -173,14 +177,16 @@ ADS II prakticke
 10. Navrhněte hradlovou síť, která testuje, zda se v n-bitové posloupnosti vyskytuje nějaký pevný vzorek. Výstupem nechť je ano/ne.
 
 #define Ostatni
-6. scanf("Ivona") Definujme permanent matice stejně jako determinant, ale bez znaménkového pravidla (všechny členy přispívají kladně). Chceme pro danou nula-jedničkovou matici zjistit, zda má nenulový permanent.
-13. scanf("Ivona") Uvažujme problém "Je dána soustava lineárních rovnic v celých číslech. Existuje vektor složený z nul a jedniček, který ji řeší?" Dokažte, že tento problém je NP-úplný
+6. scanf("Ivona") Definujme permanent matice stejně jako determinant, ale bez znaménkového pravidla (všechny členy přispívají kladně).
+Chceme pro danou nula-jedničkovou matici zjistit, zda má nenulový permanent.
+13. scanf("Ivona") Uvažujme problém "Je dána soustava lineárních rovnic v celých číslech. Existuje vektor složený z nul a jedniček, který ji řeší?"
+Dokažte, že tento problém je NP-úplný
 	{
 		1. Problem je v NP. Napoveda - ohodnoceni promennych, linearne overit reseni.
 		2. Lze prevest na nejaky z NP-uplnych
 		//TODO binarni promenne, prevest na SAT???
 	}
-15. scanf("Ivona") Hledání největší nezávislé množiny v intervalovém grafu (to je graf, jehož vrcholy jsou intervaly a hrany spojují dvojice intervalů mající neprázdný průnik)
+15. scanf("Ivona") Hledání největší nezávislé množiny v intervalovém grafu
 	{
 		GREEDY-ALGO
 		Step 1:
@@ -401,8 +407,11 @@ Teorie
 			}
 			return Y;
 		}
+		//TODO korektnost napr slajdy Hrice #69
 
 		//Casova slozitost
+		FFT: T(n) = 2T(n/2) + O(n) a tedy T(n) = O(n*log(n)). (Kuchařková věta)
+
 		Je-li N = 2^k, pak v O(n*log(n)) lze spocitat FFT a FFT^(-1) v C^n. Nasobeni polynomu v O(n*log(n))
 
 		funkce FFT trva (n*log(n)), nasobeni O(n).
