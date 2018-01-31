@@ -10,7 +10,8 @@ ADS II prakticke
 16. scanf("Kyrylo") Je dán slovník a text. Navrhněte algoritmus, který pro každé slovo ze slovníku spočte, kolikrát se v textu vyskytuje jako podřetězec.
 20. printf(); Jak zjistit, jestli je zadaný řetězec periodický? Tedy zda pro daný řetězec α existuje řetězec β a číslo k>1 tak, že α = βk.
 	{
-		Tak druhý pokus. Pomoci KMP najdu nejdelší Sufix, který je zároveň Prefixem slova (budou mě zajímat všechny takové kromě triviálního případu, když prefix = sufix = celé slovo). Pak pokud takový existuje, jeho délka je K a N se dělí beze zbytku (N - K), tak slovo je periodické.
+		Tak druhý pokus. Pomoci KMP najdu nejdelší Sufix, který je zároveň Prefixem slova (budou mě zajímat ∀ takové kromě triviálního případu, když prefix = sufix = celé slovo).
+		Pak pokud takový existuje, jeho délka je K a N se dělí beze zbytku (N - K), tak slovo je periodické.
 
 	Pro výpočet délky takového sufixu/prefixu použijí následující funkce. Která spočítá tzv. prefixovou funkci KMP.
 
@@ -179,7 +180,21 @@ ADS II prakticke
 		2. Lze prevest na nejaky z NP-uplnych
 		//TODO binarni promenne, prevest na SAT???
 	}
-15. scanf("Ivona") Hledání největší nezávislé množiny v intervalovém grafu (to je graf, jehož vrcholy jsou intervaly a hrany spojují dvojice intervalů mající neprázdný průnik).
+15. scanf("Ivona") Hledání největší nezávislé množiny v intervalovém grafu (to je graf, jehož vrcholy jsou intervaly a hrany spojují dvojice intervalů mající neprázdný průnik)
+	{
+		GREEDY-ALGO
+		Step 1:
+		Sort the intervals of I according to their right end-points.
+		Step 2:
+		Find the interval i, whose right end-point is left-most. Include i in the solution set MIS.
+		Step 3:
+		Remove all intervals of set I which are overlapping with i.
+		Step 4:
+		Repeat Step 2 & 3 until I is not empty.
+		Step 5:
+		Report MIS.
+		//vic tu http://drona.csa.iisc.ac.in/~minati/archive/mis_CCCG.pdf
+	}
 24. scanf("Kyrylo") Uvažujme problém nezávislé množiny v grafech s maximálním stupněm 4 resp. 2. Rozhodněte, zda tento problém patří do P nebo je NP-úplný.
 	{
 		Prevedeme na to 3,3-SAT (2 hrany ma kazdy vrchol v trojuhelniku a dale muze byt spojen s nejvyse 2 svymi negacemi, tj. nevytvorime vic nez 4 hrany).
@@ -399,7 +414,7 @@ Teorie
 		L ∈ P <-> Existuje nejaky alg. A a polynom f, pro kazdy vstup X alg A dovehne v caaw nejvyse f(|X|) a vyda vysledek A(X) = L(X)
 
 		case NP: Trida NP, L ∈ NP <-> Existuje nejaky problem k ∈ P a polynom g,
-		pro vsechna X je L(X) = 1 prave tehdy, pokud pro nejaky retezec y delkz nejvyse g(|x|) plati k(x,y);
+		pro ∀ X je L(X) = 1 prave tehdy, pokud pro nejaky retezec y delkz nejvyse g(|x|) plati k(x,y);
 		//Existuje polynomialni dlouha napoveda y. Je-li L(X) = 1, musi existovat aspon 1 napoveda, kterou alg k schvali.
 
 		case NP-tezky: problem L je NP-tezky <-> na nej je predvoditelny kazdy problem z NP.
@@ -408,18 +423,34 @@ Teorie
 	}
 13. scanf("Kyrylo") Problém batohu – pseudopolynomiální algoritmus a aproximační schéma
 	{
+		//TODO pseudopolynomialni alg 19.5
+		Použijeme dynamické programování.
+		//To je pěkný příklad tzv. pseudopolynomiálního algoritmu, tedy algoritmu,
+		//jehož složitost je polynomem v počtu čísel na vstupu a jejich velikosti.
+		omezime se na K prvnich predmetu, 
+
+		//Aproximacni
 		foreach(predmet P in batohu) if(vaha P > const H) batohu.remove(P);
-		Cmax = max Ci;
-		M = Horni_cela_cast(n/e);
+		C_MAX = max Ci;
+		M = floor(n/e); //floor() Horni cela cast
 		for(int i = 0; i < n+1; ++i)
-			Cnew[i] = dolni_cela_cast(C[i] * M/Cmax);
-		Vyřešíme dynamickým programováním problém batohu pro upravené ceny Cnew a původní hmotnosti i kapacitu batohu.
+			ĉ[i] = trunc(C[i] * M/C_MAX); //trunc() -  dolni cela cast
+		Vyřešíme dynamickým programováním problém batohu pro upravené ceny ĉ a původní hmotnosti i kapacitu batohu.
 		Vybereme stejné předměty, jaké použilo optimální řešení kvantovaného zadání.
 
 		//Casova Slozitost
 		Kroky 1–3 a 5 jistě zvládneme v čase 𝒪(n).
-		Krok 4 řeší problém batohu se součtem cen Ĉ ≤ nM = 𝒪(n2/ε), což stihne v čase 𝒪(nĈ) = 𝒪(n3/ε).
-		Zbývá dokázat, že výsledek našeho algoritmu má opravdu relativní chybu nejvýše ε. //TODO
+		Krok 4 řeší problém batohu se součtem cen Ĉ ≤ nM = 𝒪(n^2/ε), což stihne v čase 𝒪(nĈ) = 𝒪(n^3/ε).
+		Zbývá dokázat, že výsledek našeho algoritmu má opravdu relativní chybu nejvýše ε.
+	Dukaz:	
+		Necht P množina predmetu pouzitych v optimalni reseni ulohy, C(P) - optimalni cena
+		Q - mnozina predmetu aproximacniho reseni, ĉ(Q) - cena aprox. reseni
+
+		ĉ(P) = Sum(ĉ[i]) = Sum(trunc(C[i]*M/C_MAX)) ≥ Sum(C[i] * M/C_MAX - 1) ≥ Sum(C[i]*M/C_MAX) - n = C(P) * M/C_MAX - n
+		C(Q) = Sum(C[i]) ≥ Sum(ĉ[i]*C_MAX/M) = C_MAX/M * Sum(ĉ[i]) = C_MAX/M * ĉ(Q) ≥ C_MAX/M * ĉ(P)
+		//posledni nerovnost Poslední nerovnost platí proto, že ĉ(Q) je optimální řešení kvantované úlohy, zatímco ĉ(P) je nějaké další řešení téže úlohy, které nemůže být lepší.
+		C(Q) ≥ (C(P) * M/C_MAX - n) * C_MAX/M ≥ C(P) - n*C_MAX/(n/ε) ≥ C(P) - ε*C_MAX ≥ C(P) - ε*C(P) = (1-ε)*C(P)
+
 	}
 5. printf(); 2-aproximace problému obchodního cestujícího
 	{
