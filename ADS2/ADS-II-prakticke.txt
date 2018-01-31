@@ -173,7 +173,12 @@ ADS II prakticke
 
 #define Ostatni
 6. scanf("Ivona") Definujme permanent matice stejně jako determinant, ale bez znaménkového pravidla (všechny členy přispívají kladně). Chceme pro danou nula-jedničkovou matici zjistit, zda má nenulový permanent.
-13. scanf("Ivona") Uvažujme problém "Je dána soustava lineárních rovnic v celých číslech. Existuje vektor složený z nul a jedniček, který ji řeší?" Dokažte, že tento problém je NP-úplný.
+13. scanf("Ivona") Uvažujme problém "Je dána soustava lineárních rovnic v celých číslech. Existuje vektor složený z nul a jedniček, který ji řeší?" Dokažte, že tento problém je NP-úplný
+	{
+		1. Problem je v NP. Napoveda - ohodnoceni promennych, linearne overit reseni.
+		2. Lze prevest na nejaky z NP-uplnych
+		//TODO binarni promenne, prevest na SAT???
+	}
 15. scanf("Ivona") Hledání největší nezávislé množiny v intervalovém grafu (to je graf, jehož vrcholy jsou intervaly a hrany spojují dvojice intervalů mající neprázdný průnik).
 24. scanf("Kyrylo") Uvažujme problém nezávislé množiny v grafech s maximálním stupněm 4 resp. 2. Rozhodněte, zda tento problém patří do P nebo je NP-úplný.
 	{
