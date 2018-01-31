@@ -57,7 +57,7 @@ ADS II prakticke
 3. scanf("Ivona") Mějme děravou šachnovnici. Jak ji pokrýt kostkami 1×2 políčka?
 
 17. scanf("Ivona") Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami. Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
-18. scanf("Kyrylo") Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
+18. printf(); Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
 	{
 		Ty jednotkove kapacity zaridi, ze nemame nenasycena prevedeni. To by nam zbyvala slozitost O(N^3 + NM). Jde to ale i na O(NM), kdyz si trosku vylepsime odhad poctu zvednuti.
 		Diky implementaci nas jedno zvednuti stoji ≤ N. Kazda hrana ma dva vrcholy a kolikrat muzeme zvednout vrchol, uz vime, ze?
@@ -180,10 +180,6 @@ ADS II prakticke
 		Prevedeme na to 3,3-SAT (2 hrany ma kazdy vrchol v trojuhelniku a dale muze byt spojen s nejvyse 2 svymi negacemi, tj. nevytvorime vic nez 4 hrany).
 	}
 25. scanf("Kyrylo") Jsou dány Fourierovy obrazy dvou vektorů. Jak podle nich rozhodnout, zda je jeden vektor rotací druhého?
-	{
-		
-	}
-23. scanf("Kyrylo") Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
 	{
 		
 	}
@@ -407,9 +403,20 @@ Teorie
 	}
 13. scanf("Kyrylo") Problém batohu – pseudopolynomiální algoritmus a aproximační schéma
 	{
-		
+		foreach(predmet P in batohu) if(vaha P > const H) batohu.remove(P);
+		Cmax = max Ci;
+		M = Horni_cela_cast(n/e);
+		for(int i = 0; i < n+1; ++i)
+			Cnew[i] = dolni_cela_cast(C[i] * M/Cmax);
+		Vyřešíme dynamickým programováním problém batohu pro upravené ceny Cnew a původní hmotnosti i kapacitu batohu.
+		Vybereme stejné předměty, jaké použilo optimální řešení kvantovaného zadání.
+
+		//Casova Slozitost
+		Kroky 1–3 a 5 jistě zvládneme v čase 𝒪(n).
+		Krok 4 řeší problém batohu se součtem cen Ĉ ≤ nM = 𝒪(n2/ε), což stihne v čase 𝒪(nĈ) = 𝒪(n3/ε).
+		Zbývá dokázat, že výsledek našeho algoritmu má opravdu relativní chybu nejvýše ε. //TODO
 	}
-5. scanf("Kyrylo") 2-aproximace problému obchodního cestujícího
+5. printf(); 2-aproximace problému obchodního cestujícího
 	{
 		//Nejkratsi z Hamiltonovskych kruznic v grafu s ohodnocenim
 		if(Graf je uplny ^ plati v nem trojuhelnikova nerovnost) muzeme 2-aproximovat;
