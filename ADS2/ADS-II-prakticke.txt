@@ -58,7 +58,10 @@ Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
 	}
 26. scanf("Kyrylo") Je dán text a číslo K. Nalezněte podřetězec délky K, který se v textu vyskytuje nejčastěji.
 22. scanf("Kyrylo") Je dán řetězec a číslo K. Který podřetězec délky K je nejčetnější?
-27. scanf("Kyrylo") Zjistit jestli slovo A je rotaci B
+27. printf() Zjistit jestli slovo A je rotaci B
+	{
+		vezmeme B dvakrat(tento retezec bude obsahovat vsechny rotace B). Udelame automat z A, spustime KMP.
+	}
 
 #undef Text
 
@@ -232,7 +235,7 @@ Dokažte, že tento problém je NP-úplný
 #undef Ostatni
 
 Teorie
-4. printf() Aho-Corasicková pro vyhledávání v textu.
+4. printf() Aho-Corasicková pro vyhledávání v textu
 	{
 	- Zobecnenie Knuthova-Morrisova-Prattova algoritmu pre viac reťazcov.
 		- Opäť zostavenie automatu, ktorý má dopredné a spätné hrany.
@@ -312,7 +315,7 @@ Teorie
 		if(N > D*J) -> O(J + D);
 	}
 
-10. printf() Algoritmus Knuth-Morris-Pratt.
+10. printf() Algoritmus Knuth-Morris-Pratt
 	{
 		- Inkrementálný algoritmus
 			- Opiera sa o vyhladávací automat
@@ -454,7 +457,7 @@ Teorie
 			4. nejvyse n^2*m nenasycenych prevedeni(Lemma N)
 			Dohromady O(n^3 + n*m + n^2*m) = O(n^2*m)
 	}
-14. scanf("Ivona") Ford-Fulkerson
+14. printf() Ford-Fulkerson
 	{
 		F_F(Sit S)
 		{
@@ -616,13 +619,27 @@ Teorie
 		case NP-úplnost: Problem je NP-úplny když je NP-tezky a zaroven lezi v NP.
 		case Cook theorem: SAT je NP-uplny problem.
 	}
-13. scanf("Kyrylo") Problém batohu – pseudopolynomiální algoritmus a aproximační schéma
+13. printf() Problém batohu – pseudopolynomiální algoritmus a aproximační schéma
 	{
-		//TODO pseudopolynomialni alg 19.5
 		Použijeme dynamické programování.
 		//To je pěkný příklad tzv. pseudopolynomiálního algoritmu, tedy algoritmu,
 		//jehož složitost je polynomem v počtu čísel na vstupu a jejich velikosti.
-		omezime se na K prvnich predmetu, 
+		omezime se na K prvnich predmetu, Ak(c) je minimum z hmotnosti těch podmnožin, jejichž cena je právě c.
+		Pokud takova neexistuje, Ak(c) = ∞;
+
+		Ak spočitáme indukci dle k
+
+		- k = 0, A0(0) = 0, A0(1) = A0(2) ... A0(C) = ∞;
+		- Ak(c) = min(Ak-1(c), Ak-1(c - ck) + hk);
+
+		prechod od Ak-1 do Ak je O(C). Od A1 k An se dopocitame O(C*n);
+
+		An(c*) ≤ H
+
+		Upravime alg, aby ještě pamatoval pro Ak(c) ještě Bk(c) - index posledního předmětu, který jsme do množiny přidali.
+		i = Bn(c*), i` = Bi-1(c* - ci). V O(n) spocitame celou B.
+
+		V binarnim vyjadreni C muze byt exponencialni vzhledem k N - alg. je pseudopolynomialní.
 
 		//Aproximacni
 		foreach(predmet P in batohu) if(vaha P > const H) batohu.remove(P);
