@@ -57,6 +57,7 @@ Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
 	}
 26. scanf("Kyrylo") Je dán text a číslo K. Nalezněte podřetězec délky K, který se v textu vyskytuje nejčastěji.
 22. scanf("Kyrylo") Je dán řetězec a číslo K. Který podřetězec délky K je nejčetnější?
+27. scanf("Kyrylo") Zjistit jestli slovo A je rotaci B
 
 #define Toky
 3. scanf("Ivona") Mějme děravou šachnovnici. Jak ji pokrýt kostkami 1×2 políčka?
@@ -270,7 +271,35 @@ Teorie
 			- J1,...,Jn sú dĺžky jednotlivých ihiel, S je dĺžka sena a V počet výskytov
 	}
 
-2. scanf("Ivona") Rabinův-Karpův algoritmus.
+2. scanf("Ivona") Rabinův-Karpův algoritmus
+	{
+		Okenko delky J na seně, spočteme Hash a porovnáme s hashem J.
+		if(hash(i) == hash(J)) porovnáme znak po znaku;
+
+		hash(X[j]) = (X[1]*P^(J-1) + X[2]*P^(J-2) ... X[J-1] * P^1 + X[J]*P) mod(N);
+		//P je vhodna const, nesoudelna s N, P^J je řadově větší než N
+
+		R-Karp(jehla j delky D, seno σ)
+		{
+			S = |σ|;
+			L = hash(j);
+			h = H(σ[:D]); //hash 1. pozice okenka
+			//Zvolme P a N, prepocitame (P^J) mod(N)
+
+			for(int i = 0; i ≤ S - D; ++i){
+				if(h = l){
+
+				}
+				if(i < S - D) h = (p*h - σ[i] * P^J + σ[i + J]) mod(N); //prepocitame hash
+			}
+		}
+
+		//Slozitost
+		Init a pocitani hash O(J + D). Při nejhorším O(J) porovnávání pro ∀ okénka.
+		předpoklad dokonale chovaní hashe -> P(kolize) = 1/N
+		v průměru O(J + D + V*J + D*J/N) kde V je # vysktytu
+		if(N > D*J) -> O(J + D);
+	}
 
 10. scanf("Ivona") Algoritmus Knuth-Morris-Pratt.
 	{
@@ -312,6 +341,9 @@ Teorie
 	}
 
 3. scanf("Ivona") Dinic
+	{
+
+	}
 
 1. printf(); Goldberg
 	{
