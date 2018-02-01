@@ -1,6 +1,7 @@
 ADS II prakticke
 #define Text
-1. printf(); Najděte pro daný řetězec co nejdelší podřetězec, který je současně prefixem i suffixem (vlastním).
+
+1. printf() Najděte pro daný řetězec co nejdelší podřetězec, který je současně prefixem i suffixem (vlastním).
 	{
 		viz 20. PrefixFunction()
 	}
@@ -12,7 +13,7 @@ Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
 		//TODO https://cstheory.stackexchange.com/questions/29323/fibonacci-words/29327
 	}
 16. scanf("Kyrylo") Je dán slovník a text. Navrhněte algoritmus, který pro každé slovo ze slovníku spočte, kolikrát se v textu vyskytuje jako podřetězec.
-20. printf(); Jak zjistit, jestli je zadaný řetězec periodický? Tedy zda pro daný řetězec α existuje řetězec β a číslo k>1 tak, že α = βk.
+20. printf() Jak zjistit, jestli je zadaný řetězec periodický? Tedy zda pro daný řetězec α existuje řetězec β a číslo k>1 tak, že α = βk.
 	{
 		Tak druhý pokus. Pomoci KMP najdu nejdelší Sufix, který je zároveň Prefixem slova (budou mě zajímat ∀ takové kromě triviálního případu, když prefix = sufix = celé slovo).
 		Pak pokud takový existuje, jeho délka je K a N se dělí beze zbytku (N - K), tak slovo je periodické.
@@ -59,6 +60,8 @@ Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
 22. scanf("Kyrylo") Je dán řetězec a číslo K. Který podřetězec délky K je nejčetnější?
 27. scanf("Kyrylo") Zjistit jestli slovo A je rotaci B
 
+#undef Text
+
 #define Toky
 3. scanf("Ivona") Mějme děravou šachnovnici. Jak ji pokrýt kostkami 1×2 políčka?
 
@@ -68,14 +71,14 @@ Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
 		//TODO https://www.coursera.org/learn/advanced-algorithms-and-complexity/lecture/bXeiI/independent-sets-in-trees
 		//http://hscc.cs.nthu.edu.tw/~sheujp/public/journal/3.pdf
 	}
-18. printf(); Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
+18. printf() Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
 	{
 		Ty jednotkove kapacity zaridi, ze nemame nenasycena prevedeni. To by nam zbyvala slozitost O(N^3 + NM). Jde to ale i na O(NM), kdyz si trosku vylepsime odhad poctu zvednuti.
 		Diky implementaci nas jedno zvednuti stoji ≤ N. Kazda hrana ma dva vrcholy a kolikrat muzeme zvednout vrchol, uz vime, ze?
 		Takze pro kazdou hranu mame ≤ 4N zvednuti, tedy cas na zvedani taky O(NM).
 		MJ mi rikal jeste jinou verzi dukazu O(NM) zvednuti, a to pres scitani vstupnich a vystupnich stupnu vrcholu - nicmene uvedeny postup je taky spravny.
 	}
-19. printf(); Je dán orientovaný graf a jeho vrcholy u, v. Chceme nalézt co nejvíce hranově disjunktních cest z u do v.
+19. printf() Je dán orientovaný graf a jeho vrcholy u, v. Chceme nalézt co nejvíce hranově disjunktních cest z u do v.
 	Za zdroj si vezmu U jako zdroj a V jako stok. Každé hraně přiřadím kapacitu 1, v případě vrcholově z disjunktních cest ještě vrcholům kapacitu 1.
 	Pustím na tento graf např F-F algoritmus. Uvážím ty hrany, kterým algoritmus přiřadí tok 1. Zbývá ještě řešit případ když cesta obsahuje cyklus.
 	Stačí projít graf a pokud nějaký vrchol potkám dvakrát, tak je tam cyklus, který musím smazat. Když smažu cyklus tak dostanu cestu od U do V.
@@ -88,7 +91,7 @@ Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
 	Pro původní vrchol a přidám 2 vrcholy a1, a2. Které spojím hranou (a1, a2). Pak ještě spojím všechny vrcholy, které předtím byly spojený hranou s a: (a, b), s a2. Neboli pro všechny b : (a, b) byla hrana v původním grafu, vytvořím hranu (a2, b).
 
 	Pak můžu použit algoritmus pro hranově disjunktní cesty na modifikovaný graf, protože vrcholově disjunktní cesta je hranové disjunktní.
-8. printf(); Pro daný neorientovaný graf chceme nalézt největší k takové, že graf je hranově k-souvislý.
+8. printf() Pro daný neorientovaný graf chceme nalézt největší k takové, že graf je hranově k-souvislý.
 	{
 		Když budu spouštět algoritmus na hledaní max toku na všechny dvojice vrcholu, tak určitě všechny hranově disjunktní cesty potkám několikrát.
 		Takže stačí zafixovat nějaký vrchol(třeba k), označit ho za Zdroj. Za Stock budu postupně označovat vrcholy z V\{k}(Je možné taky neuvažovat sousedy k). Minimum z toku se bude rovnat hranové souvislosti grafu. Zastavím se, když počet iteraci(I) přesáhne zatím minimální tok(Protože hranová souvislost je omezená min stupněm vrcholu a 2|E|/|V|)
@@ -106,14 +109,14 @@ Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
 
 		Takže pro neorientovaný graf |V| - 1 je max počet spuštění algoritmu na max tok, pro orientovaný 2(|V| - 1).
 	}
-11. printf(); Je dán neorientovaný graf a číslo k. Zjistěte, zda graf je vrcholově k-souvislý.
+11. printf() Je dán neorientovaný graf a číslo k. Zjistěte, zda graf je vrcholově k-souvislý.
 	{
 		Tak z vrcholu udělám hranu následujícím způsobem:
 		Pro původní vrchol a přidám 2 vrcholy a1, a2. Které spojím hranou (a1, a2). Pak ještě spojím všechny vrcholy, které předtím byly spojený hranou s a: (a, b), s a2. Neboli pro všechny b : (a, b) byla hrana v původním grafu, vytvořím hranu (a2, b).
 
 		Pak můžu použit algoritmus pro hranově disjunktní cesty na modifikovaný graf, protože vrcholově disjunktní cesta je hranové disjunktní(viz 8).
 	}
-5. printf(); Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
+5. printf() Nalezněte polynomiální algoritmus, který v daném bipartitním grafu najde nejmenší vrcholové pokrytí.
 	{
 		Veta (Königova): V každom bipartitonom grafe je veľkosť maximálneho párovania rovná veľkosti minimálneho vrcholového pokrytia.
 
@@ -167,6 +170,8 @@ Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
 
 21. scanf("Kyrylo") Jak nalézt průsečíky zadaných parabol (tvaru ax^2+bx+c pro a>0)? (*) Bez omezení na a.
 
+#undef Toky
+
 #define Rovina
 2. scanf("Ivona") Jsou dány množiny bodů v rovině: červené a zelené.
 Sestrojte přímku takovou, aby na jedné její straně ležely všechny červené body, zatímco na druhé všechny zelené.
@@ -181,8 +186,12 @@ a bude umět rychle odpovídat na dotazy typu "v kolika obdélnících z množin
 		
 	}
 
+#undef Rovina
+
 #define Hradla
 10. Navrhněte hradlovou síť, která testuje, zda se v n-bitové posloupnosti vyskytuje nějaký pevný vzorek. Výstupem nechť je ano/ne.
+
+#undef Hradla
 
 #define Ostatni
 6. scanf("Ivona") Definujme permanent matice stejně jako determinant, ale bez znaménkového pravidla (všechny členy přispívají kladně).
@@ -220,13 +229,15 @@ Dokažte, že tento problém je NP-úplný
 
 27. Spočítejte diskrétní Fourierovu transformaci vektoru (i,-1,-i,1,i,-1,-i,1).
 
+#undef Ostatni
+
 Teorie
-4. scanf("Ivona") Aho-Corasicková pro vyhledávání v textu.
+4. printf() Aho-Corasicková pro vyhledávání v textu.
 	{
 	- Zobecnenie Knuthova-Morrisova-Prattova algoritmu pre viac reťazcov.
 		- Opäť zostavenie automatu, ktorý má dopredné a spätné hrany.
 		- Po novom zavedieme skratkové hrany:
-			- Skratková hrana zo stavu β vedie do najbližšieho koncového stavu h(β) dosažiteľného z β po spätných hranách (a 			   rôzneho od β)
+			- Skratková hrana zo stavu β vedie do najbližšieho koncového stavu h(β) dosažiteľného z β po spätných hranách (a rôzneho od β)
 			- Inými slovami, skratka h(β) nám povie, aký je najdlhší vlastný suffix slova β, ktorý je ihlou.
 
 		- Algoritmus: //Zo skrípt
@@ -271,7 +282,7 @@ Teorie
 			- J1,...,Jn sú dĺžky jednotlivých ihiel, S je dĺžka sena a V počet výskytov
 	}
 
-2. scanf("Ivona") Rabinův-Karpův algoritmus
+2. printf() Rabinův-Karpův algoritmus
 	{
 		Okenko delky J na seně, spočteme Hash a porovnáme s hashem J.
 		if(hash(i) == hash(J)) porovnáme znak po znaku;
@@ -301,7 +312,7 @@ Teorie
 		if(N > D*J) -> O(J + D);
 	}
 
-10. scanf("Ivona") Algoritmus Knuth-Morris-Pratt.
+10. printf() Algoritmus Knuth-Morris-Pratt.
 	{
 		- Inkrementálný algoritmus
 			- Opiera sa o vyhladávací automat
@@ -337,10 +348,10 @@ Teorie
 					Výstup: Pole zpětných hran Z
 
 			- Algoritmus beží v čase O(J+S)
-				- Lineárny čas s dĺžkou ihly(J) potrebujeme na postavenie automatu, lineárny čas s dĺžkou sena potom samotné 				  vyhľadávanie
+				- Lineárny čas s dĺžkou ihly(J) potrebujeme na postavenie automatu, lineárny čas s dĺžkou sena potom samotné vyhľadávanie
 	}
 
-3. printf(); Dinic
+3. printf() Dinic
 	{
 		Sestrojime sit rezerv, kde r(e) je rezerva hrany "e" pri toku F
 
@@ -396,7 +407,7 @@ Teorie
 		O(m + m + mn) = O(m*n);
 	}
 
-1. printf(); Goldberg
+1. printf() Goldberg
 	{
 		tok Goldberg(){
 			//Init
@@ -444,10 +455,93 @@ Teorie
 			Dohromady O(n^3 + n*m + n^2*m) = O(n^2*m)
 	}
 14. scanf("Ivona") Ford-Fulkerson
+	{
+		F_F(Sit S)
+		{
+			F = libov. tok;
+			while(Existuje nenasycena cesta P z Z do S){
+				ε = min(r(e) | e in P); //rezerva cele cesty 
+				foreach(ab in P){
+					d = min(f(ab), ε); //kolik muzeme odecist v protismeru
+					f(ba) = f(ab) - d;
+					f(ab) = f(ab) + ε - d; //zbytec pricteme v protismeru
+				}
+			}
+			return F;
+		}
 
-16. scanf("Ivona") Convex hull
-6. scanf("Ivona") Definujte Voroného diagram a popište algoritmus na jeho konstrukci
-8. printf(); Průsečíky úseček
+		//Konecnost
+		- celociselne kapacity, F v kazdem kroku se zvetsi aspon o 1, alg se zastavi po Sum(c(e)) krocich
+		- racionalni: vynasobime spol nasobkem
+		- irracionalni: nemusi se ani zastavit ani konvergovat k max toku
+		//Spravnost
+		Pokud se F_F zastavi -> vyda max tok
+
+		Uvažujme množinu vrcholu A = {vrchol v in V | Existuje nenasycena cesta z Z do S}
+		B = V\A;
+		E(A,B) je řez, Z lezi v A, protože z Z do Z existuje cesta nulove delky(nenasycena). 
+
+		//Jednotkove kapacity
+		- Jedna iterace bezi v O(m)//Cestu najdeme BFS, zlepseni je lin.
+		- #iteraci je nejvys O(n), tok se zlepsi aspon o 1
+		Dohromady O(mn)
+	}
+
+16. printf() Convex hull
+	{
+		Princip Zametani roviny
+
+		Convex_Hull(body X[])
+		{
+			X.sort(dle x-ve souradnice);
+			H = D += b1; //horni a dolni obaly
+			foreach(bod b in X, krome b1){
+				while(|H| ≥ 2 AND uhel H[k-1]H[k]b je orient doleva) //Prepocitame H
+				{
+					odebereme posledni H[k] z H;
+					H += b;
+				}
+				//symmetricky D
+			}
+
+			return D, H;
+		}
+
+		//orientace uhlu najdeme pomoci det matice = x1y2 - x2y1
+
+		//Casova slozitost
+		Trideni trva O(n*log(n)). Kazdy bod je odebran nejvyse jednou -> vsechna odebrani trvaji O(n), pridani trva O(1). Kvuli trideni O(n*log(n))
+	}
+6. printf() Definujte Voroného diagram a popište algoritmus na jeho konstrukci
+	{
+		Pro množinu X1 ... Xn ∈ R^2 je system oblasti B1 ... Bn ⊆ R^2, Bi obsahuje body, které jsou bližší k Xi než k ostatním Xj
+
+		Zametani roviny zezhora
+
+		Fortune(){
+			K += vsechny mistni udalosti;//Kalendar //TODO ktere??
+			zalozime prazdnou pobrezni linii P;
+			while(!k.empty()){
+				U = K.pop();
+				if(U je mistni){
+					Najdeme v P parabolu dle x souradnice mista;
+					Rozdelime ji a mezi jeji casti vlozime novou parabolu;
+					do diagramu pridame novou hranu, ktera zatim neni nikam pripojena;
+				}
+				if(U je kriznicova){
+					smazeme parabolu z P;
+					do diagramu zaznamename vrchol, v nemz 2 hrany konci a 1 zacina;
+				}
+				Po zmene pobzezi prepocitame kruznicove udalost(O(1) vznikne, O(1) zanikne);
+			}
+		}
+
+		//Casova slozitost
+		Celkove nastane N mistnich udalosti (na kazde X se narazime prave jednou)
+		a N kruznicovych (kruznicova smaze 1 parabolu z pobrezi, parabola pribyva pouze s kazdym Xi).
+		Kalendar a pobrezni linie jsou O(n) -> O(log(n)) na operaci -> O(log(n)) na kazdou udalost -> O(n*log(n));
+	}
+8. printf() Průsečíky úseček
 	{
 		//Princip Zametani Roviny
 		P = null; //Prurez
@@ -509,7 +603,7 @@ Teorie
 		funkce FFT trva (n*log(n)), nasobeni O(n).
 	}
 
-11. printf(); NP-úplnost: definice tříd, Cookova věta, důkaz NP-úplnosti vybraného problému
+11. printf() NP-úplnost: definice tříd, Cookova věta, důkaz NP-úplnosti vybraného problému
 	{
 		case P: Trida P rozhodovacich problemu (jsou resitelne v polynomiálním čase).
 		L ∈ P <-> Existuje nejaky alg. A a polynom f, pro kazdy vstup X alg A dovehne v caaw nejvyse f(|X|) a vyda vysledek A(X) = L(X)
@@ -553,7 +647,7 @@ Teorie
 		C(Q) ≥ (C(P) * M/C_MAX - n) * C_MAX/M ≥ C(P) - n*C_MAX/(n/ε) ≥ C(P) - ε*C_MAX ≥ C(P) - ε*C(P) = (1-ε)*C(P)
 
 	}
-5. printf(); 2-aproximace problému obchodního cestujícího
+5. printf() 2-aproximace problému obchodního cestujícího
 	{
 		//Nejkratsi z Hamiltonovskych kruznic v grafu s ohodnocenim
 		if(Graf je uplny ^ plati v nem trojuhelnikova nerovnost) muzeme 2-aproximovat;
