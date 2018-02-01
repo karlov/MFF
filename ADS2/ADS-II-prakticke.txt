@@ -8,6 +8,9 @@ ADS II prakticke
 
 7. scanf("Ivona") V daném řetězci nad abecedou {a,b} chceme nalézt nejdelší Fibonacciho podslovo.
 Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
+	{
+		//TODO https://cstheory.stackexchange.com/questions/29323/fibonacci-words/29327
+	}
 16. scanf("Kyrylo") Je dán slovník a text. Navrhněte algoritmus, který pro každé slovo ze slovníku spočte, kolikrát se v textu vyskytuje jako podřetězec.
 20. printf(); Jak zjistit, jestli je zadaný řetězec periodický? Tedy zda pro daný řetězec α existuje řetězec β a číslo k>1 tak, že α = βk.
 	{
@@ -60,6 +63,10 @@ Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
 
 17. scanf("Ivona") Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami.
 Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
+	{
+		//TODO https://www.coursera.org/learn/advanced-algorithms-and-complexity/lecture/bXeiI/independent-sets-in-trees
+		//http://hscc.cs.nthu.edu.tw/~sheujp/public/journal/3.pdf
+	}
 18. printf(); Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
 	{
 		Ty jednotkove kapacity zaridi, ze nemame nenasycena prevedeni. To by nam zbyvala slozitost O(N^3 + NM). Jde to ale i na O(NM), kdyz si trosku vylepsime odhad poctu zvednuti.
