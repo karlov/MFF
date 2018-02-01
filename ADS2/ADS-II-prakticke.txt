@@ -340,9 +340,60 @@ Teorie
 				- Lineárny čas s dĺžkou ihly(J) potrebujeme na postavenie automatu, lineárny čas s dĺžkou sena potom samotné 				  vyhľadávanie
 	}
 
-3. scanf("Ivona") Dinic
+3. printf(); Dinic
 	{
+		Sestrojime sit rezerv, kde r(e) je rezerva hrany "e" pri toku F
 
+		Dinic(){
+			F = nulový tok;
+			while(true){
+				Sestrojime sit rezerv, smazeme hrany r(e) = 0;
+				l = delka nejkratsi cesty z Z do S v R.
+				if(neexistuje zadna takova cesta) return F;
+
+				Cisteni_Site(R);
+				G = blokujici tok v R; //na kazde orientovane ceste z Z do S Existuje aspon 1 hrana, kde f(e) = c(e);
+				zlepsime F pomoci G;
+			}
+		}
+
+		Cisteni_Site(rezervni sit R){
+			rozdelime vrchole do vrstem dle vzdalenosti do Z.
+			odstranime vrstvy za S(vrcholy se vzdalenosti > l);
+			odstranime hrany do predchozich vrstev a hrany uvnitr vrstev
+			odstranime slepe ulicky: //DEGout(v) = 0
+			{
+				F = {v != z | DEEGout(v) = 0} //fronta ke smazani				
+				while(F != 0){
+					vrchol v = F.pop();
+					smazeme vsechny hrany, ktere vedou do v;
+					foreach(vrchol v in R) if(DEGout(v) == 0) F.add(v);
+				}
+			}
+		}
+
+		Blokujici_tok_Find(){
+			g = nulový tok;
+			while(existuje v R orientovana cesta P(Z, S)){
+				ε = min(r(e) - g(e)); //hrany z P
+				foreach(edge e in P) g(e) = g(e) + ε;
+				while(pro nejake e: g(e) = r(e)) smazeme e z R;
+				Docistime sit pomoci Fronty; //TODO jak?
+			}
+			return g;
+		}
+
+		//Korektnost, TODO pomocne lemma
+		Z lemmatu o zlepsovani toku F je stale korektni tok. Ale zastavi se tehdy, když neexistuje cesta z Z do S po hranach s kladnou rezervou.
+		Tedy zastavil by se i FF.
+
+		//Casova slozitost
+		- sit rezerv, mazani hran s r(e) = 0,hledani nejkratsi cesty i konecne zlepsovani toku trvaji O(m);
+		- cisteni site taky v O(m) (mazani hrany trva O(1), mazani incidencnich hran O(1), každý vrchol i hrana jsou smazany nejvys jednou ve fazi)
+		- hledani blok toku projde nejvys m cest, protože pokažde ze siti vypadne aspon 1 hrana a už se tam nevratí.
+		Sit je vrstevnata => nalezt jednu cestu stihneme v O(n);
+		Dohromady O(m*n + cisteni) = O(m*n)
+		O(m + m + mn) = O(m*n);
 	}
 
 1. printf(); Goldberg
@@ -447,6 +498,8 @@ Teorie
 			return Y;
 		}
 		//TODO korektnost napr slajdy Hrice #69
+
+		//TODO FFT^(-1)
 
 		//Casova slozitost
 		FFT: T(n) = 2T(n/2) + O(n) a tedy T(n) = O(n*log(n)). (Kuchařková věta)
