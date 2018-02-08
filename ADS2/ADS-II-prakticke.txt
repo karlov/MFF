@@ -66,7 +66,15 @@ Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
 #undef Text
 
 #define Toky
-3. scanf("Ivona") Mějme děravou šachnovnici. Jak ji pokrýt kostkami 1×2 políčka?
+3. printf() Mějme děravou šachnovnici. Jak ji pokrýt kostkami 1×2 políčka?
+{
+	provedeme diagonly, body z diagonaly N umistime do leve partity vipartitniho grafu, body z (N+1) diagonaly do prave partity.
+	Pak spojime hranami vsechny sousedy v sachovnice. Když nekde je dira - tent bod neuvažujeme.
+
+	Pak spustime alg na hledani parovani - ukaze kde rozmistit policka.
+
+	O(N*M)
+}
 
 17. scanf("Ivona") Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami.
 Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
@@ -596,7 +604,17 @@ Teorie
 		}
 		//TODO korektnost napr slajdy Hrice #69
 
-		//TODO FFT^(-1)
+		//FFT^(-1)
+		FFT*FFTk(konjugovana) = n*E
+		FFT[j][k]*FFTk[j][k] = Sum(FFT[j][l] * FFT[l][k]) from l to (n-1) = Sum(Wjl * Wkl konjugovana) from l to (n-1) = 
+		Sum(Wjl * (W konjugovana)kl) from l to (n-1) = Sum(Wjl * W^(-1)kl) from l to (n-1) = Sum(Wjl * W-kl) from l to (n-1) =
+		Sum(W(j-k)l) from l = 0 to (n-1), coz je geom rada
+
+		= (W(j-k)n - 1)/ (W(j-k) - 1) = 0;
+
+		W^n = 1, Wj-k neni 0;
+
+		//pouzijeme stejny alg az na preskalovani 1/n
 
 		//Casova slozitost
 		FFT: T(n) = 2T(n/2) + O(n) a tedy T(n) = O(n*log(n)). (Kuchařková věta)
@@ -686,11 +704,11 @@ Teorie
 		A ≤ 2*T ≤ 2*O
 	}
 
-15. scanf("Kyrylo") binary addition
+15. scanf("Kyrylo") Hradlová síť komparator scitani
 	{
 		
 	}
-12. scanf("Kyrylo") Hradlová síť, která o dvojici binárních čísel zjistí, zda je první větší než druhé.
+12. scanf("Kyrylo") Hradlová síť komparator
 	{
 		
 	}
