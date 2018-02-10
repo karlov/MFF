@@ -1,0 +1,12 @@
+Logika def
+
+- Otevrena formule: neobsahuje zadny kvantifikator
+- Otevrena teorie: axiomy otevrene formule
+- Struktura A shoduje s polozkou P.
+	Pokud P je T𝝋 a A ⊨ 𝝋,
+	pokud P je F𝝋 a A ⊨ ⌐𝝋
+- Struktura A shoduje s vetvi V, prave když shoduje s kazdou polozkou V.
+- Kanonicky model s rovnosti je faktorstruktura A/=
+	pro kazdou formuli A ⊨ 𝝋 ⇔ (A/=) ⊨ 𝝋
+- Mnozina Vět teorie T
+	ThmL(T) = { 𝝋 ∈ 	FmL | T ⊢ 𝝋 }

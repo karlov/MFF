@@ -54,7 +54,7 @@ Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
 
 	Z toho pole vezmu poslední prvek(longest_prefix[longest_prefix.Length - 1]), což je délka hledaného sufixu/prefixu K.
 
-	Jelikož tento algoritmus je KMP a jedno porovnaní navíc, časová složitost je O(N);
+	Jelikož tento algoritmus je KMP a jedno porovnaní navíc, časová složitost je 𝛩(N);
 	}
 26. scanf("Kyrylo") Je dán text a číslo K. Nalezněte podřetězec délky K, který se v textu vyskytuje nejčastěji.
 22. scanf("Kyrylo") Je dán řetězec a číslo K. Který podřetězec délky K je nejčetnější?
@@ -67,14 +67,14 @@ Fibonacciho slova jsou definována takto: F1=a, F2=b, Fn+2=FnFn+1.
 
 #define Toky
 3. printf() Mějme děravou šachnovnici. Jak ji pokrýt kostkami 1×2 políčka?
-{
-	provedeme diagonly, body z diagonaly N umistime do leve partity vipartitniho grafu, body z (N+1) diagonaly do prave partity.
-	Pak spojime hranami vsechny sousedy v sachovnice. Když nekde je dira - tent bod neuvažujeme.
+	{
+		provedeme diagonly, body z diagonaly N umistime do leve partity vipartitniho grafu, body z (N+1) diagonaly do prave partity.
+		Pak spojime hranami vsechny sousedy v sachovnice. Když nekde je dira - tent bod neuvažujeme.
 
-	Pak spustime alg na hledani parovani - ukaze kde rozmistit policka.
+		Pak spustime alg na hledani parovani - ukaze kde rozmistit policka.
 
-	O(N*M)
-}
+		O(N*M)
+	}
 
 17. scanf("Ivona") Mějme strom, jehož vrcholy jsou opatřeny celočíselnými vahami.
 Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
@@ -84,10 +84,10 @@ Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
 	}
 18. printf() Zjistit, jak rychle běží Goldbergův algoritmus na síti s jednotkovými kapacitami
 	{
-		Ty jednotkove kapacity zaridi, ze nemame nenasycena prevedeni. To by nam zbyvala slozitost O(N^3 + NM). Jde to ale i na O(NM), kdyz si trosku vylepsime odhad poctu zvednuti.
+		Ty jednotkove kapacity zaridi, ze nemame nenasycena prevedeni. To by nam zbyvala slozitost 𝛩(N^3 + NM). Jde to ale i na 𝛩(NM), kdyz si trosku vylepsime odhad poctu zvednuti.
 		Diky implementaci nas jedno zvednuti stoji ≤ N. Kazda hrana ma dva vrcholy a kolikrat muzeme zvednout vrchol, uz vime, ze?
-		Takze pro kazdou hranu mame ≤ 4N zvednuti, tedy cas na zvedani taky O(NM).
-		MJ mi rikal jeste jinou verzi dukazu O(NM) zvednuti, a to pres scitani vstupnich a vystupnich stupnu vrcholu - nicmene uvedeny postup je taky spravny.
+		Takze pro kazdou hranu mame ≤ 4N zvednuti, tedy cas na zvedani taky 𝛩(N*M).
+		MJ mi rikal jeste jinou verzi dukazu 𝛩(NM) zvednuti, a to pres scitani vstupnich a vystupnich stupnu vrcholu - nicmene uvedeny postup je taky spravny.
 	}
 19. printf() Je dán orientovaný graf a jeho vrcholy u, v. Chceme nalézt co nejvíce hranově disjunktních cest z u do v.
 	Za zdroj si vezmu U jako zdroj a V jako stok. Každé hraně přiřadím kapacitu 1, v případě vrcholově z disjunktních cest ještě vrcholům kapacitu 1.
@@ -95,7 +95,7 @@ Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
 	Stačí projít graf a pokud nějaký vrchol potkám dvakrát, tak je tam cyklus, který musím smazat. Když smažu cyklus tak dostanu cestu od U do V.
 	Naleznutou cestu smažu, v hledaní cest budu pokračovat pokud Tok není nulový.
 
-	časová složitost: F-F O(m*n), jelikož cesty jsou disjunktní jejích hledaní po ukončení F-F je O(m). Takže O(m*n) dohromady.
+	časová složitost: F-F 𝛩(m*n), jelikož cesty jsou disjunktní jejích hledaní po ukončení F-F je 𝛩(m). Takže 𝛩(m*n) dohromady.
 
 	//Vrcholove
 	Tak z vrcholu udělám hranu následujícím způsobem:
@@ -160,17 +160,17 @@ Chceme nalézt nezávislou množinu, jejíž součet vah je největší možný.
 
 		Časová zložitosť:
 
-		Veta: Najväčšie párovanie v bipartitnom grafe nájdeme v čase O(nm). // U tohto mám poznámku od Krála: Stačí O(n^2)... tok nebude väčší, než n.
+		Veta: Najväčšie párovanie v bipartitnom grafe nájdeme v čase 𝛩(nm). // U tohto mám poznámku od Krála: Stačí 𝛩(n^2)... tok nebude väčší, než n.
 
-		Dôkaz: Prevedená konštrukcia: n'= n+2, m' = m+2n (vrcholy, hrany) spotrebuje čas O(n'+m'). Nájdenie max. celočíselného toku Ford-Fulkersnovým
-		algoritmom trvá O(n'm') - pri jednotlivých kapacitách - jedna iterácia beží v čase O(m), nenasýtenú cestu s BFS, zlepšenie toku v lineárnom čase,
+		Dôkaz: Prevedená konštrukcia: n'= n+2, m' = m+2n (vrcholy, hrany) spotrebuje čas 𝛩(n'+m'). Nájdenie max. celočíselného toku Ford-Fulkersnovým
+		algoritmom trvá 𝛩(n'm') - pri jednotlivých kapacitách - jedna iterácia beží v čase 𝛩(m), nenasýtenú cestu s BFS, zlepšenie toku v lineárnom čase,
 		každá iterácia zlepší tok aspoň o 1, počet iterací je obmedzená max. toku, teda najviac n. Nakoniec tok v lineárnom čase preložíme na párovanie.
-		O(n'm') = O(mn). // Copy-paste z Marešových skript.
+		𝛩(n'm') = 𝛩(mn). // Copy-paste z Marešových skript.
 
 		Priestorová zložitosť:
 
-		Priestor potrebujeme na vrcholy, hrany + zdroj, stok a nové hrany: n+2+m+2n = 3n+m+2, teda O(3n+m+2) //konštanty,
-		teda O(n+m).
+		Priestor potrebujeme na vrcholy, hrany + zdroj, stok a nové hrany: n+2+m+2n = 3n+m+2, teda 𝛩(3n+m+2) //konštanty,
+		teda 𝛩(n+m).
 
 		Dôkaz (König):
 		Pokiaľ U podmnožinou V je vrcholové pokrytie, musia hrany vedúce medzi vrcholami tejto množiny a zdrojom a stokom tvoriť rovnaký veľký rez, 
@@ -317,10 +317,10 @@ Teorie
 		}
 
 		//Slozitost
-		Init a pocitani hash O(J + D). Při nejhorším O(J) porovnávání pro ∀ okénka.
+		Init a pocitani hash 𝛩(J + D). Při nejhorším 𝛩(J) porovnávání pro ∀ okénka.
 		předpoklad dokonale chovaní hashe -> P(kolize) = 1/N
-		v průměru O(J + D + V*J + D*J/N) kde V je # vysktytu
-		if(N > D*J) -> O(J + D);
+		v průměru 𝛩(J + D + V*J + D*J/N) kde V je # vysktytu
+		if(N > D*J) -> 𝛩(J + D);
 	}
 
 10. printf() Algoritmus Knuth-Morris-Pratt
@@ -358,7 +358,7 @@ Teorie
 					5. Z[i] = s
 					Výstup: Pole zpětných hran Z
 
-			- Algoritmus beží v čase O(J+S)
+			- Algoritmus beží v čase 𝛩(J+S)
 				- Lineárny čas s dĺžkou ihly(J) potrebujeme na postavenie automatu, lineárny čas s dĺžkou sena potom samotné vyhľadávanie
 	}
 
@@ -410,12 +410,12 @@ Teorie
 		Tedy zastavil by se i FF.
 
 		//Casova slozitost
-		- sit rezerv, mazani hran s r(e) = 0,hledani nejkratsi cesty i konecne zlepsovani toku trvaji O(m);
-		- cisteni site taky v O(m) (mazani hrany trva O(1), mazani incidencnich hran O(1), každý vrchol i hrana jsou smazany nejvys jednou ve fazi)
+		- sit rezerv, mazani hran s r(e) = 0,hledani nejkratsi cesty i konecne zlepsovani toku trvaji 𝛩(m);
+		- cisteni site taky v 𝛩(m) (mazani hrany trva 𝛩(1), mazani incidencnich hran 𝛩(1), každý vrchol i hrana jsou smazany nejvys jednou ve fazi)
 		- hledani blok toku projde nejvys m cest, protože pokažde ze siti vypadne aspon 1 hrana a už se tam nevratí.
-		Sit je vrstevnata => nalezt jednu cestu stihneme v O(n);
-		Dohromady O(m*n + cisteni) = O(m*n)
-		O(m + m + mn) = O(m*n);
+		Sit je vrstevnata => nalezt jednu cestu stihneme v 𝛩(n);
+		Dohromady 𝛩(m*n + cisteni) = 𝛩(m*n)
+		𝛩(m + m + mn) = 𝛩(m*n);
 	}
 
 1. printf() Goldberg
@@ -432,7 +432,7 @@ Teorie
 				else f(h) = 0;
 			}
 			while(Existuje vrchol u != Z OR S, že Pritok > 0){
-				if (Existuje hrana ua, r(ua)>0 AND h(u) > h(a))
+				if (Existuje hrana ua, r(ua) > 0 AND h(u) > h(a))
 				{
 					převedeme přebytek po hraně uv
 				}
@@ -455,15 +455,15 @@ Teorie
 		zmena prebytku -> nevytvari zaporne
 
 		Lemma o korektností(v returnu je TOK a je max):
-			1) vlna splnuje pozadavek na f(v) ≤ c(v). Chceme Kirfchhoffuv zakon: Dukaz sporem, kdyby nebyl splnen v nejakem vrcholu v, tak alg se nezastavi.
-			2) f je max: Sporem, necht tok neni max -> Existuje nenasycena cesta z Z do S.
+			1. vlna splnuje pozadavek na f(v) ≤ c(v). Chceme Kirfchhoffuv zakon: Dukaz sporem, kdyby nebyl splnen v nejakem vrcholu v, tak alg se nezastavi.
+			2. f je max: Sporem, necht tok neni max -> Existuje nenasycena cesta z Z do S.
 				Z ma vysku N, S - 0, takze cesta ma spad N.(ma ale jen (n-1) hran) -> najde se hrana se spadem aspoň 2 - je nenasycena, spor s Invariantem S.
-		Veta o casove složitosti(O(n^2*m)):
-			1. Init trva O(m);
+		Veta o casove složitosti(𝛩(n^2*m)):
+			1. Init trva 𝛩(m);
 			2. alg provede nejvys 2n^2 zvednuti(Lemma Z)
 			3. nejvyse n*m nasycenych prevedeni
 			4. nejvyse n^2*m nenasycenych prevedeni(Lemma N)
-			Dohromady O(n^3 + n*m + n^2*m) = O(n^2*m)
+			Dohromady 𝛩(n^3 + n*m + n^2*m) = 𝛩n^2*m)
 	}
 14. printf() Ford-Fulkerson
 	{
@@ -482,7 +482,7 @@ Teorie
 		}
 
 		//Konecnost
-		- celociselne kapacity, F v kazdem kroku se zvetsi aspon o 1, alg se zastavi po Sum(c(e)) krocich
+		- celociselne kapacity, F v kazdem kroku se zvetsi aspon o 1, alg se zastavi po ⅀(c(e)) krocich
 		- racionalni: vynasobime spol nasobkem
 		- irracionalni: nemusi se ani zastavit ani konvergovat k max toku
 		//Spravnost
@@ -493,9 +493,9 @@ Teorie
 		E(A,B) je řez, Z lezi v A, protože z Z do Z existuje cesta nulove delky(nenasycena). 
 
 		//Jednotkove kapacity
-		- Jedna iterace bezi v O(m)//Cestu najdeme BFS, zlepseni je lin.
-		- #iteraci je nejvys O(n), tok se zlepsi aspon o 1
-		Dohromady O(mn)
+		- Jedna iterace bezi v 𝛩(m)//Cestu najdeme BFS, zlepseni je lin.
+		- #iteraci je nejvys 𝛩(n), tok se zlepsi aspon o 1
+		Dohromady 𝛩(mn)
 	}
 
 16. printf() Convex hull
@@ -521,7 +521,7 @@ Teorie
 		//orientace uhlu najdeme pomoci det matice = x1y2 - x2y1
 
 		//Casova slozitost
-		Trideni trva O(n*log(n)). Kazdy bod je odebran nejvyse jednou -> vsechna odebrani trvaji O(n), pridani trva O(1). Kvuli trideni O(n*log(n))
+		Trideni trva 𝛩(n*log(n)). Kazdy bod je odebran nejvyse jednou -> vsechna odebrani trvaji 𝛩(n), pridani trva 𝛩(1). Kvuli trideni 𝛩(n*log(n))
 	}
 6. printf() Definujte Voroného diagram a popište algoritmus na jeho konstrukci
 	{
@@ -543,14 +543,14 @@ Teorie
 					smazeme parabolu z P;
 					do diagramu zaznamename vrchol, v nemz 2 hrany konci a 1 zacina;
 				}
-				Po zmene pobzezi prepocitame kruznicove udalost(O(1) vznikne, O(1) zanikne);
+				Po zmene pobzezi prepocitame kruznicove udalost(𝛩(1) vznikne, 𝛩(1) zanikne);
 			}
 		}
 
 		//Casova slozitost
 		Celkove nastane N mistnich udalosti (na kazde X se narazime prave jednou)
 		a N kruznicovych (kruznicova smaze 1 parabolu z pobrezi, parabola pribyva pouze s kazdym Xi).
-		Kalendar a pobrezni linie jsou O(n) -> O(log(n)) na operaci -> O(log(n)) na kazdou udalost -> O(n*log(n));
+		Kalendar a pobrezni linie jsou 𝛩(n) -> 𝛩(log(n)) na operaci -> 𝛩(log(n)) na kazdou udalost -> 𝛩(n*log(n));
 	}
 8. printf() Průsečíky úseček
 	{
@@ -568,10 +568,10 @@ Teorie
 		}
 
 		//Analysis of Time complexity
-		Kalendar - halda nebo vyhled. strom, vždy ma 3n udalosti O(log(n))
-		Vložíme do vyhled stromu odkazy na usecky O(log(n))
-		Pro kazdou udalost O(1) operace s Datovymi struktury
-		Vsech n+p udalosti zpracujeme za O(log(n)*(n+p))
+		Kalendar - halda nebo vyhled. strom, vždy ma 3n udalosti 𝛩(log(n))
+		Vložíme do vyhled stromu odkazy na usecky 𝛩(log(n))
+		Pro kazdou udalost 𝛩(1) operace s Datovymi struktury
+		Vsech n+p udalosti zpracujeme za 𝛩(log(n)*(n+p))
 	}
 7. scanf("Kyrylo") Rychlá Fourierova transformace
 	{
@@ -606,9 +606,9 @@ Teorie
 
 		//FFT^(-1)
 		FFT*FFTk(konjugovana) = n*E
-		FFT[j][k]*FFTk[j][k] = Sum(FFT[j][l] * FFT[l][k]) from l to (n-1) = Sum(Wjl * Wkl konjugovana) from l to (n-1) = 
-		Sum(Wjl * (W konjugovana)kl) from l to (n-1) = Sum(Wjl * W^(-1)kl) from l to (n-1) = Sum(Wjl * W-kl) from l to (n-1) =
-		Sum(W(j-k)l) from l = 0 to (n-1), coz je geom rada
+		FFT[j][k]*FFTk[j][k] = ⅀(FFT[j][l] * FFT[l][k]) from l to (n-1) = ⅀(Wjl * Wkl konjugovana) from l to (n-1) = 
+		⅀(Wjl * (W konjugovana)kl) from l to (n-1) = ⅀(Wjl * W^(-1)kl) from l to (n-1) = ⅀(Wjl * W-kl) from l to (n-1) =
+		⅀(W(j-k)l) from l = 0 to (n-1), coz je geom rada
 
 		= (W(j-k)n - 1)/ (W(j-k) - 1) = 0;
 
@@ -617,11 +617,11 @@ Teorie
 		//pouzijeme stejny alg az na preskalovani 1/n
 
 		//Casova slozitost
-		FFT: T(n) = 2T(n/2) + O(n) a tedy T(n) = O(n*log(n)). (Kuchařková věta)
+		FFT: T(n) = 2T(n/2) + 𝛩(n) a tedy T(n) = 𝛩(n*log(n)). (Kuchařková věta)
 
-		Je-li N = 2^k, pak v O(n*log(n)) lze spocitat FFT a FFT^(-1) v C^n. Nasobeni polynomu v O(n*log(n))
+		Je-li N = 2^k, pak v 𝛩(n*log(n)) lze spocitat FFT a FFT^(-1) v C^n. Nasobeni polynomu v 𝛩(n*log(n))
 
-		funkce FFT trva (n*log(n)), nasobeni O(n).
+		funkce FFT trva (n*log(n)), nasobeni 𝛩(n).
 	}
 
 11. printf() NP-úplnost: definice tříd, Cookova věta, důkaz NP-úplnosti vybraného problému
@@ -676,8 +676,8 @@ Teorie
 		Necht P množina predmetu pouzitych v optimalni reseni ulohy, C(P) - optimalni cena
 		Q - mnozina predmetu aproximacniho reseni, ĉ(Q) - cena aprox. reseni
 
-		ĉ(P) = Sum(ĉ[i]) = Sum(trunc(C[i]*M/C_MAX)) ≥ Sum(C[i] * M/C_MAX - 1) ≥ Sum(C[i]*M/C_MAX) - n = C(P) * M/C_MAX - n
-		C(Q) = Sum(C[i]) ≥ Sum(ĉ[i]*C_MAX/M) = C_MAX/M * Sum(ĉ[i]) = C_MAX/M * ĉ(Q) ≥ C_MAX/M * ĉ(P)
+		ĉ(P) = ⅀(ĉ[i]) = ⅀(trunc(C[i]*M/C_MAX)) ≥ ⅀(C[i] * M/C_MAX - 1) ≥ ⅀(C[i]*M/C_MAX) - n = C(P) * M/C_MAX - n
+		C(Q) = ⅀(C[i]) ≥ ⅀(ĉ[i]*C_MAX/M) = C_MAX/M * ⅀(ĉ[i]) = C_MAX/M * ĉ(Q) ≥ C_MAX/M * ĉ(P)
 		//posledni nerovnost Poslední nerovnost platí proto, že ĉ(Q) je optimální řešení kvantované úlohy, zatímco ĉ(P) je nějaké další řešení téže úlohy, které nemůže být lepší.
 		C(Q) ≥ (C(P) * M/C_MAX - n) * C_MAX/M ≥ C(P) - n*C_MAX/(n/ε) ≥ C(P) - ε*C_MAX ≥ C(P) - ε*C(P) = (1-ε)*C(P)
 
@@ -704,7 +704,7 @@ Teorie
 		A ≤ 2*T ≤ 2*O
 	}
 
-15. scanf("Kyrylo") Hradlová síť komparator scitani
+15. scanf("Kyrylo") Hradlová síť scitani
 	{
 		
 	}
