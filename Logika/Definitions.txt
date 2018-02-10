@@ -2,12 +2,12 @@ Logika def
 
 - Otevrena formule: neobsahuje zadny kvantifikator
 - Otevrena teorie: axiomy otevrene formule
-- Struktura A shoduje s polozkou P.
-	Pokud P je T𝝋 a A ⊨ 𝝋,
-	pokud P je F𝝋 a A ⊨ ⌐𝝋
-- Struktura A shoduje s vetvi V, prave když shoduje s kazdou polozkou V.
-- Kanonicky model s rovnosti je faktorstruktura A/=
-	pro kazdou formuli A ⊨ 𝝋 ⇔ (A/=) ⊨ 𝝋
+- Struktura 𝓐 shoduje s polozkou P.
+	Pokud P je T𝝋 a 𝓐 ⊨ 𝝋,
+	pokud P je F𝝋 a 𝓐 ⊨ ⌐𝝋
+- Struktura 𝓐 shoduje s vetvi V, prave když shoduje s kazdou polozkou V.
+- Kanonicky model s rovnosti je faktorstruktura 𝓐/=
+	pro kazdou formuli 𝓐 ⊨ 𝝋 ⇔ (𝓐/=) ⊨ 𝝋
 - Mnozina Vět teorie T
 	ThmL(T) = { 𝝋 ∈ FmL | T ⊢ 𝝋 }
 - Z korektnosti a uplnosti tablo metody vyplyva ze
@@ -16,18 +16,52 @@ Logika def
 	3. T je sporna ⇔ nema model
 	4. T, 𝝋 ⊢ 𝞇 ⇔ T ⊢ 𝝋 ⇒ 𝞇 (Veta o dedukci)
 - Ekvisplnitelnost
-	T, T' jsou Ekvisplnitelne jestlize T ma model ⇔ T' ma model
+	T, T` jsou Ekvisplnitelne jestlize T ma model ⇔ T` ma model
 - Otevřené jadro: 
 - Jsou-li všechny kvantifikatory ∀: je 𝝋 univerzalní formule
-- Otevřené jadro #TODO
-- K teorii T najdeme ekvisplnitelnou T' nasl postupem:
+- Otevřené jadro //TODO
+- K teorii T najdeme ekvisplnitelnou T` nasl postupem:
 	1. axiomy T nahradime za ekviv formule v PRENEXNIM tvaru
 	2. prevedeme na Skolemove varianty
-	3. Otevřené jadra formuli v 2. budou tvořit tu teorii T'
+	3. Otevřené jadra formuli v 2. budou tvořit tu teorii T`
 - Skolemova varianta: nahradime všechny proměnné v ∃ za term Fi(x1 ... xn)
-- Pokud 𝝋' je Skolemoa varianta formule 𝝋, tak 𝝋 a 𝝋' jsou ekvisplnitelne.
+- Pokud 𝝋` je Skolemoa varianta formule 𝝋, tak 𝝋 a 𝝋` jsou ekvisplnitelne.
 - necht S = {E1, ... , En}
 	Unifikace je substituce ∂, takova ze E1∂ = E2∂ = ... = En∂
 	Unifikace ∂ pro S je nejobecnejsi unifikace (MGU). pokud pro kazdou unifikaci 𝞽 existuje substituce 𝞴 ze 𝞽 = ∂𝞴
 	Jsou-li ∂ a 𝞽 dve MGU pro S -> lisi se pouze prejmenovanim promennych
+- Unifikacni alg
+	{
+		//TODO	
+	}
+#define Rezoluce_PL
+- LI-rezoluce z formule S je linearni rezoluce z S, ve ktere kazda bocni klauzule Bi variantou klauzule ze vstupni formule S.
+- Fakt: Hornova klauzule {p}, kde p je pozitivni literal
+- Pravidlo je klauzule s jednim pozitivnim a aspon jednim negativnim literalem
+- Cil je klauzule bez pozitivniho literalu
+
+#undef Rezoluce_PL
+
+- Teorie struktury 𝓐: je Mnozina sentenci platnych v 𝓐. Th(𝓐).
+	1. Th(𝓐) je kompletni teorie
+	2. Je-li 𝓐 ⊨ T, je Th(𝓐) (kompletni) extenze T
+	3. Je-li 𝓐 ⊨ T ^ T je kompletni, Th(𝓐) je ekvivalenti s T -> Th(T) = 𝛉L(T)
+
+	"Th(𝓐) je algoritmicky nerozhodnutelna"
+- Elementarni ekvivalence
+	Th(𝓐) = Th(𝓑) //plati stejne formule jazyka
+	<ℝ, ≤ > ≡ <ℚ, ≤ >
+- T je kompletni ⇔ az na elem ekvivalence ma jeden model
+- Teorie je rozhodnutelna //TODO
+- Lze-li efektivne(rekurzivne) pro danou teoii T jak vypadaji jeji kompletni extenze, je T (algoritmicky) rozhodnutelna
+- Teleso 𝓐 je algebraicky uzavrene pokud kazdy nenulovy polynom ma koren.
+- Bijekce h:A -> B je izomorfizmus struktur 𝓐 a 𝓑 pokud plati
+	1. h(Fa(a1, ..., an)) = Fb(h(a1), ... , h(an)) //pro kazdy n-arni funkci symbol a kazde a1, ..., an ∈ A
+	2. Ra(a1, ..., an) ⇔ Rb(h(a1), ..., h(an)) //pro kazdy n-arni relacni symbol a kazde a1, ..., an ∈ A
+- 𝓐 ≃ 𝓑 (izomofni) ⇒ 𝓐 ≡ 𝓑
+- pro kazde konecne struktury s rovnosti
+	𝓐 ≡ 𝓑 ⇒ 𝓐 ≃ 𝓑 (izomofni) //obracena implikace
+	"Ma-li kompletni teorie jazyka s rovnosti konecny model = jsou vsechny modely izomofni"
+- izomofni spektrum teorie T je pocet I(𝛋, T) navzajem neizomorfnich modelu T pro kazdou kardinalitu 𝛋 (velikost modelu???)
+- Teorie je 𝛋-kategoricka pokud ma az na izomorfizmus prave jeden model kardinality 𝛋, tj I(𝛋, T) = 1
 - 
