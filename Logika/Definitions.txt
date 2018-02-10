@@ -9,4 +9,25 @@ Logika def
 - Kanonicky model s rovnosti je faktorstruktura A/=
 	pro kazdou formuli A ⊨ 𝝋 ⇔ (A/=) ⊨ 𝝋
 - Mnozina Vět teorie T
-	ThmL(T) = { 𝝋 ∈ 	FmL | T ⊢ 𝝋 }
+	ThmL(T) = { 𝝋 ∈ FmL | T ⊢ 𝝋 }
+- Z korektnosti a uplnosti tablo metody vyplyva ze
+	1. T ⊨ 𝝋 ⇔ T ⊢ 𝝋 //je dokazatelna ⇔ je pravdiva v T
+	2. ThmL(T) = 𝛉L(T) //theoremy a dusledky je to same
+	3. T je sporna ⇔ nema model
+	4. T, 𝝋 ⊢ 𝞇 ⇔ T ⊢ 𝝋 ⇒ 𝞇 (Veta o dedukci)
+- Ekvisplnitelnost
+	T, T' jsou Ekvisplnitelne jestlize T ma model ⇔ T' ma model
+- Otevřené jadro: 
+- Jsou-li všechny kvantifikatory ∀: je 𝝋 univerzalní formule
+- Otevřené jadro #TODO
+- K teorii T najdeme ekvisplnitelnou T' nasl postupem:
+	1. axiomy T nahradime za ekviv formule v PRENEXNIM tvaru
+	2. prevedeme na Skolemove varianty
+	3. Otevřené jadra formuli v 2. budou tvořit tu teorii T'
+- Skolemova varianta: nahradime všechny proměnné v ∃ za term Fi(x1 ... xn)
+- Pokud 𝝋' je Skolemoa varianta formule 𝝋, tak 𝝋 a 𝝋' jsou ekvisplnitelne.
+- necht S = {E1, ... , En}
+	Unifikace je substituce ∂, takova ze E1∂ = E2∂ = ... = En∂
+	Unifikace ∂ pro S je nejobecnejsi unifikace (MGU). pokud pro kazdou unifikaci 𝞽 existuje substituce 𝞴 ze 𝞽 = ∂𝞴
+	Jsou-li ∂ a 𝞽 dve MGU pro S -> lisi se pouze prejmenovanim promennych
+- 
