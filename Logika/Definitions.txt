@@ -1,5 +1,47 @@
 Logika def
 
+#define Useful_slides
+	- [44, 51] (Modely v VL)
+	- [51, 67] (Tablo v VL, trash)
+	- [67, 82] (Dukazy Tablo VL)
+	- [82, 89] (rezoluce v VL, trash)
+	- [90] (Uplnost rezoluce)
+	- [94] (Uplnost LI-rezoluce)
+	- [95, 105] (trash)
+	- [105, 113] (PL)
+	- [116, 130] (Struktury, Teorie PL)
+	- [133, 154] (Tablo PL, trash)
+	- [155, 170] (Systematicke table PL, dukazy Tablo PL)
+	- [171, 190] (Teorie v PL)
+	- [191 - 205] (Rezoluce v PL, trash)
+	- [205, 210] (dukazy Rezoluce v PL)
+	- [211, 214] (trash)
+	- [215, 233] (Struktury, rozsiritelnost o def apod.)
+	- [234 - 255] (Ne bude v testu, trash) 
+#undef
+
+#define VL
+
+- CNF = (q1 ∨ ... ∨ qi) ∧ (p1 ∨ ... ∨ pl) ∧ ...
+- DNF = (q1 ∧ ... ∧ qi) ∨ (p1 ∧ ... ∧ pl) ∨ ...
+- Implikacni graf //TOOD
+- Teorie nad P je libovolna mnozina vyroku z VFp
+- Dusledek teorie T 𝛉P(T) = { 𝝋 ∈ VFp | T ⊨ 𝝋 }
+- TODO vlastnosti teorie printf("slajd 47");
+- TODO teorii nad konecne prvovyroky printf("slajd 49");
+- Dukaz je konecny objekt(kde definice Objektu???), muze vychazet z axiomu teorie
+- T ⊢ 𝝋 "𝝋 je dokazatelna z T"
+- Korektni dukazovaci system: T ⊢ 𝝋 ⇒ T ⊨ 𝝋 TODO check //kazda dokazatelna formule bude pravdiva
+- Uplny dukazovaci system:T ⊨ 𝝋 ⇒ T ⊢ 𝝋 TODO check //kazda pravdiva formule je dokazatelna
+- TODO systematicke tablo printf("slajd 68");
+- 
+
+#undef VL
+
+#define PL
+
+break
+
 - Otevrena formule: neobsahuje zadny kvantifikator
 - Otevrena teorie: axiomy otevrene formule
 - Struktura 𝓐 shoduje s polozkou P.
@@ -35,12 +77,15 @@ Logika def
 		//TODO	
 	}
 #define Rezoluce_PL
-- LI-rezoluce z formule S je linearni rezoluce z S, ve ktere kazda bocni klauzule Bi variantou klauzule ze vstupni formule S.
+- LI-rezoluce z formule S je linearni rezoluce z S,
+	ve ktere kazda bocni klauzule Bi variantou klauzule ze vstupni formule S.
 - Fakt: Hornova klauzule {p}, kde p je pozitivni literal
 - Pravidlo je klauzule s jednim pozitivnim a aspon jednim negativnim literalem
 - Cil je klauzule bez pozitivniho literalu
 
 #undef Rezoluce_PL
+
+#undef PL
 
 - Teorie struktury 𝓐: je Mnozina sentenci platnych v 𝓐. Th(𝓐).
 	1. Th(𝓐) je kompletni teorie
@@ -64,4 +109,31 @@ Logika def
 	"Ma-li kompletni teorie jazyka s rovnosti konecny model = jsou vsechny modely izomofni"
 - izomofni spektrum teorie T je pocet I(𝛋, T) navzajem neizomorfnich modelu T pro kazdou kardinalitu 𝛋 (velikost modelu???)
 - Teorie je 𝛋-kategoricka pokud ma az na izomorfizmus prave jeden model kardinality 𝛋, tj I(𝛋, T) = 1
-- 
+- Necht K ⊆ M(L) (podtřida modelu jazyka)
+	K je axiomatizovatelna, pokud ∃ teorie T jazyka L s M(T) = K
+	konecne axiomatizovatelna (konecna teorie)
+	otevrene axiomatizovatelna (otevrena teorie)
+	Teorie T je konecne(otevrene) axiomatizovatelna, pokud M(T) je konecne(otevrene) axiomatizovatelna
+- Definovatelne Mnoziny
+	1. Mnozina definovatelna formuli 𝝋(X) ve strukture 𝓐 je mnozina
+		𝝋^𝓐(X) = { a ∈ A^|X| | 𝓐 ⊨ 𝝋[e(X/a)] } //X, a jsou vektory
+	2. Mnozina definovatelna formuli 𝝋(X, Y) s parametry B A^|Y| ve strukture 𝓐 je mnozina
+		𝝋^𝓐,B(X) = { a ∈ A^|X| | 𝓐 ⊨ 𝝋[e(X/a, Y/b)] } //X, b, a jsou vektory
+
+		//𝝋 = E(x,y), 𝝋^G,b(x,y) je mnozina sousedu vrcholu b v grafu G
+
+- Pro strukturu 𝓐, mnozinu B ⊆ A a n ∈ ℕ, oznacime
+	Df^n(𝓐, B) tridu vsech definovatelnych mnozin ve strukture 𝓐 s parametrem B.
+- Mnozina A ⊆ ℕ je rekurzivni, pokud ∃ algoritmus, ktery pro kazdy vstup x ∈ ℕ skonci a zjisti zda x ∈ A.
+- Mnozina A ⊆ ℕ je rekurzivne spocetna, pokud ∃ algoritmus, ktery pro kazdy vstup x ∈ ℕ skonci prave kdyz x ∈ A.
+
+#define Dukazy
+
+//TODO
+
+#undef Dukazy
+
+//Not in the test
+
+- Necht jazyk L je rekurzivni
+	Teorie T nad L je rozhodnutelna ⇔ Thm(T) rekurzivni. Jinak nerozhodnutelna
