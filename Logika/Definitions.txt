@@ -31,6 +31,7 @@ Logika def
 	- TODO teorii nad konecne prvovyroky printf("slajd 49");
 	- Dukaz je konecny objekt(kde definice Objektu???), muze vychazet z axiomu teorie
 	- T ⊢ 𝝋 "𝝋 je dokazatelna z T"
+	- 𝞇 ⊨ 𝝋, "plati 𝞇 -> 𝝋"
 	- Korektni dukazovaci system: T ⊢ 𝝋 ⇒ T ⊨ 𝝋 TODO check //kazda dokazatelna formule bude pravdiva
 	- Uplny dukazovaci system:T ⊨ 𝝋 ⇒ T ⊢ 𝝋 TODO check //kazda pravdiva formule je dokazatelna
 	- TODO systematicke tablo printf("slajd 68");
@@ -135,11 +136,43 @@ Logika def
 
 	//TOOD
 	1. Cantorova veta, Königovo lemma.
-		a.
-		b.
+		a. Množina M je menší velikostí, než jeji potenční množina ("slajd 19")
+			- f(y) = {y} pro y ∈ M je prostá funkce f : M -> P(M) (velikost M <= Velikost P(M))
+			- Pro spor necht existuje prosta g : P(M) -> M
+				Y = {g(Z) | Z ⊆ X ^ g(z) ∉ Z }, spor g(Z) ∉ Z pravě když g(Z) ∈ Z
+		b. Každý nekonecný, konecne vetvící se strom T obsahuje nekonecnou vetev. ("slajd 22")
+			Hledání nekonecné v etve zacneme v koreni. Jelikož má jen konecne mnoho synu,
+			existuje syn s nekonecne mnoha potomky. Vybereme ho a stejn e pokracujeme v jeho podstrom e.
+			Takto získáme nekonecnou vetev.
 	2. Algoritmy pro 2-SAT a Horn-SAT (dukaz korektnosti).
-		a.
-		b.
+		a. ("slajd 38")
+			Použijeme rozklad implikačniho grafu na silně souvislé komponenty.
+			Implikacní graf výroku 𝝋 v 2-CNF je orientovaný graf G𝝋, v nemž:
+				i. vrcholy jsou promenné výroku 𝝋 nebo jejich negace
+				ii. p ∨ q reprezentujeme hrany ⌐p → q, ⌐q → p
+				iii. klauzule q reprezentujeme ⌐p → p
+			'Tvrzení' 𝝋 je splnitelný, práve když žádná silne souvislá komponenta v G𝝋 neobsahuje dvojici opacných literálu.
+			D°ukaz Každé splnující ohodnocení ohodnotí všechny literály ze stejné komponenty stejne. Implikace zleva doprava tedy platí.
+
+			G*𝝋 graf vzniklý z G𝝋 kontrakcí silne souvislých komponent.
+
+			algoritmus:
+				pro každou komponentu v rostoucím poradí dle <(topologickeho usporadani), nejsou-li její literály dosud ohodnocené, nastav je na 0 a literály v opacné komponente na 1.
+
+			Korektnost:
+			Zbývá ukázat, že takto získané ohodnocení v splnuje 𝝋.
+			Kdyby ne, existovaly by v G*𝝋 hrany p → q a ⌐q → ⌐p s v(p) = 1 a v(q) = 0.
+			To je ve sporu s poradím nastavení komponent na 0 resp. 1, nebot’ p < q a ⌐q < ⌐p.
+		b. ("slajd 41")
+			Algoritmus:
+			(1) obsahuje-li 𝝋 dvojici jednotkových klauzulí l a l, není splnitelný,
+			(2) obsahuje-li 𝝋 jednotkovou klauzuli l, nastav l na 1, odstran všechny klauzule obsahující l, odstran l ze všech klauzulí a opakuj od zacátku,
+			(3) neobsahuje-li 𝝋 jednotkovou klauzuli, je splnitelný ohodnocením 0 všech zbývajících promenných.
+
+			(2) je jednotkova propagace, 𝝋` ziskany jedn propagaci je splnitelný ⇔ 𝝋 je splnitelný.
+
+			korektnost:
+			Korektnost 1. kroku je zrejmá, v 2. kroku plyne z pozorování, v 3.kroku díky Hornove tvaru, nebot’ každá zbývající klauzule obsahuje negativní literál.
 	3. Tablo metoda ve VL: syst. tablo (dokoncenost, kon. dukazu), korektnost, úplnost.
 		a.
 		b.
@@ -184,7 +217,8 @@ Logika def
 		a.
 		b.
 		c.
-	14. Invariance definovatelných množin na automorfismy.
+	14. Invariance definovatelných množin na automorfismy
+		
 
 #undef Dukazy
 
