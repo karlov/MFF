@@ -59,23 +59,24 @@ Logika def
 #define PL
 	- Systematicke tablo PL
 		Necht’ R je položka a T = { 𝝋0, 𝝋1 ... } je (konecná ci nekonecná) teorie.
-		(1) Za 𝞽0 vezmi atomické tablo pro R. V prípade (*) vezmi lib. c 2 LC\L, v prípade (#) za t vezmi term t1. Dokud to lze, aplikuj následující kroky.
+		(1) Za 𝞽0 vezmi atomické tablo pro R. V prípade (*) vezmi lib. c ∈ LC\L, v prípade (#) za t vezmi term t1. Dokud to lze, aplikuj následující kroky.
 		(2) Necht’ v je nejlevejší vrchol v co nejmenší úrovni již daného tabla 𝞽n obsahující výskyt položky P, který není redukovaný na nejaké 
-			bezesporné vetvi skrze v. (Neexistuje-li v, vezmi 𝞽0n = 𝞽n a jdi na (4))
-		(3a) Není-li P tvaru T(∀x)𝝋(x) ani F(∃x)𝝋(x), za 𝞽0n vezmi tablo vzniklé z 𝞽n pridáním atomického tabla pro P na každou bezespornou vetev skrze v. 
+			bezesporné vetvi skrze v. (Neexistuje-li v, vezmi 𝞽`n = 𝞽n a jdi na (4))
+		(3a) Není-li P tvaru T(∀x)𝝋(x) ani F(∃x)𝝋(x), za 𝞽`n vezmi tablo vzniklé z 𝞽n pridáním atomického tabla pro P na každou bezespornou vetev skrze v. 
 			V prípade (*) za c vezmi ci pro nejmenší možné i.
-		(3b) Je-li P tvaru T(∀x)𝝋(x) ci F(∃x)𝝋(x) a ve v má i-tý výskyt, za 𝞽0n vezmi tablo vzniklé z 𝞽n pripojením
+		(3b) Je-li P tvaru T(∀x)𝝋(x) ci F(∃x)𝝋(x) a ve v má i-tý výskyt, za 𝞽`n vezmi tablo vzniklé z 𝞽n pripojením
 			atomického tabla pro P na každou bezespornou vetev skrze v, pricemž za t vezmi term ti.
-		(4) Za 𝞽n+1 vezmi tablo vzniklé z 𝞽0n pridáním T𝝋n na každou bezespornou vetev neobsahující T𝝋n. (Neexistuje-li 𝝋n, vezmi 𝞽n+1 = 𝞽0n)
+		(4) Za 𝞽n+1 vezmi tablo vzniklé z 𝞽`n pridáním T𝝋n na každou bezespornou vetev neobsahující T𝝋n. (Neexistuje-li 𝝋n, vezmi 𝞽n+1 = 𝞽`n)
 
 		//(*) - atomicke tablo s novou konst
 		//(#) - atomicke tablo s konst termem
 
 		Systematicke tablo 𝞽 = ∪𝞽n
-	- Kanonicky model //TODO slajd 164
+	- Kanonicky model
 		Kanonický model z v etve V je LC -struktura A = hA, F^A, R^Ai,
-		i. A je mnozina konstant
-		ii. 
+		i. A je mnozina konstantních termu jazyka LC
+		ii. f^A(ti1, ..., tin) = f(ti1, ..., tin) pro kazdy n-arni funkci symbol
+		iii. R^A(ti1, ..., tin) ⇔ TR(ti1, ..., tin) je položka na V //R je relace nebo Rovnost
 
 	break
 
@@ -271,6 +272,10 @@ Logika def
 			- A shoduje se s polozkou F𝝋, dle lemmatu lze A expandovat do Lc tak, ze se shoduje s nekakou vetvi v tablu.
 			- Spor, kazda vetev je sporna (obsahuje F𝝍 a T𝝍 pro nejakou formuli 𝝍)
 		b. kanonický model (s rovností) //TODO
+			Kanonický model z v etve V je LC -struktura A = hA, F^A, R^Ai,
+			i. A je mnozina konstantních termu jazyka LC
+			ii. f^A(ti1, ..., tin) = f(ti1, ..., tin) pro kazdy n-arni funkci symbol
+			iii. R^A(ti1, ..., tin) ⇔ TR(ti1, ..., tin) je položka na V //R je relace nebo Rovnost
 		c. Uplnost
 			"Sentence 𝝋, teorie T. 𝝋 je pravdiva v T -> je tablo dokazatelna z T"
 			Necht’ 𝝋 je pravdivá v T. Ukážeme, že libovolné dokoncené tablo (napr. systematické) z teorie T s položkou F𝝋 v kořeni je sporné.
@@ -352,7 +357,7 @@ Logika def
 			i. Otevrená formule platí ve strukture A, práve když platí v každé podstrukture B ⊆ A.
 			ii. Každá podstruktura modelu otevrené teorie T je modelem T. 
 		c. Veta o dedukci "T, 𝝋 ⊢ 𝞇 ⇔ T ⊢ 𝝋 ⇒ 𝞇"  //TODO, where???
-			
+
 	9. Löwenheim-Skolemova veta. Veta o kompaktnosti PL a její dusledky //TODO
 		a. "Každá bezesporná teorie T spocetného jazyka L bez rovnosti má spocetne nekonecný model." //slajd 173
 			Necht’ 𝞽 je systematické tablo z T s F? v koreni. Jelikož je dokoncené a obsahuje bezespornou vetev V,
