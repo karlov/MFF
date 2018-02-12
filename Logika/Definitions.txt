@@ -53,7 +53,6 @@ Logika def
 #undef VL
 
 #define PL
-
 	- Systematicke tablo PL
 		Necht’ R je položka a T = {𝝋0, 𝝋1 ... } je (konecná ci nekonecná) teorie.
 		(1) Za 𝞽0 vezmi atomické tablo pro R. V prípade (*) vezmi lib. c 2 LC\L, v prípade (#) za t vezmi term t1. Dokud to lze, aplikuj následující kroky.
@@ -69,6 +68,11 @@ Logika def
 		//(#) - atomicke tablo s konst termem
 
 		Systematicke tablo 𝞽 = ∪𝞽n
+	- Kanonicky model //TODO slajd 164
+		Kanonický model z v etve V je LC -struktura A = hA;FA;RAi,
+		i. A je mnozina konstant
+		ii. 
+
 	break
 
 	- Otevrena formule: neobsahuje zadny kvantifikator
@@ -91,20 +95,27 @@ Logika def
 	- Otevřené jadro: 
 	- Jsou-li všechny kvantifikatory ∀: je 𝝋 univerzalní formule
 	- Otevřené jadro //TODO
+	- Prenexni normalni tvar: vsechny kvantifikatory pred formuli
 	- K teorii T najdeme ekvisplnitelnou T` nasl postupem:
 		1. axiomy T nahradime za ekviv formule v PRENEXNIM tvaru
 		2. prevedeme na Skolemove varianty
 		3. Otevřené jadra formuli v 2. budou tvořit tu teorii T`
 	- Skolemova varianta: nahradime všechny proměnné v ∃ za term Fi(x1 ... xn)
-	- Pokud 𝝋` je Skolemoa varianta formule 𝝋, tak 𝝋 a 𝝋` jsou ekvisplnitelne.
+	- Pokud 𝝋` je Skolemova varianta formule 𝝋, tak 𝝋 a 𝝋` jsou ekvisplnitelne.
 	- necht S = {E1, ... , En}
 		Unifikace je substituce ∂, takova ze E1∂ = E2∂ = ... = En∂
 		Unifikace ∂ pro S je nejobecnejsi unifikace (MGU). pokud pro kazdou unifikaci 𝞽 existuje substituce 𝞴 ze 𝞽 = ∂𝞴
 		Jsou-li ∂ a 𝞽 dve MGU pro S -> lisi se pouze prejmenovanim promennych
 	- Unifikacni alg
-		{
-			//TODO	
-		}
+		Vstup Neprázdná (konecná) množina výraz°u S.
+		Výstup Nejobecn ejší unifikace 𝞂 pro S nebo “S není unifikovatelná”.
+
+		(0) Necht’ S0 := S, 𝞂0 := ;, k := 0. (inicializace)
+		(1) Je-li Sk singleton, vydej substituci 𝞂 = 𝞂0𝞂1 ... 𝞂k. //(mgu pro S)
+		(2) Zjisti, zda v D(Sk) existuje promenná x a term t neobsahující x.
+		(3) Pokud ne, printf("S není unifikovatelná")
+		(4) Jinak 𝞂k+1 := {x/t}, Sk+1 := Sk𝞂k+1, k := k + 1 a jdi na (1).
+		
 	#define Rezoluce_PL
 		- LI-rezoluce z formule S je linearni rezoluce z S,
 			ve ktere kazda bocni klauzule Bi variantou klauzule ze vstupni formule S.
@@ -169,7 +180,7 @@ Logika def
 			- Pro spor necht existuje prosta g : P(M) -> M
 				Y = {g(Z) | Z ⊆ X ^ g(z) ∉ Z }, spor g(Z) ∉ Z pravě když g(Z) ∈ Z
 		b. Každý nekonecný, konecne vetvící se strom T obsahuje nekonecnou vetev. ("slajd 22")
-			Hledání nekonecné v etve zacneme v koreni. Jelikož má jen konecne mnoho synu,
+			Hledání nekonecné v etve zacneme v kořeni. Jelikož má jen konecne mnoho synu,
 			existuje syn s nekonecne mnoha potomky. Vybereme ho a stejn e pokracujeme v jeho podstrom e.
 			Takto získáme nekonecnou vetev.
 	2. Algoritmy pro 2-SAT a Horn-SAT (dukaz korektnosti).
@@ -180,7 +191,7 @@ Logika def
 				ii. p ∨ q reprezentujeme hrany ⌐p → q, ⌐q → p
 				iii. klauzule q reprezentujeme ⌐p → p
 			'Tvrzení' 𝝋 je splnitelný, práve když žádná silne souvislá komponenta v G𝝋 neobsahuje dvojici opacných literálu.
-			D°ukaz Každé splnující ohodnocení ohodnotí všechny literály ze stejné komponenty stejne. Implikace zleva doprava tedy platí.
+			Dukaz Každé splnující ohodnocení ohodnotí všechny literály ze stejné komponenty stejne. Implikace zleva doprava tedy platí.
 
 			G*𝝋 graf vzniklý z G𝝋 kontrakcí silne souvislých komponent.
 
@@ -203,7 +214,7 @@ Logika def
 			Korektnost 1. kroku je zrejmá, v 2. kroku plyne z pozorování, v 3.kroku díky Hornove tvaru, nebot’ každá zbývající klauzule obsahuje negativní literál.
 	3. Tablo metoda ve VL: syst. tablo (dokoncenost, kon. dukazu), korektnost, úplnost.
 		a.  "Pro každou teorii T a položku R je systematické tablo 𝞽 dokoncené."
-			necht 𝞽 je systematické tablo z T = {𝝋0, 𝝋1 ... } s R v koreni
+			necht 𝞽 je systematické tablo z T = {𝝋0, 𝝋1 ... } s R v kořeni
 			- vetev bezesporna v 𝞽 -> kazdy prefix v 𝞽n bezesporny
 			- polozka neredukovana na vetvi v 𝞽 -> neredukovana na kazdem prefixu v 𝞽n
 			- do urovne kazde polozka je v 𝞽 konecne polozek
@@ -217,18 +228,53 @@ Logika def
 			- zvolme 𝞽n, že se shoduje s 𝞽 do urovne (M + 1) vcetne.
 			- kazda vetev 𝞽n sporna.
 			Dusledek dukaz je konecne tablo.
-		c. "𝝋 je dokazatelna pomoci tabla v T -> T ⊨ 𝝋"
+		c. korektnost
+		"𝝋 je dokazatelna pomoci tabla v T -> T ⊨ 𝝋"
 			//TODO lemma slajd 71
 
-			- T ⊢ 𝝋 -> existuje sporne tablo s F𝝋 v koreni.
+			- T ⊢ 𝝋 -> existuje sporne tablo s F𝝋 v kořeni.
 			- Sporem 𝝋 neni pravdiva v T -> Existuje model-protipriklad
 			- F𝝋 shoduje se s ohodnocenim 𝝑 -> dle lematu exustuje vetev shodujici s 𝝑 -> spor nebot kazda vetev je sporna.
-		d. "𝝋 je pravdiva v T -> je tablo dokazatelna"
+		d. Uplnost
+		"𝝋 je pravdiva v T -> je tablo dokazatelna"
 			//TODO lemma slajd 73
-			Necht’ 𝝋 je pravdivá v T. Ukážeme, že libovolné dokoncené tablo (napr. systematické) z teorie T s položkou F𝝋 v koreni je sporné.
+			Necht’ 𝝋 je pravdivá v T. Ukážeme, že libovolné dokoncené tablo (napr. systematické) z teorie T s položkou F𝝋 v kořeni je sporné.
 			- Sporem -> bezesporna vetev. Dle lemmatu existuje 𝝑 takove, ze Vetev V se shoduje s 𝝑, specialne s F𝝋 -> 𝝑(𝝋) = 0;
 			- Vetev v je dokocnena, ma T𝝍 pro kazde 𝝍 z T -> 𝝑 je model T.
 			- Spor s tim, ze 𝝋 plati v kazdem modelu T.
+	7. Tablo metoda v PL: syst. tablo (dokon., kon. dukazu), význam axiomu rovnosti.
+		a. "Pro každou teorii T a položku R je systematické tablo 𝞽 dokoncené."
+			Necht 𝞽 je systematické Tablo s T = {𝝋0, 𝝋1 ... } s R v kořeni a P je polozka ve vrcholu Vrch.
+			- Do úrovne Vrch (vcetn e) je v 𝞽 jen konecne mnoho výskytu všech položek.
+			- Kdyby vyskyt P nebyl redukovany - alg se nezastavi (krok 2, 3a, 3b)
+			- kazdy axiom na konci bude na vsech bezespornych vetvich (krok 4)
+			Tedy systematické tablo ma pouze dokoncené vetve.
+		b. "Je-li systematické tablo 𝞽 dukazem (z teorie T), je 𝞽 konecné."
+			Kdyby bylo 𝞽 nekonecné, dle Königova lemmatu by obsahovalo nekonecnou vetev.
+			Tato vetev by byla bezesporná, nebot’ pri konstrukci 𝞽 se sporné v etve neprodlužují. Pak by ale 𝞽 nebylo sporné.
+		c. Necht’ A je struktura pro jazyk L, ve které je rovnost interpretovaná jako relace =^(A) splnující axiomy rovnosti, tj. ne nutne identita.
+			//TODO axiomy rovnosti
+
+			i. =^(A) je ekvivalence na A. (z axiomu 1, 3)
+			ii. =^(A) je kongruence (z axiomu 2, 3)
+			iii. Je-li A ⊨ T*, je i (A/=^(A)) ⊨ T*, kde A/=^(A) je faktorstruktura struktury A dle =^(A),
+				pricemž rovnost je v A/=^(A) interpretovaná jako identita.
+	8. Tablo metoda v PL: korektnost, kanonický model (s rovností), úplnost.
+		a. korektnost
+		"Pro každou teorii T a sentenci 𝝋, je-li 𝝋 tablo dokazatelná z T, je 𝝋 pravdivá v T, tj. T ⊢ 𝝋 -> T ⊨ 𝝋"
+			- T ⊢ 𝝋 -> existuje sporne tablo s F𝝋 v kořeni.
+			- Sporem 𝝋 neni pravdiva v T -> Existuje model-protipriklad
+			- A shoduje se s polozkou F𝝋, dle lemmatu lze A expandovat do Lc tak, ze se shoduje s nekakou vetvi v tablu.
+			- Spor, kazda vetev je sporna (obsahuje F𝝍 a T𝝍 pro nejakou formuli 𝝍)
+		b. kanonický model (s rovností) //TODO
+		c. Uplnost
+			"Sentence 𝝋, teorie T. 𝝋 je pravdiva v T -> je tablo dokazatelna z T"
+			Necht’ 𝝋 je pravdivá v T. Ukážeme, že libovolné dokoncené tablo (napr. systematické) z teorie T s položkou F𝝋 v kořeni je sporné.
+			- Sporem -> bezesporna vetev. Dle lemmatu existuje struktura A pro jazyk Lc takova, ze Vetev V se shoduje s A, specialne s F𝝋 -> A ⊨ ⌐𝝋
+			- A1 je redukt A na puvodni jaz L, plati A1 ⊨ ⌐𝝋
+			- V je dokoncena, obsahuje T𝝍 pro kazde 𝝍 z T -> A1 je modelem T
+			- Spor s tim, ze 𝝋 plati v kazdem modelu T.
+
 	4. Veta o kompaktnosti VL a její dusledky //TODO
 		a. "Teorie má model, práve když každá její konecná cást má model."
 
@@ -245,8 +291,13 @@ Logika def
 		c.// TODO, slajd 94
 		Úplnost LI-rezoluce pro Hornovy formule. LI-rezoluce (linear input) z formule S je lineární rezoluce z S, ve které je každá bocní klauzule Bi ze (vstupní) formule S.
 			"Je-li Hornova T splnitelná a T ∪ {G} nesplnitelná pro cíl G, lze ⧠ odvodit LI-rezolucí z T ∪ {G} zacínající G."
-			- Dle v ety o kompaktnosti m°užeme predpokládat, že T je konecná.
+			- Dle v ety o kompaktnosti mužeme predpokládat, že T je konecná.
 			- Indukci dle poctu promenných v T.
+	11. Rezoluce v PL: korektnost, úplnost, lifting lemma, LI-rezoluce.
+		a. 
+		b.
+		c.
+
 	6. Sémantika PL: veta o konstantách, vlastnosti otevrených teorií, veta o dedukci.
 		a. Necht’ 𝝋 je formule jazyka L s volnými promennými x1; : : : ; xn a T je teorie jazyka L.
 		Oznacme L1 rozšírení L o nové konstantní symboly c1, ..., cn a T1 teorii T nad jazykem L1. Pak
@@ -263,33 +314,42 @@ Logika def
 			dusledky
 			i. Otevrená formule platí ve strukture A, práve když platí v každé podstrukture B ⊆ A.
 			ii. Každá podstruktura modelu otevrené teorie T je modelem T. 
-		c. Veta o dedukce //TODO, where???
-
-	7. Tablo metoda v PL: syst. tablo (dokon., kon. dukazu), význam axiomu rovnosti.
-		a. "Pro každou teorii T a položku R je systematické tablo 𝞽 dokoncené."
-			Necht 𝞽 je systematické Tablo s T = {𝝋0, 𝝋1 ... } s R v koreni a P je polozka ve vrcholu Vrch.
-			- Do úrovne Vrch (vcetn e) je v 𝞽 jen konecne mnoho výskytu všech položek.
-			- Kdyby vyskyt P nebyl redukovany - alg se nezastavi (krok 2, 3a, 3b)
-			- kazdy axiom na konci bude na vsech bezespornych vetvich (krok 4)
-			Tedy systematické tablo ma pouze dokoncené vetve.
-		b.
-		c.
-	8. Tablo metoda v PL: korektnost, kanonický model (s rovností), úplnost.
-		a.
-		b.
-		c.
+		c. Veta o dedukce //TODO, where???	
 	9. Löwenheim-Skolemova veta. Veta o kompaktnosti PL a její dusledky.
-		a.
+		a. 
 		b.
 		c.
 	10. Extenze o definice, Skolemova veta, Herbrandova veta.
-		a.
-		b.
-		c.
-	11. Rezoluce v PL: korektnost, úplnost, lifting lemma, LI-rezoluce.
-		a.
-		b.
-		c.
+		a. Teorie T1 jazyka L1 je extenze teorie T jazyka L o definice, pokud vznikla z T postupnou extenzí o definici relacního ci funkcního symbolu.
+			//TODO
+		b. "Každá teorie T má otevrenou konzervativní extenzi T*." //slajd 186
+
+			Lze predpokládat, že T je v uzavreném tvaru. Necht’ L je její jazyk.
+			- Nahrazením každého axiomu teorie T za ekvivalentní formuli v prenexním tvaru získáme ekvivalentní teorii T1
+			- Nahrazením každého axiomu teorie T2 za jeho Skolemovu variantu získáme teorii T2 rozšíreného jazyka L2.
+			- Redukt každého modelu teorie T2 na jazyk L modelem teorie T -> je T2 extenze T.
+			- každý model teorie T lze expandovat na model teorie T2 -> je to extenze konzervativní.
+			- každý axiom teorie T2 je univerzální sentence -> jejich nahrazením za otevrená jádra získáme otevrenou teorii T* ekvivalentní s T2.
+
+		c. "Necht’ T je otevrená teorie jazyka L bez rovnosti a s alespon jedním konstantním symbolem. Pak:
+			i. T má Herbranduv model, anebo
+			ii. existuje konecne mnoho základních instancí axiomu z T, jejichž konjunkce je nesplnitelná, a tedy T nemá model"
+			//slajd 189
+
+			Necht’ M je množina všech základních instancí axiomu z T.
+			Uvažme dokoncené (napr. systematické) tablo 𝞽 z T0 v jazyce L (bez pridávání nových konstant) s položkou F⊥ v kořeni.
+				- Obsahuje-li tablo 𝞽 bezespornou vetev V, kanonický model z vetve V je Herbrandovým modelem teorie T.
+				- Jinak je 𝞽 sporné, tj. M ⊢ ⊥. Navíc je konecné, tedy ⊥ je dokazatelný jen z konecne mnoha formulí M,
+					tj. jejich konjunkce je nesplnitelná.
+
+			//Herbrandovo univerzum pro L je množina všech konstantních termu z L.
+			//Struktura A pro L je Herbrandova struktura, je-li doména A Herbrandovo
+			//univerzum pro L a pro každý n-ární funkcní symbol f 2 F a t1; : : : ; tn 2 A,
+			//f A(t1, ... tn) = f (t1, ..., tn)
+			'Poznámka Na rozdíl od kanonické struktury nejsou predepsané relace'
+			//Herbranduv model teorie T je Herbrandova struktura, jež je modelem T.
+
+	
 	12. Elementární ekvivalence, dusledky L.-S. vety. Izomorfismus a sémantika.
 		a.
 		b.
