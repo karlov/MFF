@@ -107,7 +107,7 @@ Logika def
 		Unifikace ∂ pro S je nejobecnejsi unifikace (MGU). pokud pro kazdou unifikaci 𝞽 existuje substituce 𝞴 ze 𝞽 = ∂𝞴
 		Jsou-li ∂ a 𝞽 dve MGU pro S -> lisi se pouze prejmenovanim promennych
 	- Unifikacni alg
-		Vstup Neprázdná (konecná) množina výraz°u S.
+		Vstup Neprázdná (konecná) množina výrazu S.
 		Výstup Nejobecn ejší unifikace 𝞂 pro S nebo “S není unifikovatelná”.
 
 		(0) Necht’ S0 := S, 𝞂0 := ;, k := 0. (inicializace)
@@ -284,7 +284,9 @@ Logika def
 		a. "Je-li S rezolucí zamítnutelná, je S nesplnitelná."
 			//TODO korektnost rezolucniho pravidla
 			- Necht’ S ⊢R ⧠. Kdyby 𝝑 ⊨ S pro nejaké ohodnocení V, z korektnosti rezolucního pravidla by platilo i 𝝑 ⊨ ⧠, což není možné.
-		b. "Je-li konecná S nesplnitelná, je rezolucí zamítnutelná, tj. S ⊢R ⧠" //TODO
+		b. Uplnost
+			"Je-li konecná S nesplnitelná, je rezolucí zamítnutelná, tj. S ⊢R ⧠" //TODO
+
 			Indukci dle poctu promenných:
 			- Nemá-li nesplnitelná S žádnou promennou, je S = {⧠} tedy S ⊢R ⧠;
 			- 
@@ -294,11 +296,21 @@ Logika def
 			- Dle v ety o kompaktnosti mužeme predpokládat, že T je konecná.
 			- Indukci dle poctu promenných v T.
 	11. Rezoluce v PL: korektnost, úplnost, lifting lemma, LI-rezoluce.
-		a. 
-		b.
-		c.
+		a. "Je-li S rezolucí zamítnutelná, je S nesplnitelná."
+			- Necht’ S ⊢R ⧠. Kdyby A ⊨ S pro nejakou strukturu A, z korektnosti rezolucního pravidla by platilo i A ⊨ ⧠, což není možné.
+		b. Lifting Lemma //Rezolucní dukaz na úrovni VL lze "zdvihnout" na úroven PL.
+			//TODO!!!
+		c. Uplnost
+			"Je-li konecná S nesplnitelná, je rezolucí zamítnutelná, tj. S ⊢R ⧠"
+			Je-li S nesplnitelná, dle (dusledku) Herbrandovy vety je nesplnitelná i množina S1 všech základních instancí klauzulí z S.
+			- dle uplnosti rezolucí metody v VL S1 ⊢R ⧠ (na urovni VL)
+			- Dle predchozího dusledku existuje klauzule C a substituce 𝞂 taková, že ⧠ = C𝞂 a S ⊢R C (na úrovni PL).
+			- Jediná klauzule, jejíž instance je ⧠, je klauzule C = ⧠.
+		d. LI-rezoluce (“linear input”) z formule S je lineární rezoluce z S, ve které je každá bocní klauzule Bi variantou klauzule ze (vstupní) formule S.
+			"Je-li Hornova T splnitelná a T ∪ {G} nesplnitelná pro cíl G, lze ⧠ odvodit LI-rezolucí z T ∪ {G} zacínající G."
+			z Hildebrandove vety, stejne vety v LV a Lifting lemmatu.
 
-	6. Sémantika PL: veta o konstantách, vlastnosti otevrených teorií, veta o dedukci.
+	6. Sémantika PL: veta o konstantách, vlastnosti otevrených teorií, veta o dedukci //TODO
 		a. Necht’ 𝝋 je formule jazyka L s volnými promennými x1; : : : ; xn a T je teorie jazyka L.
 		Oznacme L1 rozšírení L o nové konstantní symboly c1, ..., cn a T1 teorii T nad jazykem L1. Pak
 			"T ⊨ 𝝋 prave když T1 ⊨ 𝝋(x1/c1, ..., xn/cn)"
@@ -315,7 +327,7 @@ Logika def
 			i. Otevrená formule platí ve strukture A, práve když platí v každé podstrukture B ⊆ A.
 			ii. Každá podstruktura modelu otevrené teorie T je modelem T. 
 		c. Veta o dedukce //TODO, where???	
-	9. Löwenheim-Skolemova veta. Veta o kompaktnosti PL a její dusledky.
+	9. Löwenheim-Skolemova veta. Veta o kompaktnosti PL a její dusledky //TODO
 		a. 
 		b.
 		c.
@@ -351,15 +363,34 @@ Logika def
 
 	
 	12. Elementární ekvivalence, dusledky L.-S. vety. Izomorfismus a sémantika.
-		a.
-		b.
-		c.
+		a. Struktury A a B jazyka L jsou elementárne ekvivalentní, psáno A ≡ B, pokud v nich platí stejné formule (jazyka L), tj. Th(A) = Th(B).
+			Pozorování Pro modely A; B teorie T platí A ≡ B, práve když Th(A), Th(B) jsou ekvivalentní (jednoduché kompletní extenze teorie T).
+			//TODO this is definition where is proof?
+		b. 
+		c. 
 	13. 𝔀-kategoricnost, podmínky pro konecnou a otevrenou axiomatizovatelnost.
-		a.
-		b.
-		c.
-	14. Invariance definovatelných množin na automorfismy
+		a. Teorie T je k-kategorická, pokud má až na izomorfismus práve jeden model kardinality k, tj. I (k, T) = 1.
+			Veta w-kategorické kritérium kompletnosti, Necht’ jazyk L je spocetný.
+			i. Je-li teorie T jazyka L bez rovnosti !-kategorická, je kompletní.
+			ii. Je-li teorie T jazyka L s rovností !-kategorická a bez konecného modelu, je kompletní.
+			- Každý model teorie T je elementárne ekvivalentní s nejakým spocetne nekonecným modelem T, ale ten je až na izomorfismus jediný.
+				Tedy všechny modely T jsou elementárne ekvivalentní, tj. T je kompletní.
 
+		b. "Necht’ K ⊆ M(L) a K = M(L) n K , kde L je jazyk. Pak K je konecne axiomatizovatelná, práve když K i K jsou axiomatizovatelné."
+			'->' Je-li T konecná axiomatizace K v uzavreném tvaru, pak teorie s jediným axiomem (𝝋 z T) ⋁ ⌐𝝋 axiomatizuje K^c.
+			'<-' Necht’ T, S jsou teorie jazyka L takové, že M(T) = K , M(S) = K .
+				- Pak M(T ⋃ S) = M(T) ⋂ M(S) = ; a dle vety o kompaktnosti existují konecné T1 ⊆ T a S1 ⊆ S takové, že
+					∅ = M(T1 ⋃ S1) = M(T1) ⋂ M(S1).
+				- Jelikož M(T) ⊆ M(T1) ⊆ M(S1) ⊆ M(S) = M(T)
+				- je M(T) = M(T1), tj. konecná T0 axiomatizuje K .
+		c. "Je-li teorie T otevrene axiomatizovatelná, pak každá podstruktura modelu T je rovnež modelem T"
+			Necht’ T1 je otevrená axiomatika M(T), A ⊨ T1 a B ⊆ A. Víme, že pro každé 𝝋 ∈ T1 je B ⊨ 𝝋, nebot’ 𝝋 je otevrená. Tedy B je modelem T1.
+			'Poznámka Platí i obrácená implikace, tj. je-li každá podstruktura modelu teorie T rovnež modelem T, pak T je otevrene axiomatizovatelná.'
+	14. Invariance definovatelných množin na automorfismy //TODO wtf
+		//Ukážeme, že definovatelné množiny jsou invariantní vuci automorfismum.
+		'Tvrzení Necht’ D ⊆ An je množina definovatelná ve strukture A z parametru b a h je automorfismus A, který je identický na b. Pak h[D] = D.'
+		Necht D = 𝝋^(A, b)(x, y) pro vsechny vektory a ⊆ A^(|x|)
+		a ∈ D ⇔ 𝓐 ⊨ 𝝋(e(x/a, y/b)) ⇔ 𝓐 ⊨ 𝝋(h*e(x/a, y/b)) ⇔ 𝓐 ⊨ 𝝋(e(x/ha, y/hb)) ⇔ 𝓐 ⊨ 𝝋(e(x/ha, y/b)) ⇔ ha ∈ D
 
 #undef Dukazy
 
