@@ -48,8 +48,12 @@ Logika def
 		(4) Za 𝞽n+1 vezmi tablo vzniklé z 𝞽n pridáním T𝝋n na každou bezespornou vetev neobsahující T𝝋n. (Neexistuje-li 𝝋n, vezmi 𝞽n+1 = 𝞽`n .)
 
 		Systematicke tablo 𝞽 = ∪𝞽n
+	- Rezolucní strom klauzule C z formule S je konecný binární strom s vrcholy oznacenými klauzulemi takový, že
+		i. koren je oznacen C,
+		ii. listy jsou oznaceny klauzulemi z S,
+		iii. každý vnitrní vrchol je oznacen rezolventou z klauzulí v jeho synech.
+		'Pozorování C má rezolucní strom z S práve když S ⊢R C.'
 	- 
-
 #undef VL
 
 #define PL
@@ -303,12 +307,19 @@ Logika def
 
 			Indukci dle poctu promenných:
 			- Nemá-li nesplnitelná S žádnou promennou, je S = {⧠} tedy S ⊢R ⧠;
-			- 
+			- Necht’ l je literál vyskytující se v S. Dle lemmatu, S^(l) a S^(⌐l) jsou nesplnitelné.
+			- Jelikož Sl a S^(⌐l) mají méne promenných než S, dle indukcního predpokladu existují rezolucní stromy T^(l) a T^(⌐l) pro odvození ⧠ z Sl resp. S^(⌐l) .
+			- Je-li každý list T^(l) z S, je T^(l) rezolucním stromem ⧠ z S, tj. S ⊢R ⧠.
+			- Pokud ne, doplnením literálu ⌐l do každého listu, jenž není z S, (a do všech vrchol u nad ním) získáme rezolucní strom {⌐l} z S.
+			- Obdobne získáme rezolucní strom {l} z S doplnením l ve stromu T^(⌐l),
+			- Rezolucí jejich korenu {⌐l} a {l} získáme rezolucní strom ⧠ z S.
 		c.// TODO, slajd 94
 		Úplnost LI-rezoluce pro Hornovy formule. LI-rezoluce (linear input) z formule S je lineární rezoluce z S, ve které je každá bocní klauzule Bi ze (vstupní) formule S.
 			"Je-li Hornova T splnitelná a T ∪ {G} nesplnitelná pro cíl G, lze ⧠ odvodit LI-rezolucí z T ∪ {G} zacínající G."
 			- Dle v ety o kompaktnosti mužeme predpokládat, že T je konecná.
-			- Indukci dle poctu promenných v T.
+			- Indukci dle poctu promenných v T
+			- T obsahuje fakt {p} pro nejakou p //jinak splnitelna nastaveni vsech na 1 nebo 0
+			- 
 	11. Rezoluce v PL: korektnost, úplnost, lifting lemma, LI-rezoluce.
 		a. "Je-li S rezolucí zamítnutelná, je S nesplnitelná."
 			- Necht’ S ⊢R ⧠. Kdyby A ⊨ S pro nejakou strukturu A, z korektnosti rezolucního pravidla by platilo i A ⊨ ⧠, což není možné.
@@ -342,7 +353,7 @@ Logika def
 			ii. Každá podstruktura modelu otevrené teorie T je modelem T. 
 		c. Veta o dedukce //TODO, where???	
 	9. Löwenheim-Skolemova veta. Veta o kompaktnosti PL a její dusledky //TODO
-		a. 
+		a. //slajd 173
 		b.
 		c.
 	10. Extenze o definice, Skolemova veta, Herbrandova veta.
@@ -411,4 +422,4 @@ Logika def
 //Not in the test
 
 - Necht jazyk L je rekurzivni
-	Teorie T nad L je rozhodnutelna ⇔ Thm(T) rekurzivni. Jinak nerozhodnutelna]
+	Teorie T nad L je rozhodnutelna ⇔ Thm(T) rekurzivni. Jinak nerozhodnutelna
