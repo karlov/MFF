@@ -24,7 +24,11 @@ Logika def
 
 	- CNF = (q1 ∨ ... ∨ qi) ∧ (p1 ∨ ... ∨ pl) ∧ ...
 	- DNF = (q1 ∧ ... ∧ qi) ∨ (p1 ∧ ... ∧ pl) ∨ ...
-	- Implikacni graf //TOOD
+	- Implikacni graf 
+		Implikacní graf výroku 𝝋 v 2-CNF je orientovaný graf G𝝋, v nemž:
+				i. vrcholy jsou promenné výroku 𝝋 nebo jejich negace
+				ii. p ∨ q reprezentujeme hrany ⌐p → q, ⌐q → p
+				iii. klauzule q reprezentujeme ⌐p → p
 	- Teorie nad P je libovolna mnozina vyroku z VFp
 	- Dusledek teorie T 𝛉P(T) = { 𝝋 ∈ VFp | T ⊨ 𝝋 }
 	- TODO vlastnosti teorie printf("slajd 47");
@@ -34,13 +38,37 @@ Logika def
 	- 𝞇 ⊨ 𝝋, "plati 𝞇 -> 𝝋"
 	- Korektni dukazovaci system: T ⊢ 𝝋 ⇒ T ⊨ 𝝋 TODO check //kazda dokazatelna formule bude pravdiva
 	- Uplny dukazovaci system:T ⊨ 𝝋 ⇒ T ⊢ 𝝋 TODO check //kazda pravdiva formule je dokazatelna
-	- TODO systematicke tablo printf("slajd 68");
+	- Systematicke tablo printf("slajd 68");
+		Necht’ R je položka a T = {𝝋0, 𝝋1 ... } je (konecnáci nekonecná) teorie.
+		(1) Za 𝞽0 vezmi atomické tablo pro R. Dokud to lze, aplikuj následující kroky.
+		(2) Necht’ P je nejlevejší položka v co nejmenší úrovni již daného tabla 𝞽n,
+			která není redukovaná na nejaké bezesporné v etvi procházející skrze P.
+		(3) Za 𝞽`n vezmi tablo vzniklé z 𝞽n pridáním atomického tabla pro P na každou bezespornou vetev skrze P.
+			(Neexistuje-li P, vezmi 𝞽`n = 𝞽n.)
+		(4) Za 𝞽n+1 vezmi tablo vzniklé z 𝞽n pridáním T𝝋n na každou bezespornou vetev neobsahující T𝝋n. (Neexistuje-li 𝝋n, vezmi 𝞽n+1 = 𝞽`n .)
+
+		Systematicke tablo 𝞽 = ∪𝞽n
 	- 
 
 #undef VL
 
 #define PL
 
+	- Systematicke tablo PL
+		Necht’ R je položka a T = {𝝋0, 𝝋1 ... } je (konecná ci nekonecná) teorie.
+		(1) Za 𝞽0 vezmi atomické tablo pro R. V prípade (*) vezmi lib. c 2 LC\L, v prípade (#) za t vezmi term t1. Dokud to lze, aplikuj následující kroky.
+		(2) Necht’ v je nejlevejší vrchol v co nejmenší úrovni již daného tabla 𝞽n obsahující výskyt položky P, který není redukovaný na nejaké 
+			bezesporné vetvi skrze v. (Neexistuje-li v, vezmi 𝞽0n = 𝞽n a jdi na (4))
+		(3a) Není-li P tvaru T(∀x)𝝋(x) ani F(∃x)𝝋(x), za 𝞽0n vezmi tablo vzniklé z 𝞽n pridáním atomického tabla pro P na každou bezespornou vetev skrze v. 
+			V prípade (*) za c vezmi ci pro nejmenší možné i.
+		(3b) Je-li P tvaru T(∀x)𝝋(x) ci F(∃x)𝝋(x) a ve v má i-tý výskyt, za 𝞽0n vezmi tablo vzniklé z 𝞽n pripojením
+			atomického tabla pro P na každou bezespornou vetev skrze v, pricemž za t vezmi term ti.
+		(4) Za 𝞽n+1 vezmi tablo vzniklé z 𝞽0n pridáním T𝝋n na každou bezespornou vetev neobsahující T𝝋n. (Neexistuje-li 𝝋n, vezmi 𝞽n+1 = 𝞽0n)
+
+		//(*) - atomicke tablo s novou konst
+		//(#) - atomicke tablo s konst termem
+
+		Systematicke tablo 𝞽 = ∪𝞽n
 	break
 
 	- Otevrena formule: neobsahuje zadny kvantifikator
@@ -136,7 +164,7 @@ Logika def
 
 	//TOOD
 	1. Cantorova veta, Königovo lemma.
-		a. Množina M je menší velikostí, než jeji potenční množina ("slajd 19")
+		a. "Množina M je menší velikostí, než jeji potenční množina" ("slajd 19")
 			- f(y) = {y} pro y ∈ M je prostá funkce f : M -> P(M) (velikost M <= Velikost P(M))
 			- Pro spor necht existuje prosta g : P(M) -> M
 				Y = {g(Z) | Z ⊆ X ^ g(z) ∉ Z }, spor g(Z) ∉ Z pravě když g(Z) ∈ Z
@@ -171,26 +199,79 @@ Logika def
 
 			(2) je jednotkova propagace, 𝝋` ziskany jedn propagaci je splnitelný ⇔ 𝝋 je splnitelný.
 
-			korektnost:
+			"korektnost:"
 			Korektnost 1. kroku je zrejmá, v 2. kroku plyne z pozorování, v 3.kroku díky Hornove tvaru, nebot’ každá zbývající klauzule obsahuje negativní literál.
 	3. Tablo metoda ve VL: syst. tablo (dokoncenost, kon. dukazu), korektnost, úplnost.
-		a.
-		b.
-		c.
-	4. Veta o kompaktnosti VL a její dusledky.
-		a.
-		b.
-		c.
+		a.  "Pro každou teorii T a položku R je systematické tablo 𝞽 dokoncené."
+			necht 𝞽 je systematické tablo z T = {𝝋0, 𝝋1 ... } s R v koreni
+			- vetev bezesporna v 𝞽 -> kazdy prefix v 𝞽n bezesporny
+			- polozka neredukovana na vetvi v 𝞽 -> neredukovana na kazdem prefixu v 𝞽n
+			- do urovne kazde polozka je v 𝞽 konecne polozek
+			- Kdyby P byla neredukovana - alg by se nezastavil (krok 2, 3)
+			- kazdy axiom na konci bude na vsech bezespornych vetvich (krok 4)
+			- 𝞽 ma jen dokoncené vetve
+		b. "Je-li 𝞽 = ∪𝞽n sporné tablo, je 𝞽n sporné konecné tablo pro nejaké n."
+			- Necht’ S je množina vrcholu stromu 𝞽, jenž nad sebou neobsahují spor.
+			- kdyby S nekonecna -> dle Königa tablo nekonecne (neni sporne tablo)
+			- Vrcholy z S lezi do nejake urovni M -> pak kazdy vrchol od urovne (M + 1) ma nad sebou spor.
+			- zvolme 𝞽n, že se shoduje s 𝞽 do urovne (M + 1) vcetne.
+			- kazda vetev 𝞽n sporna.
+			Dusledek dukaz je konecne tablo.
+		c. "𝝋 je dokazatelna pomoci tabla v T -> T ⊨ 𝝋"
+			//TODO lemma slajd 71
+
+			- T ⊢ 𝝋 -> existuje sporne tablo s F𝝋 v koreni.
+			- Sporem 𝝋 neni pravdiva v T -> Existuje model-protipriklad
+			- F𝝋 shoduje se s ohodnocenim 𝝑 -> dle lematu exustuje vetev shodujici s 𝝑 -> spor nebot kazda vetev je sporna.
+		d. "𝝋 je pravdiva v T -> je tablo dokazatelna"
+			//TODO lemma slajd 73
+			Necht’ 𝝋 je pravdivá v T. Ukážeme, že libovolné dokoncené tablo (napr. systematické) z teorie T s položkou F𝝋 v koreni je sporné.
+			- Sporem -> bezesporna vetev. Dle lemmatu existuje 𝝑 takove, ze Vetev V se shoduje s 𝝑, specialne s F𝝋 -> 𝝑(𝝋) = 0;
+			- Vetev v je dokocnena, ma T𝝍 pro kazde 𝝍 z T -> 𝝑 je model T.
+			- Spor s tim, ze 𝝋 plati v kazdem modelu T.
+	4. Veta o kompaktnosti VL a její dusledky //TODO
+		a. "Teorie má model, práve když každá její konecná cást má model."
+
+		b. "S má nekonecnou vetev, práve když T má model."
+		c. "Spocetne nekonecný graf G = (V ; E) je k-obarvitelný, práve když každý jeho konecný podgraf je k-obarvitelný."
 	5. Rezoluce ve VL: korektnost, úplnost. LI-rezoluce (úplnost pro Horn. formule).
-		a.
-		b.
-		c.
+		a. "Je-li S rezolucí zamítnutelná, je S nesplnitelná."
+			//TODO korektnost rezolucniho pravidla
+			- Necht’ S ⊢R ⧠. Kdyby 𝝑 ⊨ S pro nejaké ohodnocení V, z korektnosti rezolucního pravidla by platilo i 𝝑 ⊨ ⧠, což není možné.
+		b. "Je-li konecná S nesplnitelná, je rezolucí zamítnutelná, tj. S ⊢R ⧠" //TODO
+			Indukci dle poctu promenných:
+			- Nemá-li nesplnitelná S žádnou promennou, je S = {⧠} tedy S ⊢R ⧠;
+			- 
+		c.// TODO, slajd 94
+		Úplnost LI-rezoluce pro Hornovy formule. LI-rezoluce (linear input) z formule S je lineární rezoluce z S, ve které je každá bocní klauzule Bi ze (vstupní) formule S.
+			"Je-li Hornova T splnitelná a T ∪ {G} nesplnitelná pro cíl G, lze ⧠ odvodit LI-rezolucí z T ∪ {G} zacínající G."
+			- Dle v ety o kompaktnosti m°užeme predpokládat, že T je konecná.
+			- Indukci dle poctu promenných v T.
 	6. Sémantika PL: veta o konstantách, vlastnosti otevrených teorií, veta o dedukci.
-		a.
-		b.
-		c.
+		a. Necht’ 𝝋 je formule jazyka L s volnými promennými x1; : : : ; xn a T je teorie jazyka L.
+		Oznacme L1 rozšírení L o nové konstantní symboly c1, ..., cn a T1 teorii T nad jazykem L1. Pak
+			"T ⊨ 𝝋 prave když T1 ⊨ 𝝋(x1/c1, ..., xn/cn)"
+
+			'->' je-li A1 model T1, necht A reduckt A1 na L. A ⊨ 𝝋[e] pro kazde e ->
+				A ⊨ 𝝋(x1/c1^A, ..., xn/cn^A) -> A1 ⊨ 𝝋(x1/c1, ..., xn/cn)
+			'<-' je-li A model T a e ohodnoceni, A1 je expanze A na L1 o konstanty ci^A = e(xi) pro vsechna i.
+				A1 ⊨ 𝝋(x1/c1, ..., xn/cn)[e1] pro libovolné e1 -> A1 𝝋(x1/c1^A, ..., xn/cn^A) -> A1 ⊨ 𝝋[e]
+		b. "vlastnosti otevrených teorii"
+			Tvrzení Pro každou otevrenou formuli 𝝋 a ohodnocení e : Var -> B platí
+				B ⊨ 𝝋[e] ⇔ A ⊨ 𝝋[e], kde B je podstruktura A pro jazyk L.
+				- Je-li 𝝋 atomická, plyne tvrzení z definice platnosti pri ohodnocení. Dále snadno indukcí dle struktury formule.
+			dusledky
+			i. Otevrená formule platí ve strukture A, práve když platí v každé podstrukture B ⊆ A.
+			ii. Každá podstruktura modelu otevrené teorie T je modelem T. 
+		c. Veta o dedukce //TODO, where???
+
 	7. Tablo metoda v PL: syst. tablo (dokon., kon. dukazu), význam axiomu rovnosti.
-		a.
+		a. "Pro každou teorii T a položku R je systematické tablo 𝞽 dokoncené."
+			Necht 𝞽 je systematické Tablo s T = {𝝋0, 𝝋1 ... } s R v koreni a P je polozka ve vrcholu Vrch.
+			- Do úrovne Vrch (vcetn e) je v 𝞽 jen konecne mnoho výskytu všech položek.
+			- Kdyby vyskyt P nebyl redukovany - alg se nezastavi (krok 2, 3a, 3b)
+			- kazdy axiom na konci bude na vsech bezespornych vetvich (krok 4)
+			Tedy systematické tablo ma pouze dokoncené vetve.
 		b.
 		c.
 	8. Tablo metoda v PL: korektnost, kanonický model (s rovností), úplnost.
@@ -218,11 +299,11 @@ Logika def
 		b.
 		c.
 	14. Invariance definovatelných množin na automorfismy
-		
+
 
 #undef Dukazy
 
 //Not in the test
 
 - Necht jazyk L je rekurzivni
-	Teorie T nad L je rozhodnutelna ⇔ Thm(T) rekurzivni. Jinak nerozhodnutelna
+	Teorie T nad L je rozhodnutelna ⇔ Thm(T) rekurzivni. Jinak nerozhodnutelna]
