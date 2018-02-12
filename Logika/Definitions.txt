@@ -58,7 +58,7 @@ Logika def
 
 #define PL
 	- Systematicke tablo PL
-		Necht’ R je položka a T = {𝝋0, 𝝋1 ... } je (konecná ci nekonecná) teorie.
+		Necht’ R je položka a T = { 𝝋0, 𝝋1 ... } je (konecná ci nekonecná) teorie.
 		(1) Za 𝞽0 vezmi atomické tablo pro R. V prípade (*) vezmi lib. c 2 LC\L, v prípade (#) za t vezmi term t1. Dokud to lze, aplikuj následující kroky.
 		(2) Necht’ v je nejlevejší vrchol v co nejmenší úrovni již daného tabla 𝞽n obsahující výskyt položky P, který není redukovaný na nejaké 
 			bezesporné vetvi skrze v. (Neexistuje-li v, vezmi 𝞽0n = 𝞽n a jdi na (4))
@@ -73,7 +73,7 @@ Logika def
 
 		Systematicke tablo 𝞽 = ∪𝞽n
 	- Kanonicky model //TODO slajd 164
-		Kanonický model z v etve V je LC -struktura A = hA;FA;RAi,
+		Kanonický model z v etve V je LC -struktura A = hA, F^A, R^Ai,
 		i. A je mnozina konstant
 		ii. 
 
@@ -351,11 +351,20 @@ Logika def
 			dusledky
 			i. Otevrená formule platí ve strukture A, práve když platí v každé podstrukture B ⊆ A.
 			ii. Každá podstruktura modelu otevrené teorie T je modelem T. 
-		c. Veta o dedukce //TODO, where???	
+		c. Veta o dedukci "T, 𝝋 ⊢ 𝞇 ⇔ T ⊢ 𝝋 ⇒ 𝞇"  //TODO, where???
+			
 	9. Löwenheim-Skolemova veta. Veta o kompaktnosti PL a její dusledky //TODO
-		a. //slajd 173
-		b.
-		c.
+		a. "Každá bezesporná teorie T spocetného jazyka L bez rovnosti má spocetne nekonecný model." //slajd 173
+			Necht’ 𝞽 je systematické tablo z T s F? v koreni. Jelikož je dokoncené a obsahuje bezespornou vetev V,
+			nebot’ ? není dokazatelný z T, existuje kanonický model A z V . Jelikož se A shoduje s V,
+			jeho redukt na jazyk L je hledaným spocetne nekonecným modelem T.
+
+			'Poznámka Jde o slabou verzi tzv. Löwenheim-Skolemovy vety. Ve spocetném jazyce s rovností je kanonický model s rovností spocetný.'			
+		b. "Teorie má model, práve když každá její konecná cást má model."
+			'->' zrejmá
+			'<-' Pokud teorie T nemá model, je sporná, tj. je z ní dokazatelný ⊥ systematickým tablem 𝞽.
+			Jelikož je 𝞽 konecné, je ⊥ dokazatelný z nejaké konecné T1 ⊆ T, tj. T1 nemá model.
+		c. //TODO
 	10. Extenze o definice, Skolemova veta, Herbrandova veta.
 		a. Teorie T1 jazyka L1 je extenze teorie T jazyka L o definice, pokud vznikla z T postupnou extenzí o definici relacního ci funkcního symbolu.
 			//TODO
