@@ -3,7 +3,7 @@ Logika def
 #define Useful_slides
 	- [44, 51] (Modely v VL)
 	- [51, 67] (Tablo v VL, trash)
-	- [67, 82] (Dukazy Tablo VL)
+	- [68, 82] (Dukazy Tablo VL)
 	- [82, 89] (rezoluce v VL, trash)
 	- [90] (Uplnost rezoluce)
 	- [94] (Uplnost LI-rezoluce)
@@ -18,7 +18,7 @@ Logika def
 	- [211, 214] (trash)
 	- [215, 233] (Struktury, rozsiritelnost o def apod.)
 	- [234 - 255] (Ne bude v testu, trash) 
-#undef
+#undef Useful_slides
 
 #define VL
 
@@ -36,7 +36,7 @@ Logika def
 	- Dukaz je konecny objekt(kde definice Objektu???), muze vychazet z axiomu teorie
 	- T ⊢ 𝝋 "𝝋 je dokazatelna z T"
 	- 𝞇 ⊨ 𝝋, "plati 𝞇 -> 𝝋"
-	- Korektni dukazovaci system: T ⊢ 𝝋 ⇒ T ⊨ 𝝋 TODO check //kazda dokazatelna formule bude pravdiva
+	- Korektni dukazovaci system: T ⊢ 𝝋 ⇒ T ⊨ 𝝋 TODO check //kazda dokazatelna formule je pravdiva
 	- Uplny dukazovaci system:T ⊨ 𝝋 ⇒ T ⊢ 𝝋 TODO check //kazda pravdiva formule je dokazatelna
 	- Systematicke tablo printf("slajd 68");
 		Necht’ R je položka a T = {𝝋0, 𝝋1 ... } je (konecnáci nekonecná) teorie.
@@ -275,11 +275,25 @@ Logika def
 			- V je dokoncena, obsahuje T𝝍 pro kazde 𝝍 z T -> A1 je modelem T
 			- Spor s tim, ze 𝝋 plati v kazdem modelu T.
 
-	4. Veta o kompaktnosti VL a její dusledky //TODO
+	4. Veta o kompaktnosti VL a její dusledky
 		a. "Teorie má model, práve když každá její konecná cást má model."
+			Dukaz 1:(predpoklad konecnost, korektnost, uplnost)
+				'->' zrejmá
+				'<-' (Neprimo) T nema model -> je sporna (lze z ni dokazat ⊥) systematickym tablem.
+					Tablo je konecne -> ⊥ je dokazatelný z nejake konecne T1 ⊆ T -> T1 nema model.
 
 		b. "S má nekonecnou vetev, práve když T má model."
-		c. "Spocetne nekonecný graf G = (V ; E) je k-obarvitelný, práve když každý jeho konecný podgraf je k-obarvitelný."
+			Jelikož {𝝋i | i ∈ N} 𝝋 T má model pro každé n ∈ N, bude každá úroven v S neprázdná.
+			Tedy S je nekonecný, navíc binární, a dle Königova lemmatu obsahuje nekonecnou vetev.
+		c. "Spocetne nekonecný graf G = (V, E) je k-obarvitelný, práve když každý jeho konecný podgraf je k-obarvitelný." //ADSII NP-complete
+			'->' zrejmá
+			'<-' Necht’ každý konecný podgraf v G je k-obarvitelný. P = { Qu,i | u ∈ V, i ∈ k} a teorii s axiomy //WTF what is k?
+				i. (Qu,0 ∨ ... ∨ Qu,k-1) //∀ u ∈ V
+				ii. ⌐(Qu,i ∧ Qu,j) //∀ u ∈ V, i < j < k
+				iii. ⌐(Qa,i ∧ Qb,i) //∀ {a, b} ∈ E, i < k
+				G je k-obarvitelný, práve když T má model. Necht’ G1 je podgraf na vrcholech u takových, že Qu,i se vyskytuje v T1 pro nejaké i.
+				Jelikož G1 je k-obarvitelný dle predpokladu, má T1 model.
+
 	5. Rezoluce ve VL: korektnost, úplnost. LI-rezoluce (úplnost pro Horn. formule).
 		a. "Je-li S rezolucí zamítnutelná, je S nesplnitelná."
 			//TODO korektnost rezolucniho pravidla
