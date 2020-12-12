@@ -1,0 +1,230 @@
+\documentclass[12pt]{article}
+\pagestyle{headings}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[czech]{babel}
+%\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+\SetMathAlphabet{\mathcal}{bold}{OMS}{cmsy}{b}{n}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\bigOlog}{\bigO(\log n)}
+
+
+\title {Data Structures I notes}
+\author {Kyrylo Karlov}
+\date {\today}
+
+\begin {document}
+
+\maketitle
+\tableofcontents
+
+\pagebreak
+
+\section{Basic DS}
+
+Popište „nafukovací pole“ se zvětšováním a zmenšováním. Analyzujte jeho amortizovanou složitost.
+
+
+\section{Search trees}
+A group of DS that supports fast Lookup.
+
+
+\subsection{BB[alpha] tree}
+An example of locally lazy rebuild DS.
+
+A tree is perfectly balanced if
+\[ \forall v \in V : | s(l(v) - s(r(v)) | = 1 \]
+Meaning for each node left and right subtree sizes are almost equal, 1:1 ratio.
+
+However maintaining perfectly balanced tree requires $ \bigO(n) $, therefore we would use ratio between 2:1 and 1:2.
+\paragraph{Def:} A node w is in balance if
+
+\[ \forall v \in T(w) : s(v) \leq 2/3 * s(w) \]
+
+A tree is balanced if every node is balanced.
+
+\subsubsection{Time and space complexity}
+Popište BB[alpha]-stromy s líným vyvažováním. Analyzujte jejich amortizovanou složitost.
+
+\paragraph{Find} Height of a balanced tree with n nodes is $ \bigO(\log(n)) $.
+Take an arbitrary path from the root to a leaf. Root has size n, each subsequent node has at most 2/3 of parent's size. Leaf has size 1. Therefore the path contain at most $ \log_{2/3} (1/n) = \log_{3/2}(n) = \bigO(\log(n)) $ edges. So lookup is also $ \bigO(\log(n)) $ .
+
+\paragraph{Insert} Along the path we check that nodes are in balance. If they are, we are done. Otherwise take highest out-of-balance node w and rebuild T(w) to make it perfectly balanced, which takes $ \bigO(s(w)) $.
+
+\paragraph{Theorem} Amortized time complexity of Insert is $ \bigO(\log(n)) $.
+We define potential (how far is current tree from perfectly balanced):
+\[ \Phi =  \sum_{v \in V} \varphi(v)\]
+\[ \varphi :=
+	\begin{cases}
+		|  s(l(v) - s(r(v)) | &\quad\text{if at least 2} \\
+		\text {0} &\quad\text{otherwise}
+	\end{cases}
+\]
+
+After Insert, the contribution of new vertices will increase by 2 max, because of definition it can jump from 0 to 2.
+
+No rebuild - we spent $ \bigO(\log(n)) $ on operation itself and potential is increased by $ 2*\log(n) $ max, therefor total amotrized cost is $ \bigO(\log(n)) $.
+
+Otherwise we should rebuild at node w. WLOG the invariant is broken for w and its left child c. So
+\[ s(l(w)) < 2/3 * s(w) \]
+and the other subtree has
+\[ s(r(w)) < 1/3 * s(w) \]
+the contribution of w is
+\[ \varphi(w) > 1/3 * s(w) \]
+
+After the reubild, $ \varphi(w) = 0 $ as well as all nodes in subtree. All other potentials are the same. The whole potential is decreased by at least $ 1/3 * s(w) $. The real cost of rebuild is $ \bigO(s(w)) $. After multiplying the potential after a suitable constant the real cost would be offset by the change in potential, yielding zero zmortized cost of the rebuild. TODO ???
+
+\paragraph{Delete} TODO
+
+
+\subsection{Splay tree}
+
+Self-adjusting binary search trees. Heuristics: bring the lowest accessed node to the top during every operation. Double rotations are used instead of single.
+Such heuristics guarantee amortized $\bigO(n\log n)$ cost of all operations.
+
+\subsubsection{Definition}
+
+\paragraph{Splay}
+Splay operation - brings node to the top using double and single rotations.
+
+\paragraph{Theorem:} The amortized cost of Splay(x) is at most $ 3 (r'(x) - r(x)) + 1 $ where r(x) is rank before and r'(x) is after Splay.
+
+Let r(v) be binary log(s(v)) a rank of w.
+
+Total cost is a sum of individual steps. Let $ r_1(x), ..., r_t(x) $ is a rank of x after each step, initial is $ r_0(x) $.
+The amortized cost of the i-th step is at most $ 3 (r_i(x) - r_{i-1}(x)) $
+
+\paragraph{Helper lemma:}
+$ log(\frac{a + b}{2}) \geq \frac{log(a) + log(b)}{2} $. Inequality is true for all concave functions.
+
+\paragraph{Corollary:} $ log(a) + log(b) \leq 2log(a + b) - 2 $.
+
+\subsubsection*{Zig-zag}
+The real cost of the operation is 2. Let the tree be y -left w -right x. Then potential increases by:
+\[ \delta = (r'(w) - r(w)) + (r'(x) - r(x)) + (r'(y) - r(y)) \]
+
+The amortized cost is:
+\[ A = 2 + \delta \]
+
+using the Corrolary:
+\[ r'(w) + r'(y) = log(s'(w)) + log(s'(y)) \leq 2log(s'(w) + s'(y)) - 2 \]
+
+The subtrees T'(w) and T'(y) are disjoint and they are contained in T'(x), so we have
+\[log(s'(w) + s'(y)) \leq log s'(x) = r'(x)\].
+Thus:
+\[ r'(w) + r'(y) \leq 2r'(x) - 2 \]
+Substituting this to the inequality for A yields:
+\[ A \leq 3r'(x) - r(w) - r(x) - r(y) \]
+Also
+\[ r(w) \geq r(x) \land r(y) \geq r(x) \]
+Total
+
+\[ A \leq 3(r'(x) - r(x)) \]
+
+\subsubsection*{Zig-zig}
+Similar to Zig-Zag.
+\[ A = 2 + \delta \]
+The subtrees T(x) and T'(z) are disjoint, so using the Corrolary:
+\[ r(x) + r'(z) = log(s(x)) + log(s'(z)) \leq 2log(s(x) + s'(z)) - 2 \leq 2log(s'(x)) = 2r'(x) - 2 \]
+Or
+\[ r'(z) \leq 2r'(x) - r(x) - 2 \]
+So
+\[ A \leq 3r'(x) + r'(y) - 2r(x) - r(y) - r(z) \]
+\[ T(z) = T'(x) \implies r(z) = r'(x) \]
+\[ T(y) \supseteq T(x) \implies r(y) \geq r(x) \]
+\[ T'(y) \subseteq T'(x) \implies r'(y) \leq r'(x) \]
+Total
+
+\[ A \leq 3(r'(x) - r(x)) \]
+
+\subsubsection*{Zig}
+
+\[ A = 2 + (r'(x) - r(x)) + (r'(y) - r(y)) \]
+By inclusion of subtrees, we have $ r'(y) \leq r'(x) $ and $ r(y) \geq r(x) $, hence:
+\[ A \leq 1 + 2r'(x) - 2r(x) \]
+as $ r'(x) - r(x) > 0 $
+\[ A \leq 1 + 3r'(x) - 3r(x) \]
+
+\subsubsection{Time and space complexity}
+
+Navrhněte operace Find, Insert a Delete na Splay stromu. Analyzujte jejich amortizovanou složitost.
+
+\paragraph{Find}
+1. Find (x) as in binary tree \\
+2. Splay (x) or the last accessed node
+
+Either successfull of successfull FIND stops at some node at depth d. Then we splay this node.
+Going from Root costs $ \Theta(d) $ and does not change the potential. Splay will cost $ \Theta(d) $ and amortizes to $\bigO(\log n)$. Adding going from root to Splay cost which results in multiplying by the constant both amortizing cost and potential. In total whole FIND is $\bigO(\log n)$.
+
+\paragraph{Insert}
+
+1. Find (x) as in binary tree \\
+2. If already present - Splay(x) and the time complexity is the same as FIND
+3. Else - add leaf and Splay(x)
+
+Adding leaf is constant, so besides the potential change time complexity is the same as FIND.
+
+\paragraph{Lemma} Adding leaf increases potential by $\bigO(\log n)$.
+Let $ r(v_1), ... , r(v_{t+1}) $ are potentials on the path from root to new leaf (t + 1). The potential change is
+\[ \Delta \Phi = r'(v_{t+1} + \sum_{i = 1}^t (r'(v_i) - r(v_i)) \]
+as newly added node is leaf:
+\[ r'(v_{t+1} = 0 \]
+Other potentials increase by 1, also
+\[ r'(v_i) \leq r(v_{i - 1}) \]
+as the sum is telescopic
+\[ \Delta \Phi \leq r'(v_1) - r(v_1) \]
+Which is $\bigOlog$.
+
+\paragraph{Delete}
+
+1. Find(x)
+2. Delete(x)
+	a. x is a leaf
+	b. x has 1 child
+	c. x has 2 children - replace x by min in R subtree. Reduces to b.
+
+The cost of walking to the node (FIND) is offset by splaying parent of the removed node. If node has no parent - node has constant depth and time complexity is constant.
+
+Removing a node has constant real cost. The change in the potential is in favor of us: we are removing one node from the potential and decreasing the ranks of all its ancestors, so the potential difference is negative.
+We can conclude that Delete runs in $\bigOlog$ amortized time.
+
+\subsection{A-B tree}
+
+\subsubsection{Definition}
+\subsubsection{Time and space complexity}
+
+    Definujte (a,b)-strom. Popište, jak na něm probíhají operace Find, Insert a Delete. Rozeberte jejich slozitost v nejhorším případě.
+
+\paragraph{Find}
+\paragraph{Insert}
+\paragraph{Delete}
+
+\section{Cache friednly DS}
+\subsection{I/O complexity}
+\subsection{K-way merge sort}
+
+
+\section{Hash DS}
+
+\subsection{Bloome filters}
+\subsubsection{1-line filter}
+\subsubsection{k-line filter}
+
+Let $ \varepsilon > 0 $, n is max \# of elements. For $ k = \lceil \log 1/\varepsilon \rceil $ a m = 2n. Then B. filter has probability of false positive $ < \varepsilon $.
+
+\subsubsection{1-table filter}
+Assume we have k independent absolutely random hash functions.
+
+\subsubsection{Delete}
+
+We cannot easily set bit in filter to 0 during delete, as we would lose false negative property. Therefore a helper counter array will be used.
+At insert of delete we would increase/decrease counter. Then FIND will return true if $ C[h_i(x)] > 0 $. However, every item in array is limited to J bits and in case \[ C[i] = 2^J-1 \] it wouldnt increase any more (frozen). As a byproduct it will increase false positive results.
+
+If there is too many frozen counters - rehash with new functions.
+
+\paragraph{Analysis}
+
+\end {document}
