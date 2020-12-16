@@ -14,6 +14,9 @@
 \newcommand{\bigO}{\mathcal{O}}
 \newcommand{\bigOlog}{\bigO(\log(n))}
 
+% multiline comments
+\usepackage{verbatim}
+
 
 \title {Data Structures I notes}
 \author {Kyrylo Karlov}
@@ -28,8 +31,21 @@
 
 \section{Basic DS}
 
-Popište „nafukovací pole“ se zvětšováním a zmenšováním. Analyzujte jeho amortizovanou složitost.
+Increase array capacity to 2x if $l = 1/2 * m$, decrease capacity to 1/2x if $l = 1/4 * m$ where l is number of elements in array and m current capacity.
 
+\paragraph{Theorem:} Amortized time complexity is $\bigO(1)$.
+Consider sequence of k operations (Insert, Delete). Split sequence into blocks, each block ends when capacity is changed (relocation).
+For each block, we analysy cost of relocation at the end:
+
+1. First block has capacity 1, reallocation is constant. \\
+2. Last block does not end with relocation. \\
+3. All other blocks start with relocation. At the beginning $l = 1/2 * m$ \\
+	a. Block ends with stretch, $l = m$.
+	b. Ends with shrink $l = 1/4 * m$.
+In both cases, block has at least $1/4 * m$ operations. So relocation cost $1/2 * m$ can be redistributed among $1/4 * m$ operations in the block.
+Each operation gets $\bigO(1)$,
+
+Therefore a sequence of k operations takes $\bigO(k)$, assuming we started with empty array.
 
 \section{Search trees}
 A group of DS that supports fast Lookup.
@@ -50,15 +66,15 @@ However maintaining perfectly balanced tree requires $ \bigO(n) $, therefore we 
 A tree is balanced if every node is balanced.
 
 \subsubsection{Time and space complexity}
-Popište BB[alpha]-stromy s líným vyvažováním. Analyzujte jejich amortizovanou složitost.
 
 \paragraph{Find} Height of a balanced tree with n nodes is $ \bigO(\log(n)) $.
-Take an arbitrary path from the root to a leaf. Root has size n, each subsequent node has at most 2/3 of parent's size. Leaf has size 1. Therefore the path contain at most $ \log_{2/3} (1/n) = \log_{3/2}(n) = \bigO(\log(n)) $ edges. So lookup is also $ \bigO(\log(n)) $ .
+Take an arbitrary path from the root to a leaf. Root has size n, each subsequent node has at most 2/3 of parent's size. Leaf has size 1.
+Therefore the path contain at most $ \log_{2/3} (1/n) = \log_{3/2}(n) = \bigO(\log(n)) $ edges. So lookup is also $ \bigO(\log(n)) $ .
 
-\paragraph{Insert} Along the path we check that nodes are in balance. If they are, we are done. Otherwise take highest out-of-balance node w and rebuild T(w) to make it perfectly balanced, which takes $ \bigO(s(w)) $.
+\paragraph{Insert} During normal insert, take highest out-of-balance node w and rebuild T(w) to make it perfectly balanced, which takes $ \bigO(s(w)) $.
 
 \paragraph{Theorem} Amortized time complexity of Insert is $ \bigO(\log(n)) $.
-We define potential (how far is current tree from perfectly balanced):
+Potential (how far is current tree from perfectly balanced):
 \[ \Phi =  \sum_{v \in V} \varphi(v)\]
 \[ \varphi :=
 	\begin{cases}
@@ -69,16 +85,18 @@ We define potential (how far is current tree from perfectly balanced):
 
 After Insert, the contribution of new vertices will increase by 2 max, because of definition it can jump from 0 to 2.
 
-No rebuild - we spent $ \bigO(\log(n)) $ on operation itself and potential is increased by $ 2*\log(n) $ max, therefor total amotrized cost is $ \bigO(\log(n)) $.
+No rebuild - we spent $ \bigO(\log(n)) $ on operation itself and potential is increased by $ 2*\log(n) $ max, therefore total amortized cost is $ \bigO(\log(n)) $.
 
 Otherwise we should rebuild at node w. WLOG the invariant is broken for w and its left child c. So
-\[ s(l(w)) < 2/3 * s(w) \]
+\[ s(l(w)) > 2/3 * s(w) \]
 and the other subtree has
 \[ s(r(w)) < 1/3 * s(w) \]
 the contribution of w is
 \[ \varphi(w) > 1/3 * s(w) \]
 
-After the reubild, $ \varphi(w) = 0 $ as well as all nodes in subtree. All other potentials are the same. The whole potential is decreased by at least $ 1/3 * s(w) $. The real cost of rebuild is $ \bigO(s(w)) $. After multiplying the potential after a suitable constant the real cost would be offset by the change in potential, yielding zero zmortized cost of the rebuild. TODO ???
+After the reubild, $ \varphi(w) = 0 $ also for all nodes in subtree. All other potentials are the same.
+The whole potential is decreased by at least $ 1/3 * s(w) $.
+The real cost of rebuild is $ \bigO(s(w)) $. After multiplying the potential by a suitable constant the real cost would be offset by the change in potential, yielding zero amortized cost of the rebuild. TODO ???
 
 \paragraph{Delete} TODO
 
@@ -104,7 +122,9 @@ $ log(\frac{a + b}{2}) \geq \frac{log(a) + log(b)}{2} $. Inequality is true for 
 \paragraph{Corollary:} $ log(a) + log(b) \leq 2log(a + b) - 2 $.
 
 \subsubsection*{Zig-zag}
-The real cost of the operation is 2. Let the tree be y -left w -right x. Then potential increases by:
+\includegraphics[scale=0.3]{zig_zag.eps}
+
+The real cost of the operation is 2. The potential increases by:
 \[ \delta = (r'(w) - r(w)) + (r'(x) - r(x)) + (r'(y) - r(y)) \]
 
 The amortized cost is:
@@ -126,10 +146,13 @@ Total
 \[ A \leq 3(r'(x) - r(x)) \]
 
 \subsubsection*{Zig-zig}
+\includegraphics[scale=0.3]{zig_zig.eps}
+
 Similar to Zig-Zag.
 \[ A = 2 + \delta \]
 The subtrees T(x) and T'(z) are disjoint, so using the Corrolary:
-\[ r(x) + r'(z) = log(s(x)) + log(s'(z)) \leq 2log(s(x) + s'(z)) - 2 \leq 2log(s'(x)) = 2r'(x) - 2 \]
+\[ r(x) + r'(z) = log(s(x)) + log(s'(z)) \leq 2log(s(x) + s'(z)) - 2 \]
+\[ 2log(s(x) + s'(z)) - 2 \leq 2log(s'(x)) = 2r'(x) - 2 \]
 Or
 \[ r'(z) \leq 2r'(x) - r(x) - 2 \]
 So
@@ -142,6 +165,7 @@ Total
 \[ A \leq 3(r'(x) - r(x)) \]
 
 \subsubsection*{Zig}
+\includegraphics[scale=0.4]{zig.eps}
 
 \[ A = 2 + (r'(x) - r(x)) + (r'(y) - r(y)) \]
 By inclusion of subtrees, we have $ r'(y) \leq r'(x) $ and $ r(y) \geq r(x) $, hence:
@@ -151,14 +175,12 @@ as $ r'(x) - r(x) > 0 $
 
 \subsubsection{Time and space complexity}
 
-Navrhněte operace Find, Insert a Delete na Splay stromu. Analyzujte jejich amortizovanou složitost.
-
 \paragraph{Find}
 1. Find (x) as in binary tree \\
 2. Splay (x) or the last accessed node
 
-Either successfull of successfull FIND stops at some node at depth d. Then we splay this node.
-Going from Root costs $ \Theta(d) $ and does not change the potential. Splay will cost $ \Theta(d) $ and amortizes to $\bigO(\log(n))$. Adding going from root to Splay cost which results in multiplying by the constant both amortizing cost and potential. In total whole FIND is $\bigO(\log(n))$.
+Either successfull or unsuccessfull FIND stops at some node at depth d. Then we splay this node.
+Going from Root costs $ \Theta(d) $ and does not change the potential. Splay will cost $ \Theta(d) $ and amortizes to $\bigO(\log(n))$. Adding going from root to level d cost results in multiplying by the constant both amortizing cost and potential. In total whole FIND is $\bigO(\log(n))$.
 
 \paragraph{Insert}
 
@@ -170,9 +192,9 @@ Adding leaf is constant, so besides the potential change time complexity is the 
 
 \paragraph{Lemma} Adding leaf increases potential by $\bigO(\log(n))$.
 Let $ r(v_1), ... , r(v_{t+1}) $ are potentials on the path from root to new leaf (t + 1). The potential change is
-\[ \Delta \Phi = r'(v_{t+1} + \sum_{i = 1}^t (r'(v_i) - r(v_i)) \]
+\[ \Delta \Phi = r'(v_{t+1}) + \sum_{i = 1}^t (r'(v_i) - r(v_i)) \]
 as newly added node is leaf:
-\[ r'(v_{t+1} = 0 \]
+\[ r'(v_{t+1}) = 0 \]
 Other potentials increase by 1, also
 \[ r'(v_i) \leq r(v_{i - 1}) \]
 as the sum is telescopic
@@ -193,7 +215,7 @@ Removing a node has constant real cost. The change in the potential is in favor 
 We can conclude that Delete runs in $\bigOlog$ amortized time.
 
 \subsection{A-B tree}
-\includegraphics[scale=0.5]{a_b_tree}
+\includegraphics[scale=0.5]{a_b_tree.eps}
 
 Definition: An (a,b)-tree for parameters $a \geq 2$ and $b \geq 2a - 1$ is a multi-way search tree, which satisfies:
 
@@ -202,25 +224,48 @@ Definition: An (a,b)-tree for parameters $a \geq 2$ and $b \geq 2a - 1$ is a mul
 
 \paragraph{Lemma:} The height of an (a, b)-tree with n keys $  \log_b(n + 1) \leq h \leq 1 + \log_a ((n + 1)/2)$.
 
-The min number of keys in tree with height h. On Level 0 only root with 1 key. Level h contains only external nodes. The i-th level in between has $2a^{i-1}$ nodes with a-1 keys each. So
-\[ 1 + \sum_{i=1}^{h-1} 2a^{i-1} = 1 + 2(a-1) \sum_{i=1}^{h-2} a^i = 1 + 2(a-1) \frac{a^{h-1} - 1}{a-1} = 2a^{h-1} - 1 \]
+The min number of keys in tree with height h. On Level 0 only root with 1 key. Level h contains only external nodes. The i-th level in between has $2a^{i-1}$ nodes with $(a-1)$ keys each. So
+\[ 1 + \sum_{i=1}^{h-1} 2a^{i-1} * (a - 1) = 1 + 2(a-1) \sum_{i=1}^{h-2} a^i = 1 + 2(a-1) \frac{a^{h-1} - 1}{a-1} = 2a^{h-1} - 1 \]
 So
 \[ n \geq 2a^{h-1} - 1 \implies h \leq 1 + \log_a ((n + 1)/2) \]
 
-The max keys in tree of height h. All levels will have $b^i$ nodes at level i, each with (b-1) keys. In total:
+The max keys in tree of height h. All levels will have $b^i$ nodes at level i, each with $(b - 1)$ keys. In total:
 \[ \sum_{i=0}^{h-1} b^i(b-1) = (b-1) \sum_{i=0}^{h-1} b^i = (b-1) * \frac{b^h - 1}{b-1} = b^h - 1 \]
 So
 \[ n \leq b^h - 1 \implies h \geq \log_b(n + 1) \]
-\parahraph{Corollary:} The height is $\Omega(\log_b n)$ and $\bigO(\log_a n)$.
+
+\paragraph{Corollary:} The height is $ \Omega(\log_b n) $ and $ \bigO(\log_a n) $.
 
 
 \subsubsection{Time and space complexity}
 
-    Definujte (a,b)-strom. Popište, jak na něm probíhají operace Find, Insert a Delete. Rozeberte jejich slozitost v nejhorším případě.
-
 \paragraph{Find} $\bigO(\frac{log(b)}{log(a)}*log(n))$
+In every node use Binary search to either find the value or go to the subtree. If key wasnt found, we have finished in leaf.
+Find visits $\bigO(\log_a n) = \bigO(log(n)/log(a))$ nodes, in each node we perform Binary search $\bigO(\log b)$.
+In total
+\[\bigO(\frac{log(b)}{log(a)}*log(n))\]
+
+
 \paragraph{Insert}  $\bigO(\frac{b}{log(a)}*log(n))$
+1. Find place for x \\
+2. Add x to parent of place found in 1 \\
+3. while parent != root parent has b + 1 \\
+	a. take median and move it to grandparent \\
+	b. split parent into 2 \\
+4. if parent is root take median, split current root into 2 and create new root with median.
+
+In the worst case, we visit $\Theta(1)$ nodes on each level and we spend $\Theta(b)$ time on each node. Total $\Theta(b * log(n)/log(a))$.
+
+It remains to show that nodes created by splitting are not undersized, meaning they have at least a children.
+We split a node v when it reached b + 1 children, so it had b keys.
+We send one key to the parent, so the new nodes $v_1$ and $v_2$ will take $\lfloor (b - 1)/2 \rfloor$ and $\lfloor (b - 1)/2 \rfloor$ keys.
+If any of them were undersized, we would have $(b - 1)/2 < a - 1$ and thus $b < 2a - 1$.
+
+
 \paragraph{Delete} $\bigO(\frac{b}{log(a)}*log(n))$
+
+
+In the worst case, Delete visits $\Theta(1)$ nodes on each level and it spends $\Theta(b)$ time per node. Its time complexity is therefore $\Theta(b * log(n)/log(a))$.
 
 \subsubsection{Amortized Time complexity for (a, 2a-1) and (a, 2a) }
 From the Time complexity of operations we want smallest b. Ideally b = 2a, b = 2a - 1 is worse.
@@ -244,7 +289,7 @@ Define potential, so that Insert, Delete and Rotation will be $\bigO(1)$ but ope
 with
 \[ f:\{ a-2, ..., 2a \} < 0 \]
 
-The function fshould satisfy the following requirements:
+The function f should satisfy the following requirements:
 1. $|f (i) - f (i + 1)| \leq c$ for some constant c. \\
 
 This means that if the number of keys in the node changes by 1, the node’s contribution changes at most by a constant.
@@ -256,13 +301,13 @@ This guarantees free splits. TODO desc
 This guarantees free merges. TODO desc
 
 Such function is c = 2 and
-\[ f(a-2) = 2 \land f(a-1) = 1) \]
+\[ f(a-2) = 2 \land f(a-1) = 1 \]
 and
 \[ f:{a, ..., 2a-2} = 0 \]
 Finally
-\[ f(2a-1) = 2 \land f(2a) = 4) \]
+\[ f(2a-1) = 2 \land f(2a) = 4 \]
 
-Insert and Delete are amortized constant. After m operations we woudld get
+Insert and Delete are amortized constant. After m operations we would get
 \[ \bigO(m) + \Phi_m - \Phi_0 = \bigO(m) \]
 as $ \Phi_m \geq 0 \land \Phi_0 = 0 $ since tree was empty.
 
@@ -275,7 +320,8 @@ Every step therefore takes time $ \Theta(log K)$, so merging T items takes $\The
 
 If cache is large enough, then every input array has its own scan and the heap fits the cache. Then total I/O complexity is $ \bigO(T/B + K)$. The extra K is required for situation when each run is located in different block (small runs). Which will never happen in Merge Sort (WHY???). Therefore total I/O complexity is $ \bigO(T/B + 1)$.
 
-Each scan requires its own cache block, K + 1 blocks in total. Another  $K - 1$ for heap, so $M \geq 2BK$ is sufficient. If we know M and B $M = 2BK$. Then I/O complexity is $\bigO((N/B * log N)/log(M/B)+1)$.
+Each scan requires its own cache block, K + 1 blocks in total. Another  $K - 1$ for heap, so $M \geq 2BK$ is sufficient.
+If we know M and B: $K = M/2B$. Then I/O complexity is $\bigO((N/B * log N)/log(M/B)+1)$.
 
 \subsection{Matrix transpose}
 Divide and Conquer algorithm. Try to aproximate tiles by recursive subdivisions. Let $N = 2^k$, then we can split matrix into 4 parts $A_{11}, A_{12}, A_{21}, A_{22}$. Quandrants $ A_{12}, A_{21} $ are divided into 4 TS (transpoze and swap) subproblems, diagonal are divided into 2 T (transpoze) and 2 TS subproblems (same as whole matrix).
@@ -293,6 +339,44 @@ For N different from powers of 2, some of the subproblems would be rectangular. 
 
     Vyslovte a dokažte Sleatorovu-Tarjanovu větu o kompetitivnosti LRU.
 
+\paragraph{Def:} strategy is k-kompetitive if for every cache size C and every constant $T_{str} \leq k * T_{opt}$.
+
+\paragraph{Theorem:} For every cache size C, exists sequence s.t. $T_{LRU} \geq (1 - \varepsilon) * C * T_{opt}$.
+
+Proof: The sequence will consist of K copies of 1, . . . , C + 1. The exact value of K will be chosen later.
+The number of cache misses on the first C blocks depends on the initial state of the cache. When they are processed, LRU’s cache will contain exactly blocks 1, . . . , C.
+The next request for C + 1 will therefore miss and the least-recently used block 1 will be replaced by C + 1.
+The next access will request block 1, which will be again a cache miss, so 2 will be replaced by 1. All subsequent requests will miss.
+
+Now lets find better strategy than LRU for such sequence. Split sequence into Epoch of size C. And the strategy will be: remove cache line that is not in current Epoch.
+For the first Epoch we will have initial cache miss. The first item in the second Epoch is C + 1, cache should remove some item. As C is not in 2nd Epoch, replace C by C + 1.
+During the 2nd Epoch, no cache misses occur.
+
+\[ T_{LRU} \geq C * T_{EPOCH} \]
+Which is true, except for the cache misses in the first Epoch. For larger K, initial difference will be hidden in $(1 - \varepsilon)$. Therefore
+\[ T_{LRU} \geq (1 - \varepsilon) * C * T_{OPT} \]
+
+What if LRU would have larger cache?
+
+\paragraph{Theorem:} For $ C_{LRU} > C_{OPT} \geq 1$ and some sequence:
+
+\[T_{LRU} \leq \frac{C_{LRU}}{C_{LRU} - C_{OPT}} * T_{opt} + C_{OPT}\]
+
+Proof: We split the request sequence to epochs $E_0 , . . . , E_t$ such that the cost of LRU in each epoch is exactly $C_{LRU}$, except for $E_0$, where it is at most $C_{LRU}$.
+
+$E_0$ is exceptional, for others we consider 2 cases: \\
+a) All blocks on which LRU missed are distinct, therefore sequence for this epoch has at least $C_{LRU}$ different blocks. As optimal strategy knows everything, it has at most $C_{OPT}$ preloaded. Still it would miss $C_{LRU} - C_{OPT}$ times. \\
+b) LRU misses on the same block B twice. After the first miss on B, it was first in the LRU list. Before the 2nd miss, it was replaced, so it was moved to the end of LRU at some time. Which implies that at least $C_{LRU}$ other blocks was accessed. OPT misses are same as in a)
+
+Averaging for all Epochs but first gives ration at most $\frac{C_{LRU}}{C_{LRU} - C_{OPT}}$.
+
+Lets assume, both caches entered $E_0$ with empty cache. All the LRU misses are on distinct blocks, OPT could preload at least $C_{OPT}$ of them. Therefore
+\[ T_{OPT} \geq T_{LRU} - C_{OPT} \]
+
+In total:
+\[T_{LRU} \leq \frac{C_{LRU}}{C_{LRU} - C_{OPT}} * T_{opt} + C_{OPT}\]
+
+\begin{comment}
 \section{Hash DS}
 
 \subsection{Bloome filters}
@@ -312,7 +396,8 @@ At insert of delete we would increase/decrease counter. Then FIND will return tr
 If there is too many frozen counters - rehash with new functions.
 
 \paragraph{Analysis}
+\end{comment}
 
-\section{Suffix arrays}
+%\section{Suffix arrays}
 
 \end {document}
