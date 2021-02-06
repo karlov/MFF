@@ -1,0 +1,205 @@
+\section{\texorpdfstring{Odhady pomoci spektra}{Odhady pomoci spektra}}
+\vspace{5mm}
+\large
+
+\begin{theorem}[Nezav mnoz v d-regularnim]
+	Necht G je d-regularni graf o n vrcholech s vl cisly $\lambda_1 \geq \lambda_2 \geq ... \geq \lambda_n \}$. Pak
+	\[ \alpha(G) \leq n \frac{-\lambda_n}{d - \lambda_n} \]
+\end{theorem}
+\begin{proof}
+	Necht A je matice sousednosti grafu G.
+
+	\[ Sp(A) = \{\lambda_1 = d \geq \lambda_2 \geq ... \geq \lambda_n \} \]
+	\[ Sp(J) = \{n, 0^{n-1} \} \]
+
+	Matice A, J komutuji $\Rightarrow$ maji spolecnou ortonormalni baze.
+	\[ \exists X: X^{\ast}X = E, X^{\ast}AX = \Lambda_A \]
+	Kde $\Lambda_A$ je diagonalni matice s vl. cisly na diagonale, rozmíštěné dle uspořadaní. Podobně pro J:
+	\[ X^{\ast}AX = \Lambda_J, (\Lambda_J)_{1,1} = n \]
+
+	Z věty o ortonormalní bazi vl. vektor přislušný největšímu vl. číslu je nezaporný. Ostatní maji zaporné složky.
+	Pak vektor $\bar{1}$ je prislusny nejvetsimu vlastnimu cislu A - $d$.
+	Taky odpovida vl cislu n matice J.
+
+ 	Uvazme matici:
+	\[ C = A - 1/n(d - \lambda_n)J \]
+	Jeji vl. čísla jsou lin. kombinace vl. čísel A, J.
+	\[ X^{\ast}CX = X^{\ast}(A - 1/n(d - \lambda_n)J)X = X^{\ast}AX - 1/n(d - \lambda_n)X^{\ast}JX = \Lambda_A - \Lambda_K = \Lambda_C \]
+	Kde $(\Lambda_K)_{1,1} = d - \lambda_n$, jinak 0. Z toho $\Lambda_C$ ma na diagonale $\{ \lambda_n, \lambda_2,..., \lambda_n \}$.
+	Odtud $\lambda_n$ je největší vl. číslo matice C.
+
+	Necht $W \subseteq V(G)$ je nezav. mnoz G, $|W| = \alpha(G)$. Pak matice A, po seskupeni radku odpovidajicich W, ma nulovou hlavni podmatice odpovidajici W.
+	Z toho matice C ma na techto pozicich $1/n(d - \lambda_n)$. Taky je to hlavni podmatice.
+
+	\includegraphics[scale=0.5]{sp_1.eps}
+
+	Vl. cisla matice $-1/n(d - \lambda_n)J$ propletaji vl. cisla matice C.
+	\[ Sp(-1/n(d - \lambda_n)J = \{0^{\alpha - 1}, \alpha * -1/n(d - \lambda_n) \} \]
+	Z vety o propletani:
+	\[ \alpha(G) * -1/n(d - \lambda_n) \geq \lambda_n \Rightarrow \alpha(G) \leq n \frac{-\lambda_n}{d - \lambda_n} \]
+\end{proof}
+
+\begin{consequence}
+	Necht G je d-regularni graf o n vrcholech s vl cisly $\lambda_1 \geq \lambda_2 \geq ... \geq \lambda_n \}$. Pak
+	\[ \chi(G) \geq 1 + \frac{\lambda_1}{|\lambda_n|} \]
+
+	Plyne z toho, ze $ \chi(G) \geq \frac{n}{\alpha(G)}$. Barveni grafu je rozlozeni ne $\chi(G)$ nezavislych mnozin. Kazda z nich ma velikost $\chi(G)/\alpha(G)$. Kombinaci dvou nerovnosti dostaneme tvrzeni.
+\end{consequence}
+
+\begin{theorem}[Propletani B]\label{sp_cross_b}
+	Necht:
+	\[
+	\begin{pmatrix}
+		A_{11} & A_{12} & ... & A_{1m}\\
+		A_{21} & A_{22} & ... & A_{2m}\\
+		... & ... & ... & ... \\
+		A_{m1} & A_{m2} & ... & A_{mm}\\
+	\end{pmatrix}.
+\]
+
+	Je Hermitovska matice v blokovem tvaru. $A_{ij} \in \Comp^{m_i \times n_j}$.
+	$\sum_{i=1}^m n_i = n$.
+
+	Pak necht $B \in \Comp^{m \times m}$ je matice jejiz prvky $b_{ij} = \frac{\sum_{a \in A_{ij}} a}{n_i} $ jsou prumerne radkove soucty bloky A.
+	Potom vl cisla B propletaji vl cisla A.
+\end{theorem}
+\begin{proof}
+	Vezmeme matici $P \in \{0, 1\}^{m \times n}$. Bude rozdelena do bloku velikosti $n_i, i = 1,2,...,n_m$.
+	V kazdem radku 1ky jsou v bloku i, jinak nuly.
+
+	\includegraphics[scale=0.6]{sp_2.eps}
+
+	Potom $PP^T$ je diagonalni matice D protoze jednicky jsou na ruznych pozicich. Sk. soucin dvou ruznych radku je 0.
+	Na diagonale je norma i-ho radku $= n_i$.
+
+	Pouzijeme matici P abychom dostali radkove soucty matici A:\\
+	V matici PA dostaneme sloupcovy soucet po blocich. Pak v matici $PAP^T$ dostaneme soucty vsech prvku v blocich.
+
+	Pro rovnost s matici B jeste potrebujeme vydelit $n_i$. Na coz pouzijeme $D^{-1}$ ktera ma na diagonale $\frac{1}{n_i}$.
+	\[ B = D^{-1}PAP^T \]
+
+	Necht $S = D^{-1/2}P$. S je realna matice, pro niz plati
+	\[ SS^T = D^{-1/2}PP^T(D^{-1/2})^T = D^{-1/2}DD^{-1/2} = E \]
+
+	Dle Vety o propletani A \cref{sp_cross_a}, vl. cisla $SAS^T$ propletaji vl cisla A.
+	\[ SAS^T = D^{-1/2}PAP^T(D^{-1/2})^T = D^{-1/2}DBD^{-1/2} = D^{1/2}BD^{-1/2} \]
+	Pak $SAS^T$ a $B$ jsou podobne $\Rightarrow$ maji stejny spektrum.
+	\[ Sp(SAS^T) = Sp(B) \]
+\end{proof}
+
+\begin{theorem}[Polomer spektra grafu]\label{sp_polomer}
+	Necht G je graf o n vrcholech s vl cisly $\lambda_1 \geq \lambda_2 \geq ... \geq \lambda_n \}$. Pak
+	\[ \Delta(G) \geq \lambda_1 \geq deg_{avg}(G) \]
+
+	Kde $\Delta(G)$ je max $deg$ grafu.
+\end{theorem}
+\begin{proof}
+	1) Nerovnost $\Delta(G) \geq \lambda_1$. Doplnime G na $\Delta$-regularni graf H tak, aby G byl jeho indukovany podgraf. Pak vl. cisla G propletaji vl cisla H. $\lambda_{max}(H) = \Delta \Rightarrow \Delta(G) \geq \lambda_1$.
+
+	2) Nerovnost $\lambda_1 \geq deg_{avg}(G)$.
+	Vezmeme matice sousednosti A, predstavime ji jako matici s 1 blokem. Pak matice prumernych radkovych souctu je $B = deg_{avg}(G)$ jednoprvkova.
+
+	Dle Vety o propletani B \cref{sp_cross_b}, $Sp(B) = \{ deg_{avg}(G)\}$ propleta spektrum A $\Rightarrow \lambda_1 \geq deg_{avg}(G)$.
+\end{proof}
+
+\begin{theorem}[Barevnost libovolneho grafu]
+	Necht G je graf o n vrcholech s vl cisly $\lambda_1 \geq \lambda_2 \geq ... \geq \lambda_n \}$. Pak
+	\[ \chi(G) \leq 1 + \lambda_1 \]
+\end{theorem}
+\begin{proof}
+	Necht H je $\chi$-kriticky indukovany podgraf grafu G. Minimalni stupen vrcholu v $\chi$-kritickem grafu je aspon $\chi - 1$.
+	Oznacme jeho největší vl cislo jako $h_1$. Z vety o propletani plyne $\lambda_1 \geq h_1$.
+	Z vety polomeru spektra \cref{sp_polomer} dostavame
+	\[ h_1 \geq deg_{avg}(H) \geq \delta(H) \geq \chi - 1 \Rightarrow \lambda_1 \geq \chi - 1 \]
+\end{proof}
+
+\begin{theorem}[Nezav mnoz v libovolnem grafu]
+	Necht G je graf o n vrcholech s vl cisly $\lambda_1 \geq \lambda_2 \geq ... \geq \lambda_n \}$. Pak
+	\[ \alpha(G) \leq n \frac{-\lambda_1\lambda_n}{\sigma^2(G) - \lambda_1\lambda_n} \]
+\end{theorem}
+\begin{proof}
+	Necht $W \subseteq V(G)$ je nezav. mnoz G, $|W| = \alpha(G)$. Rozdelime matice A dle W a $V\setminus W$.
+
+	\includegraphics[scale=0.5]{sp_3.eps}
+
+	Pouzijeme Vetu o propletani B \cref{sp_cross_b}.
+	\[ B =
+	\begin{pmatrix}
+		0 & b_{12}\\
+		b_{21} & b_{22}\\
+	\end{pmatrix}
+	\]
+
+	Pak $Sp(B) = \{ h_1 \geq h_2 \}$ propleta $Sp(A) = Sp(G)$.
+
+	Dal vime, ze pocet hran mezi W a $v\setminus W$ se rovna
+	\[ \alpha b_{12} = (n - \alpha) b_{21} \Rightarrow b_{21} = \frac{\alpha}{n - \alpha} b_{12}\]
+
+	Z LA soucet vl cisel je determinant:
+	\[ h_1h_2 = det(B) = -b_{12} \cdot b_{21} = b_{12}^2 \cdot \frac{\alpha}{n - \alpha}\]
+
+	Z propletani:
+	\[ \lambda_1 \geq h_1 \geq h_2 \geq \lambda_n \Rightarrow -h_2 \leq -\lambda_n \Rightarrow -h_1h_2 \leq -\lambda_1 \lambda_n \]
+
+	Protoze vsichni sousede vrcholu z W jsou z $V(G) \setminus W \Rightarrow b_{12} \geq \delta(G)i$.
+	\begin{gather*}
+	-\delta^2(G) \frac{\alpha}{n - \alpha} \leq -\lambda_1 \lambda_n\\
+	-\delta^2(G) \alpha \leq (n - \alpha) * (-\lambda_1 \lambda_n)\\
+	\alpha(\delta^2(G) - \lambda_1 \lambda_n) \leq n(-\lambda_1 \lambda_n)\\
+	\alpha(G) \leq n \frac{-\lambda_1\lambda_n}{\sigma^2(G) - \lambda_1\lambda_n}
+	\end{gather*}
+\end{proof}
+
+\begin{theorem}[Propletani A]\label{sp_cross_a}
+	Necht $A \in \Comp^{n \times n}$ Hermitovska. $S \in \Comp^{m \times n}$ takova, ze $S^{\ast}S = I$.
+	Potom vl cisla $S^{\ast}AS$ propletaji vl cisla matice A.
+\end{theorem}
+\begin{proof}
+	Radky matice S jako vektory v $\Comp^n$ lze rozsirit na ortonormalní baze $\Comp^n$ (Gram-Schmidt z LA). Sestavime z ni matici T, necht
+	\[ R = \binom{S}{T} \]
+	Pak $RR^{\ast} = I$ a
+\[
+	RAR^{\ast} =
+	\begin{pmatrix}
+		SAS^{\ast} & SAT^{\ast} \\
+		TAS^{\ast} & TAT^{\ast} \\
+	\end{pmatrix}
+\]
+	Pak $SAS^{\ast}$ je hlavni podmatice $RAR^{\ast}$, a vl cisla $SAS^{\ast}$ propletaji vl cisla $RAR^{\ast}$.
+	Pritom $Sp(RAR^{\ast}) = Sp(A)$ z LA, protoze matice jsou podobne.
+\end{proof}
+
+\begin{theorem}[Barevnost souvisleho grafu]
+	Necht G je souvisly graf o n vrcholech s vl cisly $\lambda_1 \geq \lambda_2 \geq ... \geq \lambda_n \}$. Pak
+	\[ \chi(G) \geq 1 + \frac{\lambda_1}{|\lambda_n|} \]
+	Veta je analogicka dusledku vety 1, zesiluje ji pro souvisle grafy.
+\end{theorem}
+\begin{proof}
+	Obarvime graf pomoci $\chi$ barev. Necht x je realny vl. vektor prislusny vl. cislu $\lambda_1$ (Existuje dle Frobeniove vety).
+	Ze souvislosti $x_i > 0 \forall i$.
+
+	Sestavime matici $P \in \Real^{\chi \times n}$.
+	\[ P_{ij} = \twopartdef{ x_j} {j \in W}{0}{j \notin W} \]
+	Pak $PP^T = D$ je diagonalni matice, na diagonale $\sum_{u \in W_j}x_u^2 > 0$.
+	Necht $S = D^{-1/2}P$.
+	Protoze
+	\[SS^T = D^{-1/2}PP^T(D^{-1/2})^T = D^{-1/2}DD^{-1/2} = I\]
+	Dle Vety o propletani A \cref{sp_cross_a}, vl. cisla $SAS^T$ propletaji vl cisla A.
+	Necht vl cisla $SAS^T$ jsou $\{h_1, h_2,..., h_{\chi} \}$. Ma na diagonale same nuly, z toho %todo rozbit dle bloku
+	\[ \sum_0^{\chi} h_i = 0 \]
+
+	Dal
+	\[ SAS^{T}D^{1/2} \cdot \bar{1} = SAP^TD^{-1/2}D^{1/2} \cdot \bar{1} = SAP^T \bar{1} \]
+
+	\[ P^T \cdot \bar{1} = x \Rightarrow SAP^T \bar{1} = SAx = \lambda_1 Sx = \lambda_1 D^{-1/2}PP^T \bar{1} = \lambda_1 D^{-1/2}D \bar{1} = \lambda_1 D^{1/2} \bar{1} \]
+	Dostavame
+	\[ SAS^TD^{1/2} \cdot \bar{1} = \lambda_1 D^{1/2} \bar{1} \Rightarrow \lambda_1 \in Sp(SAS^T) \]
+	Ale taky odpovida nenulovemu realnemu vl. vektoru, takze $\lambda_1 = h_1$.
+	Pouzijeme propletani
+	\[ h_1 = \lambda_1 \geq h_2 \geq ... \geq h_{\chi} \geq \lambda_n \land \sum h_i = 0 \Rightarrow -\lambda_1 = h_1 = -\sum_2^{\chi} h_i \]
+	Pouzijeme horni odhad pro soucet pres \# scitancu krat min hodnota ($\lambda_n$).
+	\[ -\lambda_1 = h_1 = -\sum_2^{\chi} h_i \geq (\chi - 1)(-\lambda_n) \]
+
+	Po uprave
+	\[ \chi(G) \geq 1 + \frac{\lambda_1}{|\lambda_n|} \]
+\end{proof}

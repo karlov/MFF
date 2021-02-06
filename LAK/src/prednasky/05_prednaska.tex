@@ -1,0 +1,47 @@
+\section{\texorpdfstring{Spekrum grafu, Moorovy grafy}{Spekrum grafu, Moorovy grafy}}
+\vspace{5mm}
+\large
+%todo LA uvod
+
+\begin{definition}
+Necht G je r-regularni graf obvodu vetsiho nez 4 (nema ani $\triangle$ ani kruznice delky 4). Pak $|V(G)| \geq r^2 + 1$.
+\end{definition}
+\begin{definition}
+Moorovy grafy splnuji definice nahore, ale navic $|V(G)| = r^2 + 1$.
+\end{definition}
+
+\begin{theorem}[Moorovy grafy]
+	Moorovy grafy existuji pro $r = 1,2,3,7$, pravdepodobne $r = 57$. Pro zadne jine r neexistuji.
+\end{theorem}
+\begin{proof}
+	1) r = 1, cesta delky 2\\
+	2) r = 2, kruznice delky 5\\
+	3) r = 3 Petersenuv graf
+	4) r = 7 Homan, Singleton graf
+
+	Ostatni r, necht G je Mooruv graf, na $n = r^2 + 1$ vrcholech. Vezmeme matice sousednosti.
+
+	$A^2$ ma pocet sledu delky 2 mezi vrcholu $a - b$. Na diagonale mame r, mimo diagonalu je 0 pokud mezi $a - b$ v puvodnim grafu vedla hrana. Naopak $A^2$ bude mit 1, pokud mezi $a - b$ nevedla hrana v G.
+
+	\[A^2 = rI + (J - I - A) \Rightarrow A^2 = (r - 1) I + J - A \Rightarrow A^2 + A - (r - 1)I = J \]
+	Vezmeme polynom $P(x) = x^2 + x - (r-1)$. Pokud by $\lambda \in Sp(A) \Rightarrow \lambda^2 + \lambda - (r - 1) \in Sp(A) = Sp(J)$.
+
+	J ma $(n-1$ nasobne vlasne cislo $\lambda = 0$. Posledni vl. cislo je n. Pak
+	\[ \lambda^2 + lambda - (r - 1) = 0 \lor n \]
+	r-regularni graf ma nejvetsi vl. cislo r. Dosadime r do rovnice. $ r^2 + r - (r - 1) = r^2 + 1 = n $.
+	Ostatni jsou nulove.
+	\[ \lambda_{1,2} = 1/2 * (-1 \pm \sqrt{1 + 4 (r-1)}) = 1/2 * (-1 \pm \sqrt{4r - 3}) \]
+
+	Pak $ Sp(A) = \{ r, \lambda_1^{m_1}, \lambda_2^{m_2} \} $. Ze spektra J vime $m_1 + m_2 = n-1 = r^2$. Taky
+	\[ \sum \lambda_i = tr(A) = 0 \Rightarrow r + m_1 \lambda_1 + m_2 \lambda_2 = 0 \]
+	Vyresime system 2 rovnic o 2 neznamych. Necht
+	\[s = \sqrt{4r - 3}, s^2 = 4r - 3, r = 1/4 * (s^2 + 3)\]
+
+	\[ r + -1/2 (m_1 + m_2) + s/2 (m_1 - m_2) = 0 \land m_1 + m_2 = r^2 \Rightarrow r - 1/2 r^2 + s/2 (m_1 - m_2) = 0 \]
+
+	1) Necht $s \notin Q \Rightarrow s/2 \notin Q \land r \in N \Rightarrow m_1 = m_2 \Rightarrow r^2 - 2r = 0 \Rightarrow r = 2$. Pro 2 mame takovy graf.\\
+	2) Jinak $ s \in N \Rightarrow 1/4 (s^2 + 3) - (1/4 (s^2 + 3))^2 * 1/2 + s/2 (m_1 - m_2) = 0$. Vynasobime 32.
+	\[ 8(s^2 + 3) - (s^2 + 3)^2 + 16s(m_1 - m_2) = 0 \]
+	Podivame se jako na polynom s: $24 - 9 - s^4 + (...) s = 0$.
+	\[ s^4 + s(...) - 15 = 0 \Rightarrow s | 15 \Rightarrow s = \{ 1, 3, 5, 15 \} \Rightarrow r = \{1, 3, 7, 58 \} \]
+\end{proof}
