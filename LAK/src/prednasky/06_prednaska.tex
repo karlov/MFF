@@ -117,7 +117,7 @@
 	Pak G obsahuje vrchol, ktery sousedi se vsemi ostatnimi vrcholy grafu.
 \end{theorem}
 \begin{proof}
-	Pokud plati $ e = f = 1 \Rightarrow \exists v \in V$ ktery sousedi se vsemi ostatnimi vrchly. \\
+	Pokud plati $ e = f = 1 \Rightarrow \exists v \in V$ ktery sousedi se vsemi ostatnimi vrcholy. \\
 	Necht $N_G(u)$ je mnozina sousedu $u \in V$. Vezmeme mnozinovy system $\{ N_G(u) | u \in V \}$.
 
 	Pak prunik dvou mnozin je jednoprvkovy.
@@ -152,7 +152,7 @@
 	\[ \exists a : N_G(a) = V(G)\setminus \{a\} \]
 
 \end{proof}
-\begin{theorem}[vl cisla Hermitovske matice]
+\begin{theorem}[vl cisla Hermitovske matice(BD)]
 	Necht $A \in \Comp^{n \times n}$ je Hermitovska, $\lambda_1 \geq \lambda_2 \geq ... \geq \lambda_n$ jeji vl. cisla.
 	Necht $b_1, b_2, ..., b_n \in \Comp^n$ je ortonormalni baze vl vektoru. Pak pro $k = 1, 2, ..., n$ plati
 	\[ x^{\ast}Ax \geq \lambda_k x^{\ast}x \forall x \in \langle \{ b_1, b_2, ..., b_k\} \rangle \]
@@ -173,7 +173,7 @@
 	\[ z^{\ast}(y)Az(y) = y^{\ast}By \]
 Uvazme 3 mnoziny, j je libovolne
 	\begin{gather*}
-		S_1 = \langle\{x_j, x_{i+1},..., x_n\} \rangle \\
+		S_1 = \langle\{x_j, x_{j+1},..., x_n\} \rangle \\
 		S_2 = \langle\{y_1, y_2,..., y_j\} \rangle \\
 		S_3 = \{z(y): y \in S_2 \} \\
 		dim S_1 = n - j + 1 \\
@@ -209,7 +209,7 @@ Uvazme 3 mnoziny, j je libovolne
 	\includegraphics[scale=0.5]{eigen_prop.eps}
 
 	Z obrazku
-	\[ \lambda_i \geq k_i \lambda_{i + k} i = 1,2,..., n-k  \]
+	\[ \lambda_i \geq k_i \geq \lambda_{i + k}, i = 1,2,..., n-k  \]
 
 \end{proof}
 
