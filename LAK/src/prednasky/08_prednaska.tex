@@ -12,15 +12,15 @@ Lepe - dohodneme se na pevne delce. Vezmeme $C \subseteq A^n$. Pak bezpecny kod 
 Dal sestavime $G_{A^n}$ graf zamenitelnosti pro $A^n$.
 
 \begin{observation}
-	2 slova jsou zamenitelna $\iff$ maji na i-te pozice stejne pismeno nebo zamenitelne. Presne odpovida uplneho soucinu grafu.
+	2 slova jsou zamenitelna $\iff$ maji na i-te pozice stejne pismeno nebo zamenitelne. Presne odpovida uplnemu soucinu grafu.
 \end{observation}
 
 \begin{definition}
 	Pro grafy G, H definujme uplny soucin grafu jako graf
-\[ G \square H = (V(G) \times V(H), \{(a, b)(x, y): (a = x \lor ax \in E(G)) \land (b = y \lor by \in E(H))\}) \]
+\[ G \boxtimes H = (V(G) \times V(H), \{(a, b)(x, y): (a = x \lor ax \in E(G)) \land (b = y \lor by \in E(H))\}) \]
 Kde vrcholy a,x jsou z grafu G, b,y z grafu H.
 
-	Taky definujme $G^n = G \square G \square ... \square G$.
+	Taky definujme $G^n = G \boxtimes G \boxtimes ... \boxtimes G$.
 \end{definition}
 \begin{definition}
 	Shannonova kapacita grafu G:
@@ -34,9 +34,9 @@ Kde vrcholy a,x jsou z grafu G, b,y z grafu H.
 	\[ \sqrt[k]{\alpha(G^k)} \geq \sqrt[k]{\alpha(B^k)} = \sqrt[k]{\alpha^k(G)} = \alpha(G) \]
 \end{observation}
 \begin{observation}
-	Necht $\sigma(G) = \chi(-G)$. Coz je minimalni pocet uplnych podgrafu pokryvajici mnoz grafu. Pak
+	Necht $\sigma(G) = \chi(-G)$. Coz je minimalni pocet uplnych podgrafu pokryvajicich mnoz grafu. Pak
 	\[ \Theta(G) \leq \sigma(G) \]
-	Protoze $K_n \square K_m = K_mn$. Soucin uplnych je uplny graf, jina moznost neni (jsou tam vsechny hrany).Takze
+	Protoze $K_n \boxtimes K_m = K_{mn}$. Soucin uplnych je uplny graf, jina moznost neni (jsou tam vsechny hrany).Takze
 	\[ \sigma(G^k) \leq \sigma^k(G) \Rightarrow \sqrt[k]{\sigma(G^k)} \leq \sigma(G) \Rightarrow \Theta(G) \leq \sigma(G) \]
 \end{observation}
 \begin{observation}
@@ -45,7 +45,7 @@ Kde vrcholy a,x jsou z grafu G, b,y z grafu H.
 \end{observation}
 
 \begin{definition}
-	Lovascova definice ortonormalni reprezentace grafu je zobrazeni $f:V \to \Real^d$ splnujici:
+	Lovascova ortonormalni reprezentace grafu je zobrazeni $f:V \to \Real^d$ splnujici:
 	\begin{itemize}
 		\item $|| f(u) || = \langle f(u), f(u) \rangle = 1 \forall u \in V$ a
 		\item $\langle f(a), f(b) \rangle = 0 \forall a \ne b \land ab \notin E(G)$.
@@ -65,7 +65,7 @@ Kde vrcholy a,x jsou z grafu G, b,y z grafu H.
 	Lovascova dzeta funkce grafu G:
 	\[ \vartheta(G) = \inf_f || f || \]
 
-	Chceme pro nejakou reprezentace najit takovy jedn vektor c, ktery minimalizuje hodnotu $\langle c, f(u( \rangle^2$.
+	Chceme pro nejakou reprezentace najit takovy jedn vektor c, ktery minimalizuje hodnotu $\langle c, f(u) \rangle^2$.
 \end{definition}
 
 \begin{example}
@@ -82,7 +82,7 @@ Kde vrcholy a,x jsou z grafu G, b,y z grafu H.
 	V definici staci uvazovat omezenou dimenzi, napr $d \leq |V(G)|$.
 
 	Infimum v dev dzeta funce se taky nabyva, protoze $||f||$ je spojita funkce f. Pak
-	\[ \vartheta(G) = \min_f \min_{c: ||c|| = 1} \max_{u \in V} \frac{1}{\langle c, f(a) \rangle^2} \} \]
+	\[ \vartheta(G) = \min_f \min_{c: ||c|| = 1} \max_{u \in V} \frac{1}{\langle c, f(a) \rangle^2} \]
 \end{definition}
 \begin{agreement}
 	Muze se stat, ze rukojet je vektor kolmy na nejaky z vektoru f. Pak $\vartheta(G) = \infty$.
@@ -103,32 +103,32 @@ Kde vrcholy a,x jsou z grafu G, b,y z grafu H.
 
 	Dal c je jedn. vektor:
 	\[ 1 = \langle c, c \rangle = \langle \sum_v \langle c,v \rangle, \sum_v \langle c,v \rangle \rangle = \sum_u \sum_v \langle c,u \rangle \langle c, v \rangle \langle u, v \rangle \]
-	vektory u, v jsou z ortonormalni baze, takze pro $u \ne v$ je soucet nula, jinak misto posledniho sk souciny tam bude 1. Pak dostaneme soucet vlevo, ktery je vesti nez suma pro vektory reprezentace nezav mnoziny.
+	vektory u, v jsou z ortonormalni baze, takze pro $u \ne v$ je soucet nula, jinak misto posledniho sk souciny tam bude 1. Pak dostaneme soucet vlevo, ktery je vetsi nez suma pro vektory reprezentace nezav mnoziny.
 	\[ \sum_{b \in B} \langle c, b \rangle^2 \geq \sum_{u \in W} \langle c, f(u) \rangle^2 \]
 	Nahledneme ze velikost sk. soucinu je omezena maximumem pro vsechny vrcholy, coz je prave $\vartheta(G)$.
 	\[ \forall a \in V(G): \frac{1}{\langle c, f(a) \rangle^2} \leq \vartheta(G) \Rightarrow \langle c, f(a) \rangle^2 \geq \frac{1}{\vartheta(G)} \]
 
-	\[ \sum_{u \in W} \langle c, f(u) \rangle^2 \geq \sum_{a in W} \frac{1}{\vartheta(G)} \]
+	\[ \sum_{u \in W} \langle c, f(u) \rangle^2 \geq \sum_{a \in W} \frac{1}{\vartheta(G)} \]
 	Scitame pres velikost nezavisle mnoziny, dostaneme $ \frac{\alpha(G)}{\vartheta(G)} $
 	Dohromady
 	\[ 1 = || c || \geq \frac{\alpha(G)}{\vartheta(G)} \Rightarrow \vartheta(G) \geq \alpha(G) \]
 \end{proof}
 
 \begin{lemma}
-	$\forall G, \forall H: \vartheta(G \square H) \leq \vartheta(G) \cdot \vartheta(H)$. Taky
+	$\forall G, \forall H: \vartheta(G \boxtimes H) \leq \vartheta(G) \cdot \vartheta(H)$. Taky
 	\[ \forall G \forall k \in \N: \vartheta(G^k) \leq \vartheta^k(G) \]
 \end{lemma}
 \begin{proof}
 	Necht f je optimalni ortonormalni repr. G s rukojeti c. Podobne g pro H s rukojeti d. Uvazme tenzorovy soucin $f \circ g$ jako ortonormalni reprezentace soucinu grafu.
 
-	\[ (u, v) \in V(G \square H), (f \circ g) (u, v) = (f(u) \circ g(v)) = (f(u)_i g(v)_j)_{i, j}, i = 1, 2, ..., n1; j = 1,2, ..., n2\]
+	\[ (u, v) \in V(G \boxtimes H), (f \circ g) (u, v) = (f(u) \circ g(v)) = (f(u)_i g(v)_j)_{i, j}, i = 1, 2, ..., n_1; j = 1,2, ..., n_2\]
 	Vezmeme $(u, v), (u', v'): (uu' \notin E(G) \land u \ne u') \lor (vv' \notin E(H) \land v \ne v') $. Pak
 
 	\[ \langle f(u) \circ g(v), f(u') \circ g(v') \rangle = \langle f(u), f(u') \rangle \cdot \langle g(v), g(v') \rangle \]
 	Pak bud jeden sk soucin je 0 nebo druhy z volby vrcholu. Takze
 	\[ \langle f(u), f(u') \rangle \cdot \langle g(v), g(v') \rangle = 0 \]
 
-	Pak rukojet pro $G \square H$ bude $c \circ d$. Pak
+	Pak rukojet pro $G \boxtimes H$ bude $c \circ d$. Pak
 	\[ || f \circ g || \leq \max_{u, v} \frac{1}{\langle c \circ d, f(u) \circ f(v) \rangle^2} = \max \frac{1}{\langle c, f(u) \rangle^2 \cdot \langle d, g(v) \rangle^2} \]
 	Max je dvou funci je mensi nez soucin max dvou funkci:
 	\[ \max \frac{1}{\langle c, f(u) \rangle^2 \cdot \langle d, g(v) \rangle^2} \leq \max_u \frac{1}{\langle c, f(u) \rangle^2} \max_v \frac{1}{\langle d, g(v) \rangle^2} = \vartheta(G) * \vartheta(H) \]
@@ -146,7 +146,7 @@ Kde vrcholy a,x jsou z grafu G, b,y z grafu H.
 	$ \Theta(C_5) = \sqrt{5}$.
 \end{theorem}
 \begin{proof}
-	Vime $ \alpha(C_5^2) = 5 \Rightarrow \vartheta(C_5) \geq \sqrt{5} $. Ukazeme $\ \vartheta(C_5) \leq \sqrt(5)$. Z toho
+	Vime $ \alpha(C_5^2) = 5 \Rightarrow \vartheta(C_5) \geq \sqrt{5} $. Ukazeme $\ \vartheta(C_5) \leq \sqrt{5}$. Z toho
 	\[ \sqrt{5} \leq \Theta(C_5) \leq \vartheta(C_5) \leq \sqrt{5} \]
 	Odkud plati i rovnost.
 

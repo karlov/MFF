@@ -42,7 +42,7 @@
 \end{note}
 
 \begin{definition}
-	Kod je t-perfekti, prave kdyz $|C| > 1$, C opravuje t chyb a nastava rovnost.
+	Kod je t-perfektni, prave kdyz $|C| > 1$, C opravuje t chyb a nastava rovnost.
 	\[ |C| = \frac{q^n}{\sum_0^t \binom{n}{i} (q - 1)^i} \]
 
 	Cely graf je pokryty okoli o polomeru t. Vyuzivaji beze zbytku cely graf (kodova slova).
@@ -83,13 +83,13 @@
 \end{theorem}
 	Necht $C \subseteq \Z_q^n$. Sestavime matici $H \in \Z_q^{k \times n}$ tak, aby sloupce byly po 2 lin. nezavisle.
 
-	V kazde slozce muzeme vzit $q^k$ symbolu. Nulovy vektor pouzivat nemuzeme. Dohromady $q^k - 1$ vektoru. Vezmeme nejaky vektor, linearne zavisle s nim jsou jeho nasobky skalarem krome 0 - $(q - 1$. Proto
+	V kazde slozce muzeme vzit $q^k$ symbolu. Nulovy vektor pouzivat nemuzeme. Dohromady $(q^k - 1)$ vektoru. Vezmeme nejaky vektor, linearne zavisle s nim jsou jeho nasobky skalarem krome 0 - $(q - 1)$. Proto
 	\[ n = \frac{q^k - 1}{q - 1} \]
 
 	Podivame se na $Ker(H) \subseteq \Z_q^n$. Vime
-	\[ dim(Ker(H)) = n - rank(H) = n - k \]
+	\[ \dim(Ker(H)) = n - rank(H) = n - k \]
 
-	Tvrdime, ze v jadru jsou vektory ktere maji vzdalenost aspon 3. Pokud by existovali vektory vzdalenosti 2. Jejich rozdil by taky $\in Ker(H)$.
+	Tvrdime, ze v jadru jsou vektory ktere maji vzdalenost aspon 3. Pokud by existovali vektory vzdalenosti 2. Jejich rozdil $\in Ker(H)$.
 	Dostali bychom vektor y ktery ma nejvyse 2 nenulove souradnice. Po vynasobeni $Hy$ dostali bychom lin. kombinace 2 vektoru ktere jsou dle volby lin. nezavisle.
 
 	\[ |C| = q^{n - k} = \frac{q^n}{q^k} = \frac{q^n}{1 + n(q-1)} \]
