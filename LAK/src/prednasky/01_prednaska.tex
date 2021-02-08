@@ -9,7 +9,6 @@ Matice sousednosti grafu G
 \begin{theorem}[Pocet sledu]
 Pro kazdy graf G a kazde prirozene cislo k obsahuje k-ta mocnina matice sousednosti A pocty sledu delky k mezi vrcholy grafu G, konkretne\\
 $(A^k)_{a,b} = $ \# sledu delky k mezi a - b v G.
-
 \end{theorem}
 \begin{proof}
 Indukci podle k.
@@ -70,7 +69,9 @@ Indukci podle k.
 	\[ = \sum_{\substack{w \subseteq E \\ |w| = n-1}} det(D^{(u)}_G)^2 \]
 
 	Kostra musi mit $(n-1)$ vrcholu; v det se divame na vsechny podmoziny hran $|w| = n - 1$.
-	Ptame se jestli je strom. Proto suma nehore je prave $ \sum_{\substack{w \\ (V,w) je \ kostra}} 1 = $ \# koster G.
+	Ptame se jestli je strom. Proto suma nehore je prave
+	\[ \sum_{\substack{w \\ (V,w) je \ kostra}} 1 \]
+	Coz je \# koster G
 
 
 \end{proof}

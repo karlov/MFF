@@ -3,7 +3,7 @@
 \large
 
 
-\begin{lemma}
+\begin{lemma}\label{mult}
 	$det(S_1 + b_1, S_2 + b_2 , ... , S_k + b_k) = det(S + B), S_i, b_i \in T^k$ kde $S_i,b_i$ jsou sloupce matic $S, B$, jde spocitat jako:
 	\[ det(S_1 + b_1, S_2 + b_2 , ... , S_k + b_k) = det(S_1, S_2 + b_2 , ... , S_K + b_K) + det(b_1, S_2 + b_2 , ... , S_K + b_K) \]
 	Pak linearita v 2. slozce atd.
@@ -23,13 +23,15 @@
 	\[ k = rank(A^TA) \leq rank A \leq n \Rightarrow k \leq n \]
 
 	Tvrdime, ze $det(A^TA \ne 0)$. Pak matice je regularni a $rank = k$.
-	BUNO $|A_i| = a_i, a_1 \leq a_2 \leq ... \leq a_k$. Mame matici, kde na diagonale jsou velikosti mnozin, jinak 1.
+
+	BUNO
+	\[|A_i| = a_i, a_1 \leq a_2 \leq ... \leq a_k\]
+	Mame matici, kde na diagonale jsou velikosti mnozin, jinak 1.
 
 	Nahledneme $a_2 \geq 2$. Jinak pokud $a_1 = a_2 \Rightarrow \exists x \in A_1 \cap A_2 \Rightarrow A_1 = A_2 = \{ x \} $.
 
 	Necht J je matice jednicek. Matici A muzeme napsat jako $J + I*(a_i - 1)$ kde $(a_i - 1)$ je na diagonale.
-	%todo link to lemma
-	Pouzijeme vlastnost det jako multilinearni formy, viz lemma. Pokud vezmeme 2 sloupce z J, tak det bude 0. Takze zbyvaji det kde je jeden sloupec z S, zbytek z J.
+	Pouzijeme vlastnost det jako multilinearni formy, viz lemma \cref{mult}. Pokud vezmeme 2 sloupce z J, tak det bude 0. Takze zbyvaji det kde je jeden sloupec z S, zbytek z J.
 
 	\[ det(S + J) = det(S) + \sum_i^k J^iS = \]
 	Determinanty matic $J^iS$ kde z J je pouze i-ty sloupec lze spocitat rozvojem dle i-ho radku kde je pouze 1 jednicka.

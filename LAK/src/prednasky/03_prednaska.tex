@@ -3,7 +3,7 @@
 \large
 
 \begin{theorem}[Sudo-sudomesta]
-	Necht $A_1, ... , A_k$ jsou ruzne $ \subseteq [n]$, $ |A_i| = 0 \mod2 \ \forall i, |A_i \cap A_j| \equiv 0 \mod2, i \ne j \Rightarrow k \leq n$
+	Necht $A_1, ... , A_k$ jsou ruzne $ \subseteq [n]$, $ |A_i| = 0 \mod2 \ \forall i, |A_i \cap A_j| \equiv 0 \mod2, i \ne j \Rightarrow k \leq 2^{\lfloor \frac{n}{2} \rfloor }$
 \end{theorem}
 \begin{proof}
 	Udelame bijekci mnozina $\to$ charakteristicky vektor. Pak lin kombinace je taky sudo-sudomesto. Dal
@@ -44,7 +44,7 @@ Uvazme bijekci mezi napnutym podgrafem H a jeho charakteristickym vektorem. Mnoz
 
 	\includegraphics[scale=0.4]{el_rezy.eps}
 
-	Z obrazku prezijou pouze hrany vedouci z $A - Z$ do $V - (Z\cup A)$, hrany z $A - Z$ do $Z \cup A$, hrany $(Z \cap A)$ do $Z - A$ a hrany ze $Z - A$ do $V - (Z\cup A)$. Ostatni byly ve 2 rezich. Zustane rez $B_{A \div Z}, A \div Z = (A - Z) \cup (Z - A)$.
+	Z obrazku prezijou pouze hrany vedouci z $A - Z$ do $V - (Z\cup A)$, hrany z $A - Z$ do $Z \cap A$, hrany $(Z \cap A)$ do $Z - A$ a hrany ze $Z - A$ do $V - (Z\cup A)$. Ostatni byly ve 2 rezich. Zustane rez $B_{A \div Z}, A \div Z = (A - Z) \cup (Z - A)$.
 	\[ B_A + B_Z = B_{A \div Z}\]
 
 	Tvrdime ze $B_G = \langle B_{\{u\}}, u \in V \rangle$. Prostor el. rezu je generovany hvezdami. Protoze

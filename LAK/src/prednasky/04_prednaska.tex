@@ -1,5 +1,4 @@
 \section{\texorpdfstring{Seiduv switching}{Seiduv switching}}
-
 \vspace{5mm}
 \large
 
@@ -114,18 +113,55 @@ Seiduv switching vymeni vsechny hrany a nehrany vychazejici z $u \in V$. Ostatni
 	kde $S(G,A)$ je switch cele podmoziny. Hrany mezi A a zbytkem se prohodi.
 \end{note}
 
+\begin{note}
+	Dva grafy na stejne mnozine vrcholu jsou Seidelovsky ekv $\iff$ jsou ve stejne tride faktorizace $V_{K_V}/ \beta_{K_V}$.
+	Proto je trid ekvivalence tolik, kolik je Eulerovských grafu na dane mnozine vrcholu.
+\end{note}
+
 \begin{theorem}[Pocet neiz trid Seide switching]
 Počet neizomorfních tříd ekvivalence při Seidelově switchingu na n vrcholech je roven počtu Eulerovských grafů na n vrcholech.
 \end{theorem}
 \begin{proof}
-%todo
+Pro licha n, oznacme
+\[ \{ A = \{ u | deg_G(u) \equiv 1 \mod2 \}, |A| \equiv 0 \mod2\ \]
+
+	Udelame switch mnoziny A: $(G,A)$. Vezmeme vrchol $u \in V\setminus A$
+	Pak $deg_G(u) = a + b$, kde a je pocet hran mimo A, b je pocet hran vedoucich do A.
+
+	Po switchu:
+	\[ deg_{S(G,A)}(u) = a + |A| - b = deg_G(u) - 2b - |A| \equiv 0 \mod2 \]
+
+	Vezmeme vrchol $u \in A, deg_G(u) = c + d$, kde c jsou hrany v A, d hrany mimo A.
+
+	Po switchu:
+	\[ deg_{S(G,A)}(u) = c + |V \setminus A| - d = c + d - 2d + |V| - |A|\]
+	Kde $(c + d)$ je liche, $|V|$ je liche, $|A|$ je sude. Dohromady sude.
+
+	Takze kazdy graf lze preswitchovat na Eulerovský graf. Preswitcheni Eulerovskeho grafu se zmeni na neeulerovsky. V kazdem switching tride je 1 Eulerovský graf.
+
+	Pro n sude. Necht K je V.P. vsechn grafu na dane mnozine vrcholu, $B$ je prostor el. rezu na uplnem grafu, $\xi$ prostor Eulerovských grafu.
+	\[ \beta = \xi^{\perp} \Rightarrow \xi^{\ast} \simeq K/B \]
+
+	Prvky $\nu/B$ jsou prave tridy ekvivalence dle Seidelovem switchingu. Chceme zjistit pocet orbit akci grupy $S(V)$.
 
 	\includegraphics[scale=0.4]{seide_1.eps}
 	\includegraphics[scale=0.4]{seide_2.eps}
 
-	Pak dle Burnsidova lemmatu: \# orbit $V/B$ pri akci $S(V) = \frac{1}{n!} \sum |(V/B)_{\sigma}|$.
+	Tvrdime ze diagram komutuje. Necht $G \in \nu$
+	\[ \bar{\sigma}_B(G + B) \to \sigma(G) + B, \phi(\sigma(G) + B) \to \langle \bar{\sigma}(G), \cdot \rangle \in \xi^{\ast} \]
+	\[ \phi(G + B) \to \langle G, \cdot \rangle \in \xi^{\ast}, (\bar{\sigma}^{-1})^{\ast}(\langle G, \cdot \rangle) \]
 
-	Taky \# orbit $\xi^{\ast}$ pri akci $S(V) = \frac{1}{n!} \sum |(\xi^{\ast})_{\sigma}| = \frac{1}{n!} \sum |(V/B)_{\sigma^{-1}}|$.
+	Tvrdime ze posledni prvky ve dvou radcich jsou stejne.
+	\[ \forall X \in \xi: \langle \bar{\sigma}(G)(X) \rangle = (\bar{\sigma}^{-1})^{\ast}(\langle G, \cdot \rangle) = \langle G, (\bar{\sigma}^{-1})(G) \rangle \]
+	Leva cast
+	\[ \langle \bar{\sigma}(G)(X) \rangle = |\{ e | e \in E(\bar{\sigma} \cap E(X) \} \]
+	Prava cast
+	\[ \langle G, (\bar{\sigma}^{-1})(G) \rangle = |\{ e | e \in E(G) \cap (\bar{\sigma}^{-1})(X) \} \]
+	Z toho diagram komutuje.
+
+	Pak dle Burnsidova lemmatu: \# orbit $\nu/B$ pri akci $S(\nu) = \frac{1}{n!} \sum |(\nu/B)_{\sigma}|$.
+
+	Taky \# orbit $\xi^{\ast}$ pri akci $S(V) = \frac{1}{n!} \sum |(\xi^{\ast})_{\sigma}| = \frac{1}{n!} \sum |(\nu/B)_{\sigma^{-1}}|$.
 %todo
 	Zbyva dokazat, ze \# orbit je stejny i pro $\xi$ misto $\xi^{\ast}$.
 
