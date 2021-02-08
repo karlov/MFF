@@ -60,7 +60,7 @@ Uvazme bijekci mezi napnutym podgrafem H a jeho charakteristickym vektorem. Mnoz
 	\[ \forall H \subseteq V: H \in \xi_G \iff \langle H, B_A \rangle = 0 \ \forall B_A \in B_G \iff \langle H, B_{\{u\}} \rangle = 0 \ \forall u \in V \]
 	Uvazme hvezdu $B_{\{u\}}$ a $deg_H u = 0 \mod2$. Pak symmetricka diference smaze prave sudy pocet hran z hvezdy a nove pocet hran je taky sudy.
 	\[ \forall u \in V: \langle H, B_{\{u\}} \rangle = 0 \iff deg_H u \equiv 0 \mod2 \]
-		Pak $ \forall H \subseteq V: H \in \xi_G \iff H \in \beta_G \Rightarrow \xi_G^{\perp} = (\beta_G^{})^{\perp} = \beta_G \Rightarrow dim(\xi_G) = |E| - |V| + 1 $
+		Pak $ \forall H \subseteq V: H \in \xi_G \iff H \in \beta_G^{\perp} \Rightarrow \xi_G^{\perp} = (\beta_G^{\perp})^{\perp} = \beta_G \Rightarrow dim(\xi_G) = |E| - |V| + 1 $
 
 \end{proof}
 \begin{lemma}
@@ -75,7 +75,7 @@ Uvazme bijekci mezi napnutym podgrafem H a jeho charakteristickym vektorem. Mnoz
 	$\forall G \exists V_1 \mathbin{\dot{\cup}} V_2 = V(G), G[V_i]$ je Eulerovsky.
 \end{theorem}
 \begin{proof}
-	1) Uvazme $M = \xi_G$ v tvrzeni z lemmatu. $\bar{1} = G$, ma vsechny hrany $\Rightarrow \bar{1} \in \xi_G + \xi_G^{\perp} = \xi_G + \beta_G$.
+	Uvazme $M = \xi_G$ v tvrzeni z lemmatu. $\bar{1} = G$, ma vsechny hrany $\Rightarrow \bar{1} \in \xi_G + \xi_G^{\perp} = \xi_G + \beta_G$.
 
 	\[ \forall G: \exists A \subseteq V(G), \exists H\in \xi_G: G = H + B_A \]
 

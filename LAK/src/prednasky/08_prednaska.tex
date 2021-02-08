@@ -82,7 +82,7 @@ Kde vrcholy a,x jsou z grafu G, b,y z grafu H.
 	V definici staci uvazovat omezenou dimenzi, napr $d \leq |V(G)|$.
 
 	Infimum v dev dzeta funce se taky nabyva, protoze $||f||$ je spojita funkce f. Pak
-	\[ \vartheta(G) = \min_f \min_{c: ||c|| = 1} \max_{u \in V} \frac{1}{\langle c, f(a) \rangle^2} \]
+	\[ \vartheta(G) = \min_f \min_{c: ||c|| = 1} \max_{a \in V} \frac{1}{\langle c, f(a) \rangle^2} \]
 \end{definition}
 \begin{agreement}
 	Muze se stat, ze rukojet je vektor kolmy na nejaky z vektoru f. Pak $\vartheta(G) = \infty$.
@@ -129,7 +129,7 @@ Kde vrcholy a,x jsou z grafu G, b,y z grafu H.
 	\[ \langle f(u), f(u') \rangle \cdot \langle g(v), g(v') \rangle = 0 \]
 
 	Pak rukojet pro $G \boxtimes H$ bude $c \circ d$. Pak
-	\[ || f \circ g || \leq \max_{u, v} \frac{1}{\langle c \circ d, f(u) \circ f(v) \rangle^2} = \max \frac{1}{\langle c, f(u) \rangle^2 \cdot \langle d, g(v) \rangle^2} \]
+	\[ || f \circ g || \leq \max_{u, v} \frac{1}{\langle c \circ d, f(u) \circ g(v) \rangle^2} = \max \frac{1}{\langle c, f(u) \rangle^2 \cdot \langle d, g(v) \rangle^2} \]
 	Max je dvou funci je mensi nez soucin max dvou funkci:
 	\[ \max \frac{1}{\langle c, f(u) \rangle^2 \cdot \langle d, g(v) \rangle^2} \leq \max_u \frac{1}{\langle c, f(u) \rangle^2} \max_v \frac{1}{\langle d, g(v) \rangle^2} = \vartheta(G) * \vartheta(H) \]
 \end{proof}

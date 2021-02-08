@@ -33,7 +33,7 @@
 	Necht J je matice jednicek. Matici A muzeme napsat jako $J + I*(a_i - 1)$ kde $(a_i - 1)$ je na diagonale.
 	Pouzijeme vlastnost det jako multilinearni formy, viz lemma \cref{mult}. Pokud vezmeme 2 sloupce z J, tak det bude 0. Takze zbyvaji det kde je jeden sloupec z S, zbytek z J.
 
-	\[ det(S + J) = det(S) + \sum_i^k J^iS = \]
+	\[ det(S + J) = det(S) + \sum_i^k det(J^iS) = \]
 	Determinanty matic $J^iS$ kde z J je pouze i-ty sloupec lze spocitat rozvojem dle i-ho radku kde je pouze 1 jednicka.
 	\[ = \prod_1^k (a_i - 1) + \prod_2^k (a_i - 1) + \sum_{j=2}^k \frac{\prod_1^k (a_i - 1)}{a_j - 2} \]
 	Kde 2. produkt mame protoze $a_1$ se muze rovnat 1, zbytek jsou vetsi. Prvni $\prod$ je $\geq 0$, druhy $\prod > 0$ protoze od $i = 2, a_i \geq 2$. $\sum$ je zlomek kladnych clenu, takze $\sum \geq 0$. Dohromady $ det(J + S) > 0$
@@ -77,15 +77,15 @@ Necht $m_s(n)$ znaci pocet bodu s-vzdalenostni mnoz v $\Real^n$, pak:
 
 	Definujme funkce $F : \Real^n \times \Real^n \to R, F(x,y) = (d(x,y)^2 - m^2) * (d(x,y)^2 - k^2)$. Pokud je vzdalenost $m \lor k \Rightarrow F = 0$.
 
-	Pak $f_i(x), f_i(x) = F(x, A_i).$ Castecne dosazeni. Tyto funkce jsou v V.P. funkci z $\Real^n$. Tvrdime ze $\{ f_i(x)\}$ jsou LN.
+	Pak $f_i(x) = F(x, A_i).$ Castecne dosazeni. Tyto funkce jsou v V.P. funkci z $\Real^n$. Tvrdime ze $\{ f_i(x)\}$ jsou LN.
 	Pokud dosadime 2 ruzne prvky do $f_i$ tak dostaneme 0 dle definice zobrazeni F. Pro stejny bod $f_i = a^2b^2 \ne 0$.
 
 	\[ \sum_1^t f_i * x_i = 0, x_i \in R, 0 = nulova \ funkce \]
 	Podivame se na tuto funkce (lin kombinace funkci) v nejakem bode $A_j$.
-	\[ \forall j (\sum_1^t f_i * x_i)(A_j) = \sum_1^t f_i * x_i(A_j) = x_j a^2 b^2 = 0 \Rightarrow x_j = 0 \]
+	\[ \forall j (\sum_1^t x_i * f_i)(A_j) = \sum_1^t x_i * f_i(A_j) = x_j a^2 b^2 = 0 \Rightarrow x_j = 0 \]
 	Neboli funkce jsou LN. Jejich pocet je omezen podprostorem funkci nad $\Real^n$ ve kterem zijou.
 
-	\[ f_i(x) = (d(x,A_i)^2 - m^2) * (d(x,A_i)^2 - k^2) = ((\sum_j^t(x_j - a_{i,j})^2 - a^2)*((\sum_j^t(x_j - a_{i,j})^2 - a^2)\]
+	\[ f_i(x) = (d(x,A_i)^2 - m^2) * (d(x,A_i)^2 - k^2) = (\sum_j^t(x_j - a_{i,j})^2 - m^2)*(\sum_j^t(x_j - a_{i,j})^2 - k^2)\]
 
 	$f_i$ jsou polynomu stupne 4. \# polynomu dle dimenze:
 	\begin{enumerate}
@@ -99,6 +99,6 @@ Necht $m_s(n)$ znaci pocet bodu s-vzdalenostni mnoz v $\Real^n$, pak:
 	Nase funkce jsou z podprostoru polynomu $deg = 4$. Zvolme vhodnou bazi.
 	\[ U = \langle 1, x_i, x_i*x_j, x_i^2, (\sum x_j^2)x_i, (\sum x_j^2)^2 \rangle \forall i,j \]
 
-	Dostaneme $dim(U) = 1 + n (lin) + n (kv) + n (kv * lin) + \binom{n}{2} (lin 2) + 1 = 2 + 3n + 1/2 n (n-1) = 1/2 (4 + 5 + n^2)$. Generator $\sum x_j^2$ nepotrebujeme protoze je lin komvinaci $x_j^2$.
+	Dostaneme $dim(U) = 1 + n (lin) + n (kv) + n (kv * lin) + \binom{n}{2} (lin 2) + 1 = 2 + 3n + 1/2 n (n-1) = 1/2 (4 + 5 + n^2)$. Generator $\sum x_j^2$ nepotrebujeme protoze je lin kombinaci $x_j^2$.
 
 \end{proof}

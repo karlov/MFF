@@ -148,7 +148,7 @@
 	\[ p = \frac{t^2 + 1}{4t}((t^2 * 2t) - 2) = \frac{(t^2 + 1)(t^3 - 1)}{2t} \notin N : t > 1 \]
 	Pripad $t = 1 \Rightarrow m = 1$ neni zajimavy protoze KPR radu 1 je $\triangle$.
 
-	2) 3. axiom neplati $\Rightarrow \{N_G\}$ z teorie KPR bud vsechno lezi na 1 primce nebo jeden vrchol samostatne a zbytek na primce. Pak ten sampstatny vrchol je hledany soused vsech:
+	2) 3. axiom neplati $\Rightarrow \{N_G\}$ z teorie KPR bud vsechno lezi na 1 primce nebo jeden vrchol samostatne a zbytek na primce. Pak ten samostatny vrchol je hledany soused vsech:
 	\[ \exists a : N_G(a) = V(G)\setminus \{a\} \]
 
 \end{proof}
@@ -184,7 +184,7 @@ Uvazme 3 mnoziny, j je libovolne
 	Podivame se na
 	\begin{gather*}
 		l \in S_1 \Rightarrow l^{\ast}Al \geq \lambda_j l^{\ast}l \\
-		l \in S_3, y \in S_2, l = z(y): l^{\ast}Al = y^{\ast}By \geq b_j y y^{\ast} = b_j l^{\ast} l \geq \lambda_j l^{\ast}l \\
+		l \in S_3, y \in S_2, l = z(y): l^{\ast}Al = y^{\ast}By \geq b_j y y^{\ast} = b_j l^{\ast} l \leq \lambda_j l^{\ast}l \\
 		\lambda_j l^{\ast}l \geq b_j l^{\ast}l\ \Rightarrow \lambda_j \geq b_j
 	\end{gather*}
 
@@ -200,7 +200,7 @@ Uvazme 3 mnoziny, j je libovolne
 
 	\begin{gather*}
 		l \in S_1 \Rightarrow l^{\ast}Al \geq \lambda_{j + 1} l^{\ast}l \\
-		l \in S_3, y \in S_2, l = z(y): l^{\ast}Al = y^{\ast}By \leq b_j y y^{\ast} = b_j l^{\ast} l \geq \lambda_j l^{\ast}l \\
+		l \in S_3, y \in S_2, l = z(y): l^{\ast}Al = y^{\ast}By \leq b_j y y^{\ast} = b_j l^{\ast} l \geq \lambda_{j + 1} l^{\ast}l \\
 		\lambda_j l^{\ast}l \geq b_j l^{\ast}l\ \Rightarrow \lambda_{j + 1} \leq b_j
 	\end{gather*}
 
